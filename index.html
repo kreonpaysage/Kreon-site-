@@ -776,6 +776,38 @@ footer{padding-block:26px 40px;font-size:.88rem;color:var(--muted);display:flex;
 .faqgrp{display:grid;gap:22px}
 .faqgrp h3{font-size:1.2rem;color:var(--green-deep)}
 /* espace KREÖN : onglets */
+/* fresque des dossiers + signature en ligne */
+.fr-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;margin:0 0 14px;padding:14px 2px 6px}
+.fr{display:flex;min-width:max-content}
+.fr-st{position:relative;width:118px;flex:none;border:0;background:none;font:inherit;color:var(--fg);cursor:pointer;padding:0 4px;text-align:center;scroll-snap-align:start}
+.fr-st::before{content:"";position:absolute;top:25px;left:0;right:0;height:4px;background:var(--line)}
+.fr-st:first-child::before{left:50%}.fr-st:last-child::before{right:50%}
+.fr-st.has::before{background:var(--lime-2)}
+.fr-dot{position:relative;z-index:1;display:grid;place-items:center;margin:0 auto;width:54px;height:54px;border-radius:50%;background:var(--surface);border:3px solid var(--line);font-size:22px}
+.fr-st.has .fr-dot{border-color:var(--green)}.fr-st.sel .fr-dot{border-color:var(--green-deep);background:var(--lime);transform:scale(1.08)}
+.fr-num{position:absolute;top:-7px;right:24px;z-index:2;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:var(--alert);color:#fff;font-weight:800;font-size:.8rem;line-height:24px}
+.fr-lab{display:block;margin-top:6px;font-weight:700;font-size:.82rem;line-height:1.2}.fr-lab small{display:block;font-family:var(--f-mono);font-size:.62rem;color:var(--muted);font-weight:500}
+.fr-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:10px}.fr-head b{font-family:var(--f-display);font-style:italic;font-size:1.2rem}.fr-head span{color:var(--muted);font-size:.9rem}.fr-head .btn{min-height:38px;padding:0 12px;font-size:.88rem}
+.fr-list{display:grid;gap:10px}
+.fr-card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--green);border-radius:6px}
+.fr-card.wait{border-left-color:var(--sun)}
+.fr-ch{display:grid;grid-template-columns:1fr auto;gap:4px 10px;width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit;padding:12px 14px;cursor:pointer}
+.fr-nm{font-weight:800}.fr-mt{grid-column:1/-1;color:var(--muted);font-size:.88rem}
+.fr-pill{font-size:.75rem;font-weight:700;border-radius:99px;padding:2px 9px;background:var(--lime);color:var(--green-deep);align-self:start;white-space:nowrap}.fr-pill.w{background:var(--sun-soft);color:#7a5600}
+.fr-pg{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}.fr-pg i{display:block;height:100%;background:var(--green)}
+.fr-dos{padding:0 14px 14px}
+.fr-s{border:1px solid var(--line);border-radius:6px;margin-top:8px;background:var(--bg)}
+.fr-s summary{list-style:none;cursor:pointer;display:flex;gap:8px;align-items:center;padding:9px 10px;font-weight:700}.fr-s summary::-webkit-details-marker{display:none}
+.fr-s summary em{margin-left:auto;font-style:normal;font-size:.78rem;color:var(--muted);font-weight:600}
+.fr-b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;border:2px solid var(--line);flex:none}
+.fr-s.done .fr-b{background:var(--green);border-color:var(--green);color:#fff}.fr-s.cur .fr-b{border-color:var(--sun);background:var(--sun-soft)}
+.fr-ts{display:grid;gap:2px;padding:0 10px 8px}
+.fr-t{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0;padding:6px 0;border-top:1px solid var(--line);font-size:.95rem}
+.fr-t input{width:19px;height:19px;accent-color:var(--green);margin-top:2px;flex:none}.fr-t.ok span{color:var(--muted);text-decoration:line-through}.fr-t small{font-size:.72rem;color:var(--muted);text-decoration:none;font-family:var(--f-mono)}
+.fr-act{display:flex;flex-wrap:wrap;gap:8px;padding:0 10px 10px}.fr-act .btn{min-height:40px;padding:0 13px;font-size:.9rem}
+.sgn-t{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:6px 0 10px}.sgn-t dt{color:var(--muted)}.sgn-t dd{margin:0}
+.sgpad{width:100%;max-width:640px;aspect-ratio:640/220;background:#fff;border:1.5px solid #c9d1c3;border-radius:6px;touch-action:none;display:block}
+#signer{padding-block:28px 72px}
 .atabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px;border-bottom:1px solid var(--line)}
 .atabs button{flex:none;font:inherit;font-weight:600;font-size:.9rem;border:0;background:none;color:var(--muted);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;display:inline-flex;gap:6px;align-items:center}
 .atabs button[aria-selected=true]{color:var(--green-deep);border-bottom-color:var(--green)}
@@ -2685,6 +2717,8 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
   <nav class="flinks qfoot" aria-label="Informations légales"></nav>
 </div>
 
+<div id="signer" class="wrap" hidden><div id="signer-body"></div><nav class="flinks qfoot" aria-label="Informations légales"></nav></div>
+
 <div id="client" class="wrap" hidden>
   <div class="q-top"><div><p class="eyebrow">Mon espace</p><h1 style="margin-top:8px">Espace client KREÖN</h1><p>Vos chantiers et leurs documents, le cercle KREÖN, votre contrat d'entretien.</p></div><a class="back" href="#top">← Retour au site</a></div>
   <div id="clbox"></div>
@@ -3609,7 +3643,7 @@ if($('tc_s')){$('tc_s').addEventListener('input',tcalc);Array.prototype.forEach.
 /* ---------- vue « Espace KREÖN » : toute la gestion ---------- */
 var ADM={rows:[],filt:'todo',tab:'demandes',subs:false,C:{sav:[],contrats:[],parrainages:[],candidatures:[],partenaires:[],avis_soumis:[],clients:[]},delArm:null};
 var ASSETS=null;
-var TABS=[['demandes','Demandes et visites'],['visites','Visites de chantier'],['planning','Planning'],['publier','À publier'],['frais','Notes de frais'],['agents','Employés'],['devis','Devis'],['factures','Factures'],['renta','Rentabilité'],['rapports','Rapports journaliers'],['achats','Achats et stock'],['materiel','Matériel'],['clients','Clients'],['sav','SAV'],['contrats','Contrats'],['parrainages','Parrainages'],['candidatures','Candidatures'],['partenaires','Partenaires'],['avis','Avis'],['realisations','Réalisations'],['reglages','Réglages du site'],['dispo','Disponibilités']];
+var TABS=[['fresque','Fresque des dossiers'],['demandes','Demandes et visites'],['visites','Visites de chantier'],['planning','Planning'],['publier','À publier'],['frais','Notes de frais'],['agents','Employés'],['devis','Devis'],['factures','Factures'],['renta','Rentabilité'],['rapports','Rapports journaliers'],['achats','Achats et stock'],['materiel','Matériel'],['clients','Clients'],['sav','SAV'],['contrats','Contrats'],['parrainages','Parrainages'],['candidatures','Candidatures'],['partenaires','Partenaires'],['avis','Avis'],['realisations','Réalisations'],['reglages','Réglages du site'],['dispo','Disponibilités']];
 /* ---------- ONGLET « MES AGENTS » ---------- */
 var AGL=[
  {id:'aurore',sal:3200,pole:'ops',nom:'Aurore',role:'Briefing 7 h · Rasso 17 h 30',col:'#f2b632',when:'Tous les jours · briefing du matin à 7 h, rasso et Ordre des opérations à 17 h 30',days:[0,1,2,3,4,5,6],hours:[7],min:0,every:30,
@@ -4458,6 +4492,9 @@ var VI={data:{items:[]},sub:false,busy:false,open:null,msg:''};
 var VIST={brouillon:['Photos en cours','pend'],a_traiter:['Envoyé à Victor','pend'],en_cours:['Victor travaille','pend'],pret:['Dossier prêt','ok'],erreur:['À reprendre','ko']};
 function viSub(){if(VI.sub||!DB)return;VI.sub=true;DB.doc('bareme/visites').onSnapshot(function(s){VI.data=(s.exists&&s.data())||{items:[]};if(!VI.data.items)VI.data.items=[];if(ADM.tab==='visites'&&!$('admin').hidden)drawAdmin()},function(){})}
 function viSave(fn,msg){var ref=DB.doc('bareme/visites');return ref.get().then(function(s){var v=(s.exists&&s.data())||{};v.items=v.items||[];fn(v);v.maj=new Date().toISOString();return ref.set(JSON.parse(JSON.stringify(v)))}).then(function(){if(msg)kToast(msg)},function(){kToast('Enregistrement refusé : réessayez.')})}
+/* Devis signé : une seule source (devis.statut='signe'), propagée à la visite liée. Agents : règle 15 des règles communes. */
+window.kDevisSigne=function(id,o){return viSave(function(v){(v.items||[]).forEach(function(x){if(x.devisId===id){x.devisSigne=o.signeLe||new Date().toISOString();x.devisSigneVia=o.signeVia||'manuel';if(o.signePdf)x.devisSignePdf=o.signePdf}})},'<b>✍️ Devis '+esc(o.num||'')+' signé</b><br>Planning, visite et agents à jour.')};
+window.kAccordSigne=function(id,r,now){var ref=DB.doc('devis/'+id);return ref.get().then(function(sn){if(!sn.exists)return;var o=sn.data()||{};if(['valide','envoye'].indexOf(o.statut)<0)return;o.statut='signe';o.signeLe=now.toISOString();o.signeVia='tablette';o.signePdf=r.url;o.signeAsset=r.id;o.maj=o.signeLe;delete o._id;return ref.set(JSON.parse(JSON.stringify(o))).then(function(){return window.kDevisSigne(id,o)})}).catch(function(){})};
 function viItem(v,id){return (v.items||[]).filter(function(x){return x.id===id})[0]||null}
 function viShrink(file){return new Promise(function(res){var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var m=2400,k=Math.min(1,m/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){res(b||file)},'image/jpeg',.86)};img.onerror=function(){URL.revokeObjectURL(u);res(file)};img.src=u})}
 function viPick(id){var i=document.getElementById('vi_file');if(!i){i=document.createElement('input');i.type='file';i.accept='image/*';i.multiple=true;i.id='vi_file';i.style.display='none';document.body.appendChild(i);
@@ -4588,8 +4625,8 @@ function papMake(){var d=SIG.doc,id=SIG.id,it=viItem(VI.data,id),m=document.getE
     SIG.last={blob:blob,fname:fname};
     var up=window.claude&&window.claude.use?window.claude.use('assets'):Promise.resolve(null);
     return up.then(function(A){if(!A)throw {code:'no_assets'};return A.upload(new File([blob],fname,{type:'application/pdf'}))}).then(function(r){
-      return viSave(function(vv){var x=viItem(vv,id);if(!x)return;x.signes=(x.signes||[]).filter(function(z){return z.doc!==d.id});x.signes.push({doc:d.id,titre:d.titre,date:now.toISOString(),url:r.url,assetId:r.id,fichier:fname,nom:nom});if(kreUrl&&!vv.sigKreon)vv.sigKreon=kreUrl},'<b>✅ '+esc(d.titre)+'</b><br>PDF signé rangé dans la visite.')})})
-  .then(function(){papClose();drawAdmin()},function(e){b.disabled=false;b.textContent='Valider et créer le PDF signé';if(SIG.last&&DLS){DLS.save({filename:SIG.last.fname,data:SIG.last.blob}).catch(function(){})}kToast(e&&e.code==='no_assets'?'Enregistrement du PDF indisponible dans cet affichage : ouvrez le tableau de bord depuis Claude, connecté.':'Le PDF n\'a pas pu être créé : réessayez.')})}
+      return viSave(function(vv){var x=viItem(vv,id);if(!x)return;x.signes=(x.signes||[]).filter(function(z){return z.doc!==d.id});x.signes.push({doc:d.id,titre:d.titre,date:now.toISOString(),url:r.url,assetId:r.id,fichier:fname,nom:nom});SIG.acc=(d.id==='accord'&&x.devisId)?{id:x.devisId,r:r,now:now}:null;if(kreUrl&&!vv.sigKreon)vv.sigKreon=kreUrl},'<b>✅ '+esc(d.titre)+'</b><br>PDF signé rangé dans la visite.')})})
+  .then(function(){papClose();drawAdmin();var A=SIG.acc;SIG.acc=null;if(A&&window.kAccordSigne)window.kAccordSigne(A.id,A.r,A.now)},function(e){b.disabled=false;b.textContent='Valider et créer le PDF signé';if(SIG.last&&DLS){DLS.save({filename:SIG.last.fname,data:SIG.last.blob}).catch(function(){})}kToast(e&&e.code==='no_assets'?'Enregistrement du PDF indisponible dans cet affichage : ouvrez le tableau de bord depuis Claude, connecté.':'Le PDF n\'a pas pu être créé : réessayez.')})}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-sig]');if(b){var a=b.getAttribute('data-sig');
     if(a==='close'){papClose();return}if(a==='ok'){papMake();return}
     if(a==='clr'){var cv=document.querySelector('#vsig canvas[data-pad="'+b.getAttribute('data-p')+'"]');if(cv){cv.getContext('2d').clearRect(0,0,cv.width,cv.height);cv._ink=false}return}
@@ -4675,14 +4712,155 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-vsav
     VI.arm=null;viSave(function(v){v.items=v.items.filter(function(x){return x.id!==id})},'Visite supprimée.')}});
 document.addEventListener('change',function(e){var f=e.target.closest('[data-vf]:not([data-vk])');if(!f)return;var k=f.getAttribute('data-vf'),id=f.getAttribute('data-vid'),val=f.value.trim();
   viSave(function(v){var it=viItem(v,id);if(it)it[k]=val}).then(function(){f.blur()})});
+/* ==================== FRESQUE DES DOSSIERS + SIGNATURE EN LIGNE (v45) ====================
+   Un dossier = une demande, une visite et/ou un devis liés. L'étape est calculée depuis les vraies données
+   (devis.statut, visite, factures, dates de chantier) ; les cases cochées à la main sont dans bareme/fresque. */
+var FR={sub:false,dv:[],vi:[],st:{},sig:[],open:null,step:null,busy:{}};
+var FRS=[
+ {id:'demande',ic:'📥',t:'Demande reçue',who:'Denis importe la demande et prépare la réponse',tasks:[['qualif','Demande qualifiée (profil, surface, commune)'],['repondre','Réponse au client envoyée'],['creneau','Créneau de visite confirmé']],act:[['dem','Ouvrir la demande']]},
+ {id:'visite',ic:'📏',t:'Visite technique',who:'Valentin sur place, fiche à l\'écran',tasks:[['fiche','Fiche de visite remplie'],['moasure','Métré Moasure'],['debit','Débit mesuré au seau'],['doc1','Doc 1 · Autorisation, état des lieux, réseaux signé'],['doc2','Doc 2 · Autorisation photos signée'],['photos','Photos de la fiche papier',1]],act:[['vis','Ouvrir la visite']]},
+ {id:'chiffrage',ic:'🧮',t:'Chiffrage',who:'Victor prépare, Valentin valide',tasks:[['pdf','Dossier Victor prêt'],['aconf','Points « À confirmer » réglés'],['marge','Marge brute ≥ 35 %'],['valide','Devis validé']],act:[['vis','Ouvrir la visite'],['dv','Ouvrir le devis']]},
+ {id:'devis',ic:'📨',t:'Devis envoyé',who:'Denis prépare le mail, Valentin envoie',tasks:[['mail','Brouillon du mail prêt'],['lien','Lien de signature en ligne créé',1],['envoye','Devis envoyé au client'],['relance','Relance à J+7 si pas de réponse',1]],act:[['dv','Ouvrir le devis'],['sign','🔗 Lien de signature']]},
+ {id:'signe',ic:'✍️',t:'Devis signé',who:'Bon pour accord, rétractation, acompte',tasks:[['doc3','Devis signé (tablette, mail ou en ligne)'],['doc4','Formulaire de rétractation remis'],['express','Demande expresse de démarrage anticipé',1],['acompte','Facture d\'acompte 30 % émise (au plus tôt J+7)']],act:[['dv','Ouvrir le devis']]},
+ {id:'prepa',ic:'🗂️',t:'Préparation',who:'DT-DICT, fournitures, location (Max)',tasks:[['dt','DT-DICT déposée'],['recep','Récépissés reçus (≈ 9 jours)'],['marquage','Marquage-piquetage fait'],['fourn','Fournitures +10 % commandées'],['loc','Location matériel réservée',1],['date','Date de démarrage dans le devis']],act:[['max','🚚 Lancer Max'],['dv','Ouvrir le devis']]},
+ {id:'chantier',ic:'🚜',t:'Chantier',who:'Convoi pick-up et remorque',tasks:[['demarre','Chantier démarré (date passée)'],['f40','Facture de démarrage 40 % émise'],['terr','Terrassement de finition'],['tranchee','Tranchées, PEHD, sable, grillage',1],['arro','Arrosage Gardena posé et en eau',1],['hydro','Hydro-ensemencement réalisé'],['media','Photos et vidéos du chantier',1]],act:[]},
+ {id:'reception',ic:'🤝',t:'Réception',who:'PV, réglages, consignes, solde',tasks:[['doc6','Doc 6 · PV de réception signé'],['doc5','Doc 5 · Consignes d\'arrosage et réglages signés'],['doc7','Doc 7 · Garantie de levée remise'],['solde','Facture du solde émise']],act:[['dv','Ouvrir le devis']]},
+ {id:'suivi',ic:'🌱',t:'Suivi de levée',who:'Garantie : 80 % à J+45',tasks:[['j21','Contrôle J+21'],['histo','Historique du programmateur vérifié'],['j45','Contrôle J+45 (≥ 80 %)'],['ressemis','Ressemis des zones claires',1]],act:[]},
+ {id:'cloture',ic:'⭐',t:'Clôturé',who:'Fidélisation',tasks:[['paye','Tout est encaissé'],['avis','Avis Google demandé'],['entretien','Contrat d\'entretien proposé',1],['parrain','Parrainage proposé',1]],act:[]}
+];
+function frIso(d){return d.toISOString().slice(0,10)}
+function frB64(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function frUnB64(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)))}
+function frSub(){if(FR.sub||!DB)return;FR.sub=true;
+  var re=function(){if(ADM.tab==='fresque'&&!$('admin').hidden)drawAdmin()};
+  DB.collection('devis').onSnapshot(function(sn){FR.dv=sn.docs.map(function(d){var v=d.data()||{};v._id=d.id;return v});re()},function(){});
+  DB.doc('bareme/visites').onSnapshot(function(s){FR.vi=((s.exists&&s.data())||{}).items||[];re()},function(){});
+  DB.doc('bareme/fresque').onSnapshot(function(s){FR.st=((s.exists&&s.data())||{}).dossiers||{};re()},function(){});
+  DB.collection('signatures').onSnapshot(function(sn){FR.sig=sn.docs.map(function(d){var v=d.data()||{};v._id=d.id;return v});frSigApply()},function(){})}
+function frSave(){return DB.doc('bareme/fresque').set(JSON.parse(JSON.stringify({dossiers:FR.st,maj:new Date().toISOString()}))).catch(function(){kToast('Enregistrement refusé : réessayez.')})}
+function frSigned(o,doc){return ((o.vis&&o.vis.signes)||[]).some(function(z){return z.doc===doc})}
+function frBuild(){
+  var R=(ADM.rows||[]).filter(function(r){return !r.test}),F=(typeof fcAll==='function'?fcAll():[]),M={},L=[],byDv={};
+  function mk(k){var o={key:k,dem:null,vis:null,dv:null};M[k]=o;L.push(o);return o}
+  R.forEach(function(r){var o=mk('r:'+r._id);o.dem=r});
+  FR.dv.forEach(function(d){if(d.statut==='refuse')return;var o=(d.demandeId&&M['r:'+d.demandeId])||mk('d:'+d._id);o.dv=d;byDv[d._id]=o});
+  FR.vi.forEach(function(v){var o=v.devisId&&byDv[v.devisId];if(o&&o.key.indexOf('d:')===0){delete M[o.key];o.key='v:'+v.id;M[o.key]=o}if(!o)o=mk('v:'+v.id);o.vis=v});
+  var today=frIso(new Date());
+  L.forEach(function(o){var d=o.dv||{},v=o.vis||{},r=o.dem||{};
+    o.nom=String(d.client||d.societe||v.client||[r.prenom,r.nom].filter(Boolean).join(' ')||r.societe||'Client').trim();
+    o.lieu=d.ville||v.commune||r.commune||'';o.surf=+d.surface||+r.surface||0;o.ht=+d.ht||0;
+    o.fac=o.dv?F.filter(function(f){return f.devisId===o.dv._id&&f.statut!=='annulee'}):[];
+    var deb=d.debut||'',dur=Math.max(1,Math.round(+d.duree||+d.jours||1)),fin=deb?frIso(new Date(plD(deb).getTime()+dur*864e5)):'';
+    var ds=d.statut||'',sg=ds==='signe',acp=o.fac.some(function(f){return f.type==='acompte'}),sol=o.fac.some(function(f){return f.type==='facture'}),paid=o.fac.length&&o.fac.every(function(f){return f.statut==='payee'});
+    var A={qualif:!!(o.dem||o.vis||o.dv),repondre:r.statut==='traitee'||!!(o.vis||o.dv),creneau:r.slotStatut==='confirme'||!!o.vis,
+      fiche:!!v.saisie,moasure:!!(v.saisie&&(v.saisie.zones||[]).some(function(z){return +z.s||(+z.l&&+z.w)})),debit:!!(v.saisie&&v.saisie.seau),doc1:frSigned(o,'visite'),doc2:frSigned(o,'photos'),photos:!!(v.pages&&v.pages.length),
+      pdf:v.statut==='pret',marge:+d.tx>=35,valide:/^(valide|envoye|signe)$/.test(ds),mail:!!d.mailPrepare||/^(envoye|signe)$/.test(ds),lien:!!d.signLien,envoye:/^(envoye|signe)$/.test(ds),
+      doc3:sg,acompte:acp,date:!!deb,demarre:!!deb&&today>=deb,f40:o.fac.filter(function(f){return f.type==='acompte'}).length>1,
+      doc5:frSigned(o,'arrosage'),solde:sol,paye:!!paid};
+    o.auto=A;
+    var s=0;if(o.vis||r.slotStatut==='confirme')s=1;if((o.vis&&/^(a_traiter|en_cours|pret)$/.test(v.statut||''))||o.dv)s=2;if(/^(valide|envoye)$/.test(ds))s=3;
+    if(sg)s=4;if(sg&&acp)s=5;if(sg&&deb&&today>=deb)s=6;if(sg&&fin&&today>=fin)s=7;if(sol)s=8;if(paid&&sol&&s>=8&&(FR.st[o.key]||{}).step>=9)s=9;
+    o.stepAuto=s;o.step=Math.max(s,Math.min(9,+(FR.st[o.key]||{}).step||0));
+    var dn=(FR.st[o.key]||{}).done||{};o.isDone=function(k){return !!A[k]||!!dn[k]}});
+  return L.filter(function(o){return !(FR.st[o.key]||{}).archive})}
+function frLeft(o,i){return FRS[i].tasks.filter(function(t){return !t[2]&&!o.isDone(t[0])}).length}
+function frCount(){if(!FR.sub)return 0;return frBuild().filter(function(o){return o.step<9}).length}
+function tabFresque(){frSub();var L=frBuild(),n=FRS.map(function(){return 0});L.forEach(function(o){if(o.step<9||frLeft(o,9))n[o.step]++});
+  var h='<div class="fr-wrap"><div class="fr" role="list">'+FRS.map(function(s,i){return '<button type="button" role="listitem" class="fr-st'+(n[i]?' has':'')+(FR.step===i?' sel':'')+'" data-fr="step" data-i="'+i+'"><span class="fr-dot">'+s.ic+'</span>'+(n[i]?'<span class="fr-num">'+n[i]+'</span>':'')+'<span class="fr-lab"><small>ÉTAPE '+(i+1)+'</small>'+s.t+'</span></button>'}).join('')+'</div></div>';
+  var list=FR.step==null?L.filter(function(o){return o.step<9}):L.filter(function(o){return o.step===FR.step});
+  list.sort(function(a,b){return b.step-a.step});
+  h+='<div class="fr-head"><b>'+(FR.step==null?'Tous les dossiers en cours':FRS[FR.step].ic+' '+(FR.step+1)+'. '+FRS[FR.step].t)+'</b>'+(FR.step!=null?'<span>👤 '+FRS[FR.step].who+'</span><button type="button" class="btn ghost" data-fr="all">Tous les dossiers</button>':'<span>Touchez une étape pour filtrer, un dossier pour tout voir.</span>')+'</div>';
+  h+=list.length?'<div class="fr-list">'+list.map(function(o){var left=frLeft(o,o.step);var op=FR.open===o.key;
+    return '<article class="fr-card'+(left?' wait':'')+(op?' open':'')+'"><button type="button" class="fr-ch" data-fr="open" data-k="'+esc(o.key)+'"><span class="fr-nm">'+esc(o.nom)+'</span><span class="fr-pill'+(left?' w':'')+'">'+(left?left+' à faire':'prêt à avancer')+'</span><span class="fr-mt">'+esc([o.lieu,o.surf?o.surf+' m²':'',o.ht?eu(o.ht)+' HT':''].filter(Boolean).join(' · '))+' · étape '+(o.step+1)+' : '+FRS[o.step].t+'</span><span class="fr-pg"><i style="width:'+Math.round(100*o.step/9)+'%"></i></span></button>'+(op?frDossier(o):'')+'</article>'}).join('')+'</div>':'<div class="aempty"><b>Aucun dossier ici.</b><span>Les dossiers apparaissent dès qu\'une demande, une visite ou un devis existe.</span></div>';
+  return h}
+function frDossier(o){
+  return '<div class="fr-dos">'+FRS.map(function(s,i){var cur=i===o.step,past=i<o.step,left=frLeft(o,i);
+    var tk=s.tasks.map(function(t){var ok=o.isDone(t[0]),au=!!o.auto[t[0]];
+      return '<label class="fr-t'+(ok?' ok':'')+'"><input type="checkbox" data-frk="'+esc(o.key)+'|'+t[0]+'"'+(ok?' checked':'')+(au||!cur&&!past?' disabled':'')+'> <span>'+t[1]+(t[2]?' <small>facultatif</small>':'')+(au?' <small>auto</small>':'')+'</span></label>'}).join('');
+    var ac=cur?'<div class="fr-act">'+s.act.map(function(a){var ok=(a[0]==='dem'&&o.dem)||(a[0]==='vis'&&o.vis)||(/^(dv|sign)$/.test(a[0])&&o.dv)||a[0]==='max';return ok?'<button type="button" class="btn ghost" data-fr="act" data-a="'+a[0]+'" data-k="'+esc(o.key)+'">'+a[1]+'</button>':''}).join('')+(i<9?'<button type="button" class="btn" data-fr="next" data-k="'+esc(o.key)+'"'+(left?' disabled':'')+'>Passer à l\'étape '+(i+2)+' →</button>':'<button type="button" class="btn ghost" data-fr="arch" data-k="'+esc(o.key)+'">Archiver le dossier</button>')+'</div>':'';
+    return '<details class="fr-s'+(past?' done':cur?' cur':'')+'"'+(cur?' open':'')+'><summary><span class="fr-b">'+(past?'✓':i+1)+'</span>'+s.ic+' '+s.t+'<em>'+(past?'validé':cur?(left?left+' à faire':'prêt'):'à venir')+'</em></summary>'+(past||cur?'<div class="fr-ts">'+tk+'</div>'+ac:'')+'</details>'}).join('')+
+    '<p class="note">Les cases « auto » se cochent seules d\'après le tableau de bord (visite, devis, factures, dates). Un devis signé, quel que soit le moyen, fait passer le dossier à l\'étape 5 partout.</p></div>'}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fr],[data-frsign]');if(!b||!DB)return;
+  if(b.hasAttribute('data-frsign')){window.kSignLien(b.getAttribute('data-frsign'));return}
+  var a=b.getAttribute('data-fr'),k=b.getAttribute('data-k');
+  if(a==='step'){var i=+b.getAttribute('data-i');FR.step=FR.step===i?null:i;FR.open=null;drawAdmin();return}
+  if(a==='all'){FR.step=null;drawAdmin();return}
+  if(a==='open'){FR.open=FR.open===k?null:k;drawAdmin();return}
+  var o=frBuild().filter(function(x){return x.key===k})[0];if(!o)return;
+  if(a==='next'){FR.st[k]=FR.st[k]||{};FR.st[k].step=o.step+1;frSave().then(function(){kToast('<b>'+esc(o.nom)+'</b> passe à l\'étape '+(o.step+2)+' : '+FRS[o.step+1].t)});return}
+  if(a==='arch'){FR.st[k]=FR.st[k]||{};FR.st[k].archive=new Date().toISOString();FR.open=null;frSave().then(function(){kToast('Dossier archivé.')});return}
+  if(a==='act'){var x=b.getAttribute('data-a');
+    if(x==='dem'){ADM.tab='demandes';$('adm').innerHTML='';drawAdmin();return}
+    if(x==='vis'){ADM.tab='visites';$('adm').innerHTML='';drawAdmin();return}
+    if(x==='dv'&&o.dv){subDevis();var c=dvCalc(JSON.parse(JSON.stringify(o.dv)));c._id=o.dv._id;DV.cur=c;ADM.tab='devis';$('adm').innerHTML='';drawAdmin();window.scrollTo(0,0);return}
+    if(x==='sign'&&o.dv){window.kSignLien(o.dv._id);return}
+    if(x==='max'){var mx=AGL.filter(function(z){return z.id==='max'})[0];if(window.kAgFire&&mx)window.kAgFire('max','équipe le chantier signé de '+o.nom+' (devis '+((o.dv||{}).num||'')+') : location, fournitures +10 %, dates. Brouillons seulement.').then(function(r){kToast(r.ok?'<b>🚚 Max est lancé</b>':window.kAgFireMsg(mx,r))});return}}
+});
+document.addEventListener('change',function(e){var c=e.target.closest&&e.target.closest('[data-frk]');if(!c)return;var p=c.getAttribute('data-frk').split('|');
+  FR.st[p[0]]=FR.st[p[0]]||{};FR.st[p[0]].done=FR.st[p[0]].done||{};FR.st[p[0]].done[p[1]]=c.checked;frSave()});
+/* ---- lien de signature en ligne : jeton aléatoire gardé dans le devis, vérifié à la réception ---- */
+window.kSignLien=function(id){var ref=DB.doc('devis/'+id);return ref.get().then(function(sn){if(!sn.exists)throw 0;var o=sn.data()||{};
+    if(!/^(valide|envoye)$/.test(o.statut||'')){kToast('Le lien de signature se crée sur un devis validé ou envoyé.');return}
+    var t=o.signToken||(Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-5));
+    var u='https://kreonpaysage.com/#signer?d='+frB64(JSON.stringify({i:id,n:o.num||'',c:o.client||o.societe||'',ht:+o.ht||0,ttc:+o.ttc||0,t:t,a:[o.adresse,o.cp,o.ville].filter(Boolean).join(' ')}));
+    return ref.update({signToken:t,signLien:u}).then(function(){if(DV.cur&&DV.cur._id===id){DV.cur.signToken=t;DV.cur.signLien=u}
+      try{navigator.clipboard.writeText(u)}catch(x){}kToast('<b>🔗 Lien de signature prêt et copié</b><br>Denis l\'ajoute au mail du devis. Le client signe sur son téléphone.');if(ADM.tab==='devis')drawAdmin();return u})})
+  .catch(function(){kToast('Lien impossible : enregistrez d\'abord le devis.')})};
+/* ---- signatures reçues (en ligne ou importées du tableau Google par Denis) : vérifiées puis appliquées au devis ---- */
+function frSigApply(){FR.sig.forEach(function(g){if(g.traitee||FR.busy[g._id])return;FR.busy[g._id]=1;
+  var sref=DB.doc('signatures/'+g._id),dref=DB.doc('devis/'+(g.devisId||'x'));
+  dref.get().then(function(sn){var o=sn.exists?(sn.data()||{}):null,why='';
+    if(!o)why='devis introuvable';else if(o.statut==='signe')why='déjà signé';else if(!/^(valide|envoye)$/.test(o.statut||''))why='devis au statut '+(o.statut||'?');
+    else if(!o.signToken||o.signToken!==g.token)why='jeton de signature invalide';else if(Math.abs((+o.ttc||0)-(+g.ttc||0))>0.01)why='montant différent de celui du devis';
+    if(why)return sref.update({traitee:true,resultat:'a_verifier',raison:why}).then(function(){if(why!=='déjà signé')kToast('<b>⚠️ Signature en ligne à vérifier</b><br>'+esc(g.nom||'')+' · '+esc(why))});
+    var now=g.date||new Date().toISOString();o.statut='signe';o.signeLe=now;o.signeVia='electronique';o.signeNom=g.nom||'';o.signeLieu=g.lieu||'';o.signeImg=g.signature||'';o.signeCases=g.cases||{};o.signeExpress=!!g.express;o.maj=new Date().toISOString();delete o._id;
+    return dref.set(JSON.parse(JSON.stringify(o))).then(function(){return sref.update({traitee:true,resultat:'applique',appliqueLe:o.maj})}).then(function(){return window.kDevisSigne(g.devisId,o)})})
+  .catch(function(){FR.busy[g._id]=0})})}
+/* ---- page publique #signer : le client signe son devis ---- */
+var SGN={p:null,pad:null,done:false};
+function renderSigner(h){var m=/[?&]d=([^&]+)/.exec(h||''),p=null;try{p=m&&JSON.parse(frUnB64(m[1]))}catch(e){p=null}SGN.p=p;SGN.done=false;
+  var el=$('signer-body');document.title='Signature du devis · KREÖN';window.scrollTo(0,0);
+  if(!p||!p.i||!p.t){el.innerHTML='<div class="panel"><h2>Lien incomplet</h2><p class="intro">Ce lien de signature n\'est pas valide. Utilisez le lien reçu par mail, ou contactez-nous à valentin@kreonpaysage.com.</p></div>';return}
+  var r2_=function(x){return Math.round(x*100)/100},e3=[r2_(p.ttc*.3),r2_(p.ttc*.4)];e3.push(r2_(p.ttc-e3[0]-e3[1]));
+  el.innerHTML='<div class="panel sgn"><p class="eyebrow">Devis n° '+esc(p.n||'')+'</p><h2>Signature de votre devis</h2><p class="intro">'+esc(p.c||'')+(p.a?' · '+esc(p.a):'')+'</p>'+
+   '<dl class="sgn-t"><dt>Montant HT</dt><dd>'+eu(p.ht)+'</dd><dt>Montant TTC</dt><dd><b>'+eu(p.ttc)+'</b></dd><dt>Échéancier</dt><dd>30 % à la commande ('+eu(e3[0])+'), 40 % au démarrage ('+eu(e3[1])+'), 30 % à la réception ('+eu(e3[2])+')</dd></dl>'+
+   '<p class="note">Le devis détaillé est joint au mail que vous avez reçu. Transport, matériel et accès par convoi pick-up et remorque.</p>'+
+   '<form id="sgnform" novalidate>'+[['acc','J\'ai lu le devis n° '+esc(p.n||'')+' et j\'accepte les prestations, les prix et les conditions particulières.',1],
+     ['acces','J\'ai pris connaissance de la clause d\'accès : « KREÖN décline toute responsabilité en cas de détérioration des sols ou des cheminements non prévus pour supporter des charges de type pick-up et remorque. »',1],
+     ['garantie','Je sais que la garantie de levée du gazon dépend du respect des consignes d\'arrosage, vérifié par l\'historique du programmateur.',1],
+     ['retract','J\'ai reçu l\'information sur mon droit de rétractation de 14 jours et le formulaire de rétractation.',1],
+     ['express','Facultatif : je demande que les travaux commencent avant la fin du délai de 14 jours ; si je me rétracte ensuite, je paierai les travaux déjà réalisés.',0]].map(function(c){return '<label class="chk"><input type="checkbox" name="'+c[0]+'"'+(c[2]?' required':'')+'><span>'+c[1]+'</span></label>'}).join('')+
+   '<div class="vgrid" style="margin-top:14px"><div class="q"><label for="sg_nom">Nom et prénom du signataire</label><input id="sg_nom" type="text" autocomplete="name" required></div><div class="q"><label for="sg_lieu">Fait à</label><input id="sg_lieu" type="text" value="'+esc((p.a||'').split(' ').slice(-1)[0]||'')+'"></div></div>'+
+   '<div class="q"><label>Votre signature, au doigt ou à la souris, avec la mention « Bon pour accord »</label><canvas id="sgpad" class="sgpad" width="640" height="220"></canvas><button type="button" class="btn ghost" id="sgclr" style="justify-self:start">Effacer</button></div>'+
+   '<p class="err" id="sgerr" hidden></p><div class="actions"><button type="submit" class="btn" id="sgok">Signer le devis</button></div>'+
+   '<p class="note">Signature électronique simple, horodatée. KREÖN vous confirme la réception par mail. Aucun paiement n\'est demandé avant 7 jours après la signature.</p></form></div>';
+  var cv=$('sgpad'),cx=cv.getContext('2d'),dr=false,used=false;cx.lineWidth=3;cx.lineCap='round';cx.strokeStyle='#1d2b22';
+  function pt(e){var r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]}
+  cv.addEventListener('pointerdown',function(e){dr=true;used=true;cv.setPointerCapture(e.pointerId);var q=pt(e);cx.beginPath();cx.moveTo(q[0],q[1]);e.preventDefault()});
+  cv.addEventListener('pointermove',function(e){if(!dr)return;var q=pt(e);cx.lineTo(q[0],q[1]);cx.stroke();e.preventDefault()});
+  ['pointerup','pointercancel','pointerleave'].forEach(function(t){cv.addEventListener(t,function(){dr=false})});
+  $('sgclr').onclick=function(){cx.clearRect(0,0,cv.width,cv.height);used=false};
+  $('sgnform').onsubmit=function(e){e.preventDefault();var f=e.target,err=$('sgerr'),nom=$('sg_nom').value.trim();
+    var miss=['acc','acces','garantie','retract'].filter(function(k){return !f[k].checked});
+    if(miss.length||!nom||!used){err.textContent=!used?'Signez dans le cadre.':(!nom?'Indiquez votre nom.':'Cochez les cases obligatoires.');err.hidden=false;return}err.hidden=true;
+    var sm=document.createElement('canvas');sm.width=360;sm.height=124;var sx=sm.getContext('2d');sx.fillStyle='#fff';sx.fillRect(0,0,360,124);sx.drawImage(cv,0,0,360,124);
+    var b=$('sgok');b.disabled=true;b.textContent='Envoi…';var now=new Date();
+    var data={devisId:p.i,num:p.n||'',client:p.c||'',ht:+p.ht||0,ttc:+p.ttc||0,token:p.t,nom:nom,lieu:$('sg_lieu').value.trim(),
+      cases:{acc:true,acces:true,garantie:true,retract:true},express:!!f.express.checked,signature:sm.toDataURL('image/png'),date:now.toISOString(),
+      ua:String(navigator.userAgent||'').slice(0,140),createdAt:now.toISOString(),
+      recap:'✍️ DEVIS SIGNÉ EN LIGNE\nDevis '+(p.n||'')+' · '+(p.c||'')+' · '+eu(p.ttc)+' TTC\nSignataire : '+nom+'\nDémarrage anticipé demandé : '+(f.express.checked?'oui':'non')};
+    saveMine('signatures',data,function(r){if(!r||!r.ok){b.disabled=false;b.textContent='Signer le devis';err.textContent='Envoi impossible. Réessayez, ou répondez au mail du devis.';err.hidden=false;return}
+      SGN.done=true;$('signer-body').innerHTML='<div class="panel"><h2>Merci, votre devis est signé ✅</h2><p class="intro">Devis n° '+esc(p.n||'')+', signé le '+now.toLocaleDateString('fr-FR')+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+' par '+esc(nom)+'.</p><p>Valentin vous contacte pour fixer la date de démarrage. Vous pouvez vous rétracter pendant 14 jours avec le formulaire joint au devis.</p><p style="margin-top:16px"><a class="btn" href="#top">Retour au site</a></p></div>'})};
+}
+
 function drawAdmin(){
-  var ae=document.activeElement;if(ae&&$('adm').contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))return;
+  frSub();var ae=document.activeElement;if(ae&&$('adm').contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))return;
   var k=counts(),h='<div class="kquick"><button type="button" class="btn nfscan" data-nf="scan">📸 Scanner un ticket</button><button type="button" class="btn ghost" data-pl="gotoday">📅 Planning du jour</button><button type="button" class="btn ghost" data-pub="go">📣 À publier</button><span class="kver">'+KVER+'</span></div>'+guBar()+fcTreso()+'<div class="sasbar"><span>Session équipe ouverte, verrouillage après 30 min d\'inactivité</span><button type="button" data-sas="lock">Verrouiller</button><button type="button" data-sas="reset">'+(SAS.arm?'Confirmer : nouveau code':'Changer le code')+'</button></div>';
   h+='<div class="kpis"><div><b>'+k.visites+'</b><span>visites à confirmer</span></div><div class="'+(k.z3?'hot':'')+'"><b>'+k.z3+'</b><span>alertes zone 3</span></div><div class="'+(k.urg?'hot':'')+'"><b>'+k.urg+'</b><span>SAV urgents</span></div><div><b>'+k.avis+'</b><span>avis à vérifier</span></div></div>';
-  var cnt={publier:(typeof pubTodo==='function'?pubTodo():0),achats:ST.art.filter(function(a){return stState(a)!=='ok'}).length,clients:k.clients,demandes:k.demandes+k.visites?Math.max(k.demandes,k.visites):0,sav:k.sav,contrats:k.contrats,parrainages:k.parrainages,candidatures:k.candidatures,partenaires:k.partenaires,avis:k.avis};
+  var cnt={fresque:frCount(),publier:(typeof pubTodo==='function'?pubTodo():0),achats:ST.art.filter(function(a){return stState(a)!=='ok'}).length,clients:k.clients,demandes:k.demandes+k.visites?Math.max(k.demandes,k.visites):0,sav:k.sav,contrats:k.contrats,parrainages:k.parrainages,candidatures:k.candidatures,partenaires:k.partenaires,avis:k.avis};
   var hot={achats:true,demandes:k.z3>0,sav:k.urg>0};
   var TO=tabsOrdered();h+='<div class="atabs" role="tablist">'+TO.map(function(t){var c=cnt[t[0]];return '<button type="button" role="tab" data-tab="'+t[0]+'" aria-selected="'+(ADM.tab===t[0])+'">'+t[1]+(c?'<span class="cnt'+(hot[t[0]]?' hot':'')+'">'+c+'</span>':'')+'</button>'}).join('')+'<button type="button" class="atord'+(TBO.edit?' on':'')+'" data-tbo="edit" aria-expanded="'+TBO.edit+'" title="Changer l\'ordre des onglets">⇅ Ordre</button></div>'+(TBO.edit?tboPanel(TO):'');
-  h+='<div id="admbody">'+({publier:tabPublier,visites:tabVisites,factures:tabFactures,frais:tabFrais,planning:tabPlanning,agents:tabAgents,demandes:tabDemandes,devis:tabDevis,renta:tabRenta,rapports:tabRapports,achats:tabAchats,materiel:tabMateriel,clients:tabClients,sav:function(){return tabList('sav')},contrats:function(){return tabList('contrats')},parrainages:function(){return tabList('parrainages')},candidatures:function(){return tabList('candidatures')},partenaires:function(){return tabList('partenaires')},avis:tabAvis,realisations:tabReal,reglages:tabReglages,dispo:tabDispo}[ADM.tab])()+'</div>';
+  h+='<div id="admbody">'+({fresque:tabFresque,publier:tabPublier,visites:tabVisites,factures:tabFactures,frais:tabFrais,planning:tabPlanning,agents:tabAgents,demandes:tabDemandes,devis:tabDevis,renta:tabRenta,rapports:tabRapports,achats:tabAchats,materiel:tabMateriel,clients:tabClients,sav:function(){return tabList('sav')},contrats:function(){return tabList('contrats')},parrainages:function(){return tabList('parrainages')},candidatures:function(){return tabList('candidatures')},partenaires:function(){return tabList('partenaires')},avis:tabAvis,realisations:tabReal,reglages:tabReglages,dispo:tabDispo}[ADM.tab])()+'</div>';
   h+='<p class="note" id="admmsg" aria-live="polite"></p>';
   var keep=ADM.tab==='realisations'&&$('rl_form')?$('rl_form'):null;
   if(keep&&$('adm').contains(keep)){/* ne pas effacer un formulaire en cours de saisie */var b=$('rl_list');if(b)b.innerHTML=realList();return}
@@ -5264,7 +5442,7 @@ function dvEditor(d){
   h+='</div><aside class="dvside">'+dvReal(d)+'<div class="clcard"><p class="eyebrow">Synthèse interne</p><div class="kv"><div><span>Total HT</span><span>'+eu(d.ht)+'</span></div><div><span>TVA '+d.tva+' %</span><span>'+eu(d.ttc-d.ht)+'</span></div><div class="tot"><span>Total TTC</span><span>'+eu(d.ttc)+'</span></div></div>'+
     '<div class="kv" style="margin-top:6px"><div><span>Coût de revient</span><span>'+eu(d.cout)+'</span></div><div><span>Marge brute</span><span>'+eu(d.marge)+'</span></div><div><span>Jours d\'équipe</span><span>'+String(d.jours).replace('.',',')+'</span></div></div>'+
     '<p class="dvtx '+cls+'">Taux de marge '+String(d.tx).replace('.',',')+' %</p>'+(d.tx<BAR.seuil.bas?'<p class="warnx">Marge sous '+BAR.seuil.bas+' % : revoir les prix ou le périmètre.</p>':'')+
-    '<p class="note">Coûts et marge ne figurent jamais sur le PDF client.</p><div class="dact"><button type="button" class="btn" data-dv="save">'+(d._id?'Enregistrer':'Créer le devis')+'</button><button type="button" class="btn ghost" data-dv="pdf"'+(d.lignes.length?'':' disabled')+'>Télécharger le PDF</button></div>'+(d.statut==='valide'?'<p class="dvopenban" style="margin-top:12px">✅ <b>Validé</b>'+(d.mailPrepare?' · brouillon du mail client prêt dans Gmail : joignez le PDF puis envoyez.':' · Denis prépare le mail au client (brouillon Gmail).')+'</p><div class="dvvalid"><button type="button" class="btn ghost" data-dv17="envoye">J\'ai envoyé le devis au client</button></div>':(d.statut==='brouillon'||!d.statut)?'<div class="dvvalid"><button type="button" class="btn okgo" data-dv17="valider">Valider et transmettre à Denis</button></div><p class="note">Denis prépare alors le mail au client en brouillon Gmail, avec la signature KREÖN. Rien ne part sans vous.</p>':'')+''+(d.num&&/^(signe|envoye|valide)$/.test(d.statut||'')?'<div class="dvvalid"><button type="button" class="btn" data-dvfac="acompte">🧾 Facture d\'acompte 30 %</button><button type="button" class="btn" data-dvfac="solde">🧾 Facturer le solde / total</button></div>'+(d.facture?'<p class="note">Déjà facturé : '+esc(d.facture)+'</p>':''):'')+'<div class="dact dvdanger"><button type="button" class="btn ghost" data-dv="close">Fermer sans enregistrer</button><button type="button" class="btn ghost dvdel" data-dv="del">'+(d._id?'Supprimer ce devis':'Abandonner ce brouillon')+'</button></div><p class="note" id="dvmsg" aria-live="polite">'+esc(DV.msg||'')+'</p></div></aside></div>';
+    '<p class="note">Coûts et marge ne figurent jamais sur le PDF client.</p><div class="dact"><button type="button" class="btn" data-dv="save">'+(d._id?'Enregistrer':'Créer le devis')+'</button><button type="button" class="btn ghost" data-dv="pdf"'+(d.lignes.length?'':' disabled')+'>Télécharger le PDF</button></div>'+(d.statut==='valide'?'<p class="dvopenban" style="margin-top:12px">✅ <b>Validé</b>'+(d.mailPrepare?' · brouillon du mail client prêt dans Gmail : joignez le PDF puis envoyez.':' · Denis prépare le mail au client (brouillon Gmail).')+'</p><div class="dvvalid"><button type="button" class="btn ghost" data-dv17="envoye">J\'ai envoyé le devis au client</button></div>':(d.statut==='brouillon'||!d.statut)?'<div class="dvvalid"><button type="button" class="btn okgo" data-dv17="valider">Valider et transmettre à Denis</button></div><p class="note">Denis prépare alors le mail au client en brouillon Gmail, avec la signature KREÖN. Rien ne part sans vous.</p>':'')+(d._id&&/^(valide|envoye)$/.test(d.statut||'')?'<div class="dvvalid"><button type="button" class="btn ghost" data-frsign="'+d._id+'">🔗 '+(d.signLien?'Recopier':'Créer')+' le lien de signature en ligne</button></div>'+(d.signLien?'<p class="note">Lien de signature : '+esc(d.signLien)+'</p>':''):'')+(d.statut==='signe'?'<p class="dvopenban" style="margin-top:12px">✍️ <b>Signé</b>'+(d.signeLe?' le '+new Date(d.signeLe).toLocaleDateString('fr-FR'):'')+(d.signeVia?' · '+esc({tablette:'sur la tablette',mail:'retour par mail',electronique:'en ligne',manuel:'saisi à la main'}[d.signeVia]||d.signeVia):'')+(d.signeNom?' par '+esc(d.signeNom):'')+(d.signePdf?' · <a href="'+esc(d.signePdf)+'" target="_blank" rel="noopener">copie signée</a>':'')+'</p>'+(d.signeImg?'<img alt="Signature du client" src="'+esc(d.signeImg)+'" style="max-width:240px;border:1px solid var(--line);border-radius:4px;margin-top:6px">':''):'')+''+(d.num&&/^(signe|envoye|valide)$/.test(d.statut||'')?'<div class="dvvalid"><button type="button" class="btn" data-dvfac="acompte">🧾 Facture d\'acompte 30 %</button><button type="button" class="btn" data-dvfac="solde">🧾 Facturer le solde / total</button></div>'+(d.facture?'<p class="note">Déjà facturé : '+esc(d.facture)+'</p>':''):'')+'<div class="dact dvdanger"><button type="button" class="btn ghost" data-dv="close">Fermer sans enregistrer</button><button type="button" class="btn ghost dvdel" data-dv="del">'+(d._id?'Supprimer ce devis':'Abandonner ce brouillon')+'</button></div><p class="note" id="dvmsg" aria-live="polite">'+esc(DV.msg||'')+'</p></div></aside></div>';
   return h}
 function dvf(k,l,v,t){return '<div class="q"><label class="lab" for="dvf_'+k+'">'+l+'</label><input id="dvf_'+k+'" type="'+(t||'text')+'" data-df="'+k+'" value="'+esc(v==null?'':v)+'"'+(k==='cp'?' inputmode="numeric" maxlength="5"':'')+'></div>'}
 function dvRefresh(){var y=window.scrollY,ae=document.activeElement,id=ae&&ae.id,li=ae&&ae.closest&&ae.closest('[data-li]'),lf=ae&&ae.getAttribute&&ae.getAttribute('data-lf'),pos=ae&&ae.selectionStart;
@@ -5284,9 +5462,9 @@ $('adm').addEventListener('click',function(e){var b=e.target.closest('[data-dv],
   if(a==='save'){var d=dvCalc(DV.cur),p0=Promise.resolve();
     if(!d.num&&FCT.on){d.test=true;d.num='ESSAI-D-'+new Date().getFullYear()+'-'+Date.now().toString(36).slice(-4).toUpperCase()}
     if(!d.num){var yr=new Date().getFullYear(),n=(+BAR.num||0)+1;d.num='D-'+yr+'-'+('000'+n).slice(-4);var o2=JSON.parse(JSON.stringify(BAR));o2.num=n;p0=DB.doc('bareme/config').set(o2)}
-    var data=JSON.parse(JSON.stringify(d));delete data._id;data.maj=new Date().toISOString();
+    var data=JSON.parse(JSON.stringify(d));delete data._id;data.maj=new Date().toISOString();if(data.statut==='signe'&&!data.signeLe){data.signeLe=data.maj;data.signeVia=data.signeVia||'manuel';d.signeLe=data.signeLe;d.signeVia=data.signeVia}
     p0.then(function(){return d._id?DB.doc('devis/'+d._id).set(data):DB.collection('devis').add(data).then(function(ref){d._id=ref.id})})
-      .then(function(){if(d.demandeId)DB.doc('demandes/'+d.demandeId).update({devis:d.num,statut:'traitee'}).catch(function(){});dvRefresh();m('Devis '+d.num+' enregistré.')},function(){m('Enregistrement refusé : réessayez.')});return}
+      .then(function(){if(data.statut==='signe'&&d._id&&window.kDevisSigne)window.kDevisSigne(d._id,data)}).then(function(){if(d.demandeId)DB.doc('demandes/'+d.demandeId).update({devis:d.num,statut:'traitee'}).catch(function(){});dvRefresh();m('Devis '+d.num+' enregistré.')},function(){m('Enregistrement refusé : réessayez.')});return}
   if(a==='pdf'){b.disabled=true;m('Préparation du PDF…');dvPdf(dvCalc(DV.cur)).then(function(u){if(!DLS){m('Téléchargement indisponible dans cet affichage.');return}return DLS.save({filename:(DV.cur.num||'devis-brouillon')+'-KREON.pdf',data:new Blob([u],{type:'application/pdf'})}).then(function(){m('PDF enregistré.')})}).catch(function(e){m(e&&e.code==='declined'?'Téléchargement annulé.':'Le PDF n\'a pas pu être créé.')}).then(function(){b.disabled=false});return}
 });
 ['input','change'].forEach(function(t){$('adm').addEventListener(t,function(e){if(!DV.cur||ADM.tab!=='devis')return;var el=e.target,k=el.getAttribute&&el.getAttribute('data-df'),lf=el.getAttribute&&el.getAttribute('data-lf'),o=el.getAttribute&&el.getAttribute('data-dvopt');
@@ -6089,9 +6267,9 @@ $('burger').addEventListener('click',function(){var o=!$('mainnav').classList.co
 var prevView='site';
 function route(){
   var h=(location.hash||'').replace('#','');
-  var q=h==='devis'||h==='devis-pro'||h==='devis-part',l=Object.prototype.hasOwnProperty.call(LEGAL,h),v=h==='visite',g=h==='equipe'||h==='gestion',cl=h==='mon-espace';
-  $('site').hidden=q||l||v||g||cl;$('quote').hidden=!q;$('legal').hidden=!l;$('visit').hidden=!v;$('admin').hidden=!g;$('client').hidden=!cl;
-  if(!q&&!l&&!v&&!g&&!cl){showPage(h)}
+  var q=h==='devis'||h==='devis-pro'||h==='devis-part',l=Object.prototype.hasOwnProperty.call(LEGAL,h),v=h==='visite',g=h==='equipe'||h==='gestion',cl=h==='mon-espace',sg=h.indexOf('signer')===0;
+  $('site').hidden=q||l||v||g||cl||sg;$('signer').hidden=!sg;if(sg&&!(SGN.done&&SGN.h===h)){SGN.h=h;renderSigner(h)}$('quote').hidden=!q;$('legal').hidden=!l;$('visit').hidden=!v;$('admin').hidden=!g;$('client').hidden=!cl;
+  if(!q&&!l&&!v&&!g&&!cl&&!sg){showPage(h)}
   if(cl){renderClient();document.title='Mon espace · KREÖN';window.scrollTo(0,0);Array.prototype.forEach.call(document.querySelectorAll('#mainnav a'),function(a){if(a.getAttribute('data-p')==='mon-espace')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})}
   if(q||l)document.title='KREÖN';
   if(v){if(prevView!=='visit')resetVisit();renderVisit();document.title='Visite technique · KREÖN';window.scrollTo(0,0)}
