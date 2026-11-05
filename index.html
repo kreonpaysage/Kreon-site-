@@ -1159,6 +1159,31 @@ input.vh:focus-visible+*,.avadd:focus-within{outline:3px solid var(--sun)}
 
 
 
+
+/* fiche de visite numérique */
+.vform{background:var(--surface);border:2px solid #0b5d4b;border-radius:8px;padding:14px;margin-bottom:16px;display:grid;gap:12px}
+.vfhead{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between}.vfhead b{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:1.25rem}.vfhead small{color:var(--muted);flex-basis:100%;order:3}
+.vfgrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
+.vfcol{display:grid;gap:10px;min-width:0}
+.vfcol details{border:1px solid var(--line);border-radius:6px;background:var(--bg)}.vfcol summary{cursor:pointer;font-weight:700;padding:12px 14px;color:var(--green-deep)}
+.vfr{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 14px}
+.vff{display:grid;gap:4px;margin:0;font-weight:600;font-size:.85rem;min-width:0}.vff.wide{grid-column:1/-1}.vff input,.vff select{min-height:44px;padding:8px 10px}
+.vfzs{display:grid;gap:8px;padding:0 14px 10px}
+.vfz{display:grid;grid-template-columns:1.4fr 1.2fr .8fr .8fr .9fr .8fr auto;gap:6px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px}
+.vfx{border:0;background:none;color:var(--alert);font-size:1.1rem;cursor:pointer;min-height:44px;padding:0 6px}
+.vfcol>details>.btn{margin:0 14px 12px}
+.vfcalc{position:sticky;top:120px;background:#f3f8ef;border:1px solid var(--lime-2);border-radius:8px;padding:14px;display:grid;gap:8px;font-size:.92rem;min-width:0}
+.vfcalc h4{margin:6px 0 0;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep)}
+.vfcalc p{margin:0}.vfcalc small{color:var(--muted)}
+.vfkp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.vfkp div{background:#fff;border-radius:6px;padding:8px 10px;display:grid}.vfkp b{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:1.25rem;font-variant-numeric:tabular-nums}.vfkp span{font-size:.78rem;color:var(--muted)}
+.vfkp .ok b{color:var(--green-deep)}.vfkp .pend b{color:#8a6100}.vfkp .ko b{color:var(--alert)}
+.vft{width:100%;border-collapse:collapse;font-size:.85rem}.vft td{padding:4px 0;border-bottom:1px solid var(--line);vertical-align:top}.vft td:not(:first-child){text-align:right;white-space:nowrap;padding-left:8px;font-variant-numeric:tabular-nums}
+@media(max-width:900px){.vfgrid{grid-template-columns:1fr}.vfcalc{position:static}.vfz{grid-template-columns:1fr 1fr 1fr}.vfz .vff:first-child{grid-column:1/-1}}
+@media(max-width:560px){.vfr{grid-template-columns:1fr}}
+.vfbar{display:none}
+@media(max-width:900px){.vfbar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:45;background:#0b5d4b;padding:8px max(12px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px))}
+ .vfbar button{width:100%;display:flex;justify-content:space-between;gap:8px;background:none;border:0;color:#fff;font:inherit;font-weight:700;font-variant-numeric:tabular-nums;min-height:40px;align-items:center;cursor:pointer}
+ .vfbar .ok{color:#b9f2a0}.vfbar .pend{color:var(--sun)}.vfbar .ko{color:#ffb4a8}.vform{padding-bottom:70px}}
 /* visites de chantier */
 .vitop{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-left:6px solid #0b5d4b;border-radius:6px;padding:16px 18px;margin-bottom:14px}
 .vitop>div:first-child{display:grid;gap:4px}.vitop b{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:1.3rem}.vitop small{color:var(--muted);font-size:.92rem}
@@ -4429,11 +4454,82 @@ function viUpload(id,files){if(VI.busy)return;VI.busy=true;var done=[],n=files.l
   .then(function(){VI.busy=false})}
 function viFire(id){var vi=AGL.filter(function(x){return x.id==='victor'})[0];
   viSave(function(v){var it=viItem(v,id);if(it){it.statut='a_traiter';it.envoye=new Date().toISOString();delete it.erreur}}).then(function(){
-    if(window.kAgFire&&vi)window.kAgFire('victor','traite le dossier de visite id « '+id+' » du document bareme/visites (étapes 1 à 8 de ton prompt) : lis les photos des pages, prépare le devis brouillon, les fournitures +10 %, le plan d\'arrosage si demandé et le dossier chantier, dépose les PDF dans le tableau de bord.').then(function(r){kToast(r.ok?'<b>⚡ Victor est lancé</b><br>Les PDF arrivent ici dans quelques minutes.':window.kAgFireMsg(vi,r))})})}
+    if(window.kAgFire&&vi)window.kAgFire('victor','traite le dossier de visite id « '+id+' » du document bareme/visites (étapes 1 à 8 de ton prompt) : lis la fiche saisie à l\'écran (champ saisie, source principale) et les photos des pages, prépare le devis brouillon, les fournitures +10 %, le plan d\'arrosage si demandé et le dossier chantier, dépose les PDF dans le tableau de bord.').then(function(r){kToast(r.ok?'<b>⚡ Victor est lancé</b><br>Les PDF arrivent ici dans quelques minutes.':window.kAgFireMsg(vi,r))})})}
 function viSaveFile(b){var u=b.getAttribute('data-vurl'),f=b.getAttribute('data-vfile')||'document-kreon.pdf';
   if(!DLS){window.open(u,'_blank','noopener');return}
   b.disabled=true;fetch(u).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(bl){return DLS.save({filename:f,data:bl})})
    .then(function(){kToast('✅ '+esc(f)+' enregistré')},function(err){if(!(err&&err.code==='declined'))window.open(u,'_blank','noopener')}).then(function(){b.disabled=false})}
+
+/* ---------- FICHE DE VISITE NUMÉRIQUE (saisie sur place + calcul en direct) ---------- */
+var VF={t:null,id:null};
+var VFZT=[['gazon','Gazon'],['talus','Talus'],['prairie','Prairie fleurie'],['massif','Massif / haie (ml)']];
+function vfS(it){var s=it.saisie||{};s.zones=s.zones||[];return s}
+function vfNum(v){v=String(v==null?'':v).replace(',','.');var n=parseFloat(v);return isFinite(n)?n:0}
+function vfZoneS(z){var s=vfNum(z.s);if(!s)s=vfNum(z.l)*vfNum(z.w);return s}
+function vfCalc(S){var B=BAR,M=1.1,r={zones:{gazon:0,talus:0,prairie:0},ml:0,arroS:0};
+  (S.zones||[]).forEach(function(z){if(z.type==='massif'){r.ml+=vfNum(z.l);return}var a=vfZoneS(z);r.zones[z.type||'gazon']+=a;if(z.arro!=='non'&&S.arrosage==='oui')r.arroS+=a});
+  r.hydro=r.zones.gazon+r.zones.talus+r.zones.prairie;
+  var pente=S.pente==='forte'||r.zones.talus>0,sem=pente?3.5:3.2,h=r.hydro/100;
+  r.four=[['Semences',h*sem,'kg'],['Fibres de bois',h*18,'kg'],['Engrais starter',h*4,'kg'],['Fixateur',h*.8,'kg']].map(function(x){return [x[0],x[1],Math.ceil(x[1]*M*10)/10,x[2]]});
+  r.eau=h*.4;r.cuves=Math.ceil(r.hydro/200);r.jours=r.hydro?Math.max(.5,Math.ceil(r.hydro/1000*2)/2):0;
+  var sec=vfNum(S.seau);r.debit=sec?36/sec:0;
+  var dec=S.terr==='oui'?r.hydro*vfNum(S.ep||10)/100:0;r.decap=dec;r.foison=dec*1.25;r.evac=S.evac==='oui'?r.foison:0;r.tv=r.hydro*vfNum(S.tv)/100*1.1;
+  r.rot=r.evac?Math.ceil(r.evac/(vfNum(S.remcap)||1.5)):0;
+  if(r.arroS){var heads=Math.ceil(r.arroS/10),q=heads*.27;r.tetes=heads;r.zonesArro=r.debit?Math.max(1,Math.ceil(q/(r.debit*.8))):null}
+  r.dict=(S.terr==='oui'||r.arroS>0||vfNum(S.alim)>0)?'obligatoire':'à vérifier';
+  /* devis estimatif avec le moteur de l'onglet Devis */
+  var d={num:'',date:isoD(new Date()),statut:'brouillon',client:S.client||'',tel:S.tel||'',mail:S.mail||'',adresse:S.adresse||'',cp:S.cp||'',surface:r.hydro,km:S.km||'',tvaTaux:20,notes:'',lignes:[],deplAuto:true};
+  function add(k,q){var p=pdef(k);if(p&&q>0)d.lignes.push({k:k,d:p[1],q:Math.round(q*100)/100,u:p[2],pu:pvDef(k)})}
+  ['gazon','talus','prairie'].forEach(function(t){add('hydro_'+t,r.zones[t])});
+  if(S.terr==='oui')add('terr',r.hydro);if(r.evac)add('evac',Math.ceil(r.evac));if(r.tv)add('tv',Math.ceil(r.tv*10)/10);
+  if(r.arroS)add('arro',r.arroS);if(S.arrosage==='oui'&&r.ml)add('goutte',r.ml);if(vfNum(S.alim))add('alim',vfNum(S.alim));
+  add('bordA',vfNum(S.bordA));add('bordB',vfNum(S.bordB));
+  try{dvCalc(d)}catch(e){}r.devis=d;return r}
+function vfOut(S){var r=vfCalc(S),B=BAR,d=r.devis,f1=function(v,n){return (Math.round(v*Math.pow(10,n||0))/Math.pow(10,n||0)).toLocaleString('fr-FR')};
+  var tx=d.tx||0,cl=tx>=B.seuil.ok?'ok':tx>=B.seuil.bas?'pend':'ko';
+  var h='<div class="vfkp"><div><b>'+f1(r.hydro)+' m²</b><span>à ensemencer</span></div><div><b>'+(d.ht?eu(d.ht):'—')+'</b><span>HT estimé</span></div><div class="'+cl+'"><b>'+(d.ht?f1(tx,1)+' %':'—')+'</b><span>marge brute (cible '+B.seuil.ok+' %)</span></div><div><b>'+f1(d.jours||0,1)+' j</b><span>chantier</span></div></div>';
+  if(r.hydro)h+='<h4>Hydroensemencement · fournitures +10 %</h4><table class="vft">'+r.four.map(function(x){return '<tr><td>'+x[0]+'</td><td>'+f1(x[1],1)+' '+x[3]+'</td><td><b>'+f1(x[2],1)+' '+x[3]+'</b></td></tr>'}).join('')+'<tr><td>Eau</td><td colspan="2"><b>'+f1(r.eau,1)+' m³</b> · '+r.cuves+' cuve'+(r.cuves>1?'s':'')+' Urbaspray · '+r.jours+' j en solo</td></tr></table>';
+  if(r.decap||r.tv)h+='<h4>Terre</h4><p>'+(r.decap?'Décapage '+f1(r.decap,1)+' m³ en place → '+f1(r.foison,1)+' m³ foisonnés'+(r.evac?' · '+r.rot+' rotation'+(r.rot>1?'s':'')+' remorque'+(r.rot>6?'<br><b>Trop de rotations : benne ou camion avec chauffeur à louer (Max)</b>':''):''):'')+(r.tv?(r.decap?'<br>':'')+'Terre végétale à apporter : '+f1(r.tv,1)+' m³ (+10 %)':'')+'</p>';
+  if(r.arroS)h+='<h4>Arrosage</h4><p>'+f1(r.arroS)+' m² arrosés · ≈ '+r.tetes+' têtes'+(r.debit?' · débit '+f1(r.debit,2)+' m³/h → ≈ '+r.zonesArro+' zone'+(r.zonesArro>1?'s':''):' · <b>mesurer le débit au seau</b>')+(r.ml?' · '+f1(r.ml)+' ml de goutte-à-goutte':'')+'<br><small>Estimation. Le plan à l\'échelle et la nomenclature exacte sortent de Victor.</small></p>';
+  h+='<h4>DT-DICT</h4><p>'+(r.dict==='obligatoire'?'<b>Obligatoire</b> (tranchées / terrassement) : à déposer avant le chantier, réponses sous 9 jours en ligne.':'À vérifier selon les travaux.')+'</p>';
+  if(d.lignes&&d.lignes.length)h+='<h4>Devis estimatif</h4><table class="vft">'+d.lignes.map(function(l){return '<tr><td>'+esc(l.d)+'</td><td>'+f1(l.q,2)+' '+esc(l.u||'')+'</td><td><b>'+eu(l.tot||0)+'</b></td></tr>'}).join('')+'<tr><td colspan="2">Total HT · TVA '+d.tva+' %</td><td><b>'+eu(d.ht||0)+'</b></td></tr></table>';
+  return h}
+function vfBar(S){var r=vfCalc(S),d=r.devis,tx=d.tx||0,cl=tx>=BAR.seuil.ok?'ok':tx>=BAR.seuil.bas?'pend':'ko';return '<button type="button" data-vfgo="1"><span>'+Math.round(r.hydro)+' m²</span><span>'+(d.ht?eu(d.ht)+' HT':'—')+'</span><span class="'+cl+'">'+(d.ht?(Math.round(tx*10)/10).toLocaleString('fr-FR')+' %':'—')+'</span><span>Détail ↓</span></button>'}
+function vfSel(k,v,opts){return '<select data-vk="'+k+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(String(v||'')===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select>'}
+function vfIn(k,v,ph,t){return '<input type="'+(t||'text')+'"'+(t==='number'?' inputmode="decimal" step="any"':'')+' data-vk="'+k+'" value="'+esc(v==null?'':v)+'" placeholder="'+esc(ph||'')+'">'}
+function vfF(lab,ctl,w){return '<label class="vff'+(w?' wide':'')+'"><span>'+lab+'</span>'+ctl+'</label>'}
+var ON=[['','—'],['oui','Oui'],['non','Non']];
+function vfForm(it){var S=vfS(it);
+  var z=S.zones.map(function(x,i){return '<div class="vfz" data-zi="'+i+'">'+vfF('Zone',vfIn('zones.'+i+'.nom',x.nom,'Ex. : pelouse sud'))+vfF('Type',vfSel('zones.'+i+'.type',x.type||'gazon',VFZT))+vfF(x.type==='massif'?'Longueur (ml)':'Long. (m)',vfIn('zones.'+i+'.l',x.l,'0','number'))+(x.type==='massif'?'':vfF('Larg. (m)',vfIn('zones.'+i+'.w',x.w,'0','number'))+vfF('ou m² Moasure',vfIn('zones.'+i+'.s',x.s,'0','number')))+vfF('Arrosée',vfSel('zones.'+i+'.arro',x.arro||'oui',[['oui','Oui'],['non','Non']]))+'<button type="button" class="vfx" data-vfz="del" data-zi="'+i+'" aria-label="Supprimer la zone">✕</button></div>'}).join('');
+  return '<section class="vform" data-vfid="'+it.id+'"><div class="vfhead"><b>Fiche de visite · '+esc(S.client||it.client||'nouveau client')+'</b><small>Enregistrement automatique · le calcul se met à jour à chaque saisie</small><button type="button" class="btn ghost" data-vi="close">Fermer la fiche</button></div>'+
+   '<div class="vfgrid"><div class="vfcol">'+
+   '<details open><summary>1 · Client et chantier</summary><div class="vfr">'+vfF('Profil',vfSel('profil',S.profil,[['','—'],['particulier','Particulier'],['pro','Professionnel']]))+vfF('Nom du client',vfIn('client',S.client))+vfF('Téléphone',vfIn('tel',S.tel,'','tel'))+vfF('Mail',vfIn('mail',S.mail,'','email'))+vfF('Adresse du chantier',vfIn('adresse',S.adresse),1)+vfF('Code postal',vfIn('cp',S.cp))+vfF('Commune',vfIn('commune',S.commune))+vfF('Km depuis Alès',vfIn('km',S.km,'auto','number'))+
+     vfF('Accès pickup + remorque',vfSel('acces',S.acces,[['','—'],['ok','Facile'],['etroit','Étroit'],['non','Impossible']]))+vfF('Largeur de passage (m)',vfIn('passage',S.passage,'','number'))+vfF('Seau de 10 L rempli en (s)',vfIn('seau',S.seau,'ex. 15','number'))+vfF('Pression (bar)',vfIn('pression',S.pression,'','number'))+vfF('Prise électrique extérieure',vfSel('elec',S.elec,ON))+'</div></details>'+
+   '<details open><summary>2 · Zones et métré Moasure</summary><div class="vfzs">'+(z||'<p class="note">Ajoutez une ligne par zone mesurée.</p>')+'</div><button type="button" class="btn ghost" data-vfz="add">➕ Ajouter une zone</button><div class="vfr">'+vfF('Sol',vfSel('sol',S.sol,[['','—'],['vegetale','Terre végétale'],['argile','Argileux'],['cailloux','Caillouteux'],['remblai','Remblai / chantier']]))+vfF('Pente',vfSel('pente',S.pente,[['','—'],['plat','Plat'],['legere','Légère'],['forte','Forte / talus']]))+vfF('Exposition',vfSel('expo',S.expo,[['','—'],['soleil','Plein soleil'],['mi','Mi-ombre'],['ombre','Ombre']]))+vfF('Réseaux repérés (eau, gaz, élec, fosse, regards…)',vfIn('reseaux',S.reseaux),1)+'</div></details>'+
+   '<details><summary>3 · Préparation du terrain</summary><div class="vfr">'+vfF('Terrassement / décapage',vfSel('terr',S.terr,ON))+vfF('Épaisseur à décaper (cm)',vfIn('ep',S.ep,'10','number'))+vfF('Évacuation des terres',vfSel('evac',S.evac,ON))+vfF('Capacité remorque (m³)',vfIn('remcap',S.remcap,'1,5','number'))+vfF('Apport terre végétale (cm)',vfIn('tv',S.tv,'0','number'))+vfF('Bordures acier (ml)',vfIn('bordA',S.bordA,'0','number'))+vfF('Bordures béton (ml)',vfIn('bordB',S.bordB,'0','number'))+'</div></details>'+
+   '<details><summary>4 · Arrosage Gardena</summary><div class="vfr">'+vfF('Arrosage automatique',vfSel('arrosage',S.arrosage,ON))+vfF('Point d\'eau → regard (ml de tranchée)',vfIn('alim',S.alim,'0','number'))+vfF('Emplacement du regard et du boîtier',vfIn('regard',S.regard,'ex. façade nord, garage'),1)+'</div><p class="note">Pour le plan à l\'échelle : dessinez le terrain sur la page 5 de la fiche papier (maison, terrasse, piscine, arrivée d\'eau, regards, fosse) et ajoutez-en la photo. Les tranchées contournent le bâti.</p></details>'+
+   '<details><summary>5 · DT-DICT</summary><div class="vfr">'+vfF('Emprise des travaux (m²)',vfIn('emprise',S.emprise,'auto','number'))+vfF('DT-DICT déposée le',vfIn('dictDate',S.dictDate,'','date'))+vfF('Récépissés reçus',vfSel('dictOk',S.dictOk,[['','—'],['attente','En attente'],['ok','Tous reçus'],['marquage','Marquage-piquetage à faire']]))+'</div></details>'+
+   '<details><summary>6 · Décisions et suite</summary><div class="vfr">'+vfF('Budget annoncé par le client (€)',vfIn('budget',S.budget,'','number'))+vfF('Début souhaité',vfIn('debut',S.debut,'','date'))+vfF('Attentes, contraintes, remarques',vfIn('rem',S.rem),1)+'</div></details>'+
+   '</div><aside class="vfcalc" id="vfcalc">'+vfOut(S)+'</aside></div><div class="vfbar" id="vfbar">'+vfBar(S)+'</div>'+
+   '<div class="dact"><button type="button" class="btn" data-vi="mkdevis" data-vid="'+it.id+'">Créer / mettre à jour le devis brouillon</button><button type="button" class="btn ghost" data-vi="photos" data-vid="'+it.id+'">📸 Ajouter la photo du plan</button><button type="button" class="btn ghost" data-vi="send" data-vid="'+it.id+'">Envoyer à Victor (plan + PDF)</button></div></section>'}
+function vfSet(S,k,v){var p=k.split('.'),o=S;for(var i=0;i<p.length-1;i++){o=o[p[i]]=o[p[i]]||(/^\d+$/.test(p[i+1])?[]:{})}o[p[p.length-1]]=v}
+function vfLive(){var f=document.querySelector('#adm .vform');if(!f)return null;var id=f.getAttribute('data-vfid'),it=viItem(VI.data,id);if(!it)return null;var S=JSON.parse(JSON.stringify(vfS(it)));
+  Array.prototype.forEach.call(f.querySelectorAll('[data-vk]'),function(el){vfSet(S,el.getAttribute('data-vk'),el.value)});return {id:id,S:S}}
+function vfPush(redraw){var L=vfLive();if(!L)return;var o=$('vfcalc');if(o)o.innerHTML=vfOut(L.S);var vb=$('vfbar');if(vb)vb.innerHTML=vfBar(L.S);
+  var it=viItem(VI.data,L.id);if(it){it.saisie=L.S;if(L.S.client)it.client=L.S.client;if(L.S.commune)it.commune=L.S.commune}
+  clearTimeout(VF.t);VF.t=setTimeout(function(){viSave(function(v){var x=viItem(v,L.id);if(x){x.saisie=L.S;if(L.S.client)x.client=L.S.client;if(L.S.commune)x.commune=L.S.commune}}).then(function(){if(redraw)drawAdmin()})},redraw?0:700)}
+document.addEventListener('input',function(e){if(e.target.closest('#adm .vform [data-vk]'))vfPush(false)});
+document.addEventListener('change',function(e){var el=e.target.closest('#adm .vform [data-vk]');if(!el)return;vfPush(/\.type$/.test(el.getAttribute('data-vk')))});
+document.addEventListener('click',function(e){if(e.target.closest('[data-vfgo]')){var c=$('vfcalc');if(c)try{c.scrollIntoView({block:'start',behavior:'smooth'})}catch(x){}return}var b=e.target.closest('#adm [data-vfz]');if(!b)return;var L=vfLive();if(!L)return;
+  if(b.getAttribute('data-vfz')==='add')L.S.zones.push({nom:'',type:'gazon',l:'',w:'',s:'',arro:'oui'});else L.S.zones.splice(+b.getAttribute('data-zi'),1);
+  var it=viItem(VI.data,L.id);it.saisie=L.S;try{document.activeElement.blur()}catch(x){}drawAdmin();viSave(function(v){var x=viItem(v,L.id);if(x)x.saisie=L.S})});
+function vfMkDevis(id){var it=viItem(VI.data,id);if(!it)return;var L=vfLive(),S=L&&L.id===id?L.S:vfS(it),r=vfCalc(S),d=r.devis;
+  if(!d.lignes.length){kToast('Renseignez au moins une zone mesurée.');return}
+  d.source='visite';d.visiteId=id;d.ville=S.commune||'';d.agentNotes='- Devis issu de la fiche de visite numérique du '+new Date().toLocaleDateString('fr-FR')+'.\n- Accès : '+(S.acces||'?')+' · débit '+(r.debit?r.debit.toFixed(2)+' m³/h':'non mesuré')+' · DT-DICT '+r.dict+'.'+(S.rem?'\n- '+S.rem:'');
+  var did='visite-'+id,ref=DB.doc('devis/'+did);
+  ref.get().then(function(sn){if(sn.exists){var o=sn.data()||{};if(o.statut&&o.statut!=='brouillon'){throw {code:'locked'}}d.num=o.num||'';d.date=o.date||d.date}
+    return ref.set(JSON.parse(JSON.stringify(d)))}).then(function(){return viSave(function(v){var x=viItem(v,id);if(x)x.devisId=did})})
+  .then(function(){kToast('<b>✅ Devis brouillon à jour</b><br>Onglet Devis, « '+did+' » : '+eu(d.ht)+' HT, marge '+d.tx+' %.')},function(e){kToast(e&&e.code==='locked'?'Ce devis est déjà validé ou envoyé : il n\'est plus modifié automatiquement.':'Enregistrement du devis refusé : réessayez.')})}
 function viCard(it){var st=VIST[it.statut]||[it.statut||'—',''],P=it.pages||[],D=it.docs||[],open=VI.open===it.id||D.length&&it.statut==='pret'&&VI.open==null;
   var h='<article class="vicard'+(it.statut==='pret'?' ok':'')+'"><div class="vihead"><div><h3>'+esc(it.client||'Client à préciser')+'</h3><small>'+[esc(it.commune||''),it.cree?new Date(it.cree).toLocaleDateString('fr-FR',{day:'numeric',month:'long'}):'',P.length+' page'+(P.length>1?'s':'')+' photographiée'+(P.length>1?'s':'')].filter(Boolean).join(' · ')+'</small></div><span class="slotst '+st[1]+'">'+st[0]+'</span></div>';
   if(it.statut==='brouillon'||it.statut==='erreur'||!it.statut)h+='<div class="vimeta"><label>Client<input type="text" data-vf="client" data-vid="'+it.id+'" value="'+esc(it.client||'')+'" placeholder="Nom du client"></label><label>Commune<input type="text" data-vf="commune" data-vid="'+it.id+'" value="'+esc(it.commune||'')+'" placeholder="Commune"></label><label class="wide">Note pour Victor (facultatif)<input type="text" data-vf="notes" data-vid="'+it.id+'" value="'+esc(it.notes||'')+'" placeholder="Ex. : client pressé, prévoir variante sans arrosage"></label></div>';
@@ -4441,18 +4537,21 @@ function viCard(it){var st=VIST[it.statut]||[it.statut||'—',''],P=it.pages||[]
   if(it.erreur)h+='<p class="altxt">'+esc(it.erreur)+'</p>';
   if(it.resume)h+='<p class="viresume">'+esc(it.resume)+'</p>';
   if(D.length)h+='<ul class="vidocs">'+D.map(function(d){return '<li><span class="vipdf" aria-hidden="true">PDF</span><b>'+esc(d.titre||d.fichier||'Document')+'</b><span class="vibtn"><a class="btn" href="'+esc(d.url)+'" target="_blank" rel="noopener">Ouvrir</a><button type="button" class="btn ghost" data-vsave="1" data-vurl="'+esc(d.url)+'" data-vfile="'+esc(d.fichier||'document-kreon.pdf')+'">Enregistrer</button></span></li>'}).join('')+'</ul>';
+  if(it.saisie&&!(VI.edit===it.id)){var R=vfCalc(vfS(it));if(R.devis.ht)h+='<p class="viresume">Fiche saisie : '+Math.round(R.hydro)+' m² · '+eu(R.devis.ht)+' HT estimé · marge '+R.devis.tx+' %</p>'}
   h+='<div class="dact">';
+  if(VI.edit!==it.id)h+='<button type="button" class="btn ghost" data-vi="edit" data-vid="'+it.id+'">📝 '+(it.saisie?'Reprendre la fiche':'Remplir la fiche à l\'écran')+'</button>';
   if(it.statut!=='en_cours'&&it.statut!=='a_traiter')h+='<button type="button" class="btn ghost" data-vi="photos" data-vid="'+it.id+'">📸 '+(P.length?'Ajouter des photos':'Photographier les pages')+'</button>';
-  if(P.length&&(it.statut==='brouillon'||it.statut==='erreur'))h+='<button type="button" class="btn" data-vi="send" data-vid="'+it.id+'">Envoyer à Victor ('+P.length+' page'+(P.length>1?'s':'')+')</button>';
+  if((P.length||it.saisie)&&(it.statut==='brouillon'||it.statut==='erreur'))h+='<button type="button" class="btn" data-vi="send" data-vid="'+it.id+'">Envoyer à Victor'+(P.length?' ('+P.length+' photo'+(P.length>1?'s':'')+')':'')+'</button>';
   if(it.statut==='pret')h+='<button type="button" class="btn ghost" data-vi="send" data-vid="'+it.id+'">Refaire le dossier</button>';
   if(it.statut==='a_traiter')h+='<button type="button" class="btn ghost" data-vi="send" data-vid="'+it.id+'">Relancer Victor</button>';
   if(P.length&&it.statut!=='en_cours')h+='<button type="button" class="btn ghost" data-vi="dellast" data-vid="'+it.id+'">Retirer la dernière photo</button>';
   h+='<button type="button" class="btn ghost videl" data-vi="del" data-vid="'+it.id+'">'+(VI.arm===it.id?'Confirmer la suppression':'Supprimer')+'</button></div>';
   if(it.devisId)h+='<p class="note">Devis brouillon : onglet Devis, « '+esc(it.devisId)+' ». À relire et valider avant tout envoi.</p>';
   return h+'</article>'}
-function tabVisites(){viSub();var L=(VI.data.items||[]).slice().sort(function(a,b){return (b.cree||'').localeCompare(a.cree||'')});
+function tabVisites(){viSub();var L=(VI.data.items||[]).slice().sort(function(a,b){return (b.cree||'').localeCompare(a.cree||'')});var FE=VI.edit&&viItem(VI.data,VI.edit);
   var h='<div class="vitop"><div><b>Visites de chantier</b><small>1. Imprimez la fiche, remplissez-la sur place. 2. Photographiez chaque page à plat. 3. Envoyez à Victor : devis, fournitures +10 %, plan d\'arrosage et dossier chantier arrivent ici en PDF.</small></div>'+
-    '<div class="dact"><button type="button" class="btn" data-vi="new">➕ Nouvelle visite</button><button type="button" class="btn ghost" data-doc="fiche-visite-kreon.pdf">📄 Fiche vierge (PDF, 6 pages)</button></div><p class="dlmsg" data-msg="fiche-visite-kreon.pdf" aria-live="polite"></p></div>';
+    '<div class="dact"><button type="button" class="btn" data-vi="newform">📝 Nouvelle visite (fiche à l\'écran)</button><button type="button" class="btn ghost" data-vi="new">📸 Nouvelle visite (photos de la fiche papier)</button><button type="button" class="btn ghost" data-doc="fiche-visite-kreon.pdf">📄 Fiche vierge (PDF, 6 pages)</button></div><p class="dlmsg" data-msg="fiche-visite-kreon.pdf" aria-live="polite"></p></div>';
+  if(FE)h+=vfForm(FE);
   h+=L.length?L.map(viCard).join(''):'<p class="plempty">Aucune visite pour l\'instant. Touchez « Nouvelle visite » sur place, puis photographiez les pages de la fiche.</p>';
   h+='<p class="note">Victor ne contacte jamais le client. Le devis reste en brouillon tant que vous ne l\'avez pas validé. Les portées et débits du plan sont à caler à la mise en eau.</p>';
   return h}
@@ -4460,11 +4559,15 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-vsav
   b=e.target.closest('[data-vi]');if(!b||!$('adm').contains(b))return;var a=b.getAttribute('data-vi'),id=b.getAttribute('data-vid');
   if(a==='new'){var nid='v'+Date.now().toString(36);viSave(function(v){v.items.unshift({id:nid,cree:new Date().toISOString(),client:'',commune:'',statut:'brouillon',pages:[],docs:[]})}).then(function(){VI.open=nid;viPick(nid)});return}
   if(a==='photos'){viPick(id);return}
+  if(a==='newform'){var fid='v'+Date.now().toString(36);viSave(function(v){v.items.unshift({id:fid,cree:new Date().toISOString(),client:'',commune:'',statut:'brouillon',pages:[],docs:[],saisie:{zones:[{nom:'',type:'gazon',l:'',w:'',s:'',arro:'oui'}]}})}).then(function(){VI.edit=fid;drawAdmin();var f=document.querySelector('#adm .vform');if(f)try{f.scrollIntoView({block:'start'})}catch(x){}});return}
+  if(a==='edit'){VI.edit=id;drawAdmin();var f2=document.querySelector('#adm .vform');if(f2)try{f2.scrollIntoView({block:'start'})}catch(x){}return}
+  if(a==='close'){vfPush(false);VI.edit=null;setTimeout(drawAdmin,50);return}
+  if(a==='mkdevis'){vfMkDevis(id);return}
   if(a==='send'){viFire(id);return}
   if(a==='dellast'){viSave(function(v){var it=viItem(v,id);if(it&&it.pages&&it.pages.length)it.pages.pop()},'Dernière photo retirée.');return}
   if(a==='del'){if(VI.arm!==id){VI.arm=id;drawAdmin();setTimeout(function(){if(VI.arm===id){VI.arm=null;if(ADM.tab==='visites')drawAdmin()}},5000);return}
     VI.arm=null;viSave(function(v){v.items=v.items.filter(function(x){return x.id!==id})},'Visite supprimée.')}});
-document.addEventListener('change',function(e){var f=e.target.closest('[data-vf]');if(!f)return;var k=f.getAttribute('data-vf'),id=f.getAttribute('data-vid'),val=f.value.trim();
+document.addEventListener('change',function(e){var f=e.target.closest('[data-vf]:not([data-vk])');if(!f)return;var k=f.getAttribute('data-vf'),id=f.getAttribute('data-vid'),val=f.value.trim();
   viSave(function(v){var it=viItem(v,id);if(it)it[k]=val}).then(function(){f.blur()})});
 function drawAdmin(){
   var ae=document.activeElement;if(ae&&$('adm').contains(ae)&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))return;
