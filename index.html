@@ -473,6 +473,7 @@ footer{padding-block:26px 40px;font-size:.88rem;color:var(--muted);display:flex;
 .recap dl{margin:0;display:grid;grid-template-columns:minmax(120px,.5fr) 1fr;gap:6px 18px;font-size:.95rem}
 .recap dt{color:var(--muted)} .recap dd{margin:0;overflow-wrap:anywhere}
 .recap h3{margin-top:6px;color:var(--green-deep)}
+.gofull{margin-top:22px;padding:16px 18px;border:1.5px dashed var(--green);border-radius:6px;background:var(--lime);display:grid;gap:10px;justify-items:start}.gofull .btn{background:#fff}.gofull p{margin:0;color:var(--fg);font-size:.95rem}
 .demo{padding:14px 16px;background:#fff6dd;border-left:4px solid var(--sun);font-size:.95rem}
 @media(max-width:560px){.recap dl{grid-template-columns:1fr}.recap dt{margin-top:6px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar2 i{transition:none}}
@@ -2871,26 +2872,36 @@ function inc(a,k,v){var x=a[k];return Array.isArray(x)?x.indexOf(v)>-1:x===v}
 var isPro=function(a){return a.type==='Professionnel'};
 var isPart=function(a){return a.type==='Particulier'};
 var has=function(a){return !!a.type};
+var lite=function(a){return !!a.type&&!a._full};
+var F2=function(f){return function(a){return !!a._full&&f(a)}};
 var notNo=function(k){return function(a){var x=a[k];return !(x==='Non'||(Array.isArray(x)&&x.length===1&&x[0]==='Non'))}};
 var isExcl=function(o){return o===NSP||/^Aucun/.test(o)};
 /* k: radio = un seul choix (oui/non, budget, urgence) ; m = plusieurs choix + « Autre » */
 var S=[
 {id:'vous',t:'Vous',intro:'Commencez par votre profil : le questionnaire s\'adapte.',q:[
- {id:'type',l:'Vous êtes',k:'radio',r:1,o:['Particulier','Professionnel'],h:'Particulier : questionnaire détaillé sur votre terrain. Professionnel (entreprise, lotisseur, promoteur, terrassier, collectivité, syndic) : questionnaire court, centré sur votre opération.'},
+ {id:'type',l:'Vous êtes',k:'radio',r:1,o:['Particulier','Professionnel'],h:'Professionnel : entreprise, lotisseur, promoteur, terrassier, collectivité ou syndic. La demande express prend 1 minute ; vous pourrez ensuite aller plus loin si vous le souhaitez.'},
  {id:'societe',l:'Nom de la société',k:'text',r:1,c:isPro,h:'Le nom qui doit figurer sur le devis.'},
- {id:'siret',l:'Numéro SIRET',k:'text',r:1,c:isPro,h:'14 chiffres, indiqués sur votre Kbis. Il sert à établir le devis et à vérifier votre société.'},
- {id:'activite',l:'Votre activité',k:'m',r:1,c:isPro,o:['Lotisseur ou promoteur','Constructeur ou maître d\'œuvre','Terrassier ou entreprise de VRD','Paysagiste ou espaces verts','Collectivité ou syndic'],h:'Cochez ce qui correspond le mieux à votre société.'},
- {id:'adrsoc',l:'Adresse du siège (adresse, code postal, ville)',k:'text',r:1,c:isPro,ac:'street-address',h:'L\'adresse de facturation de la société.'},
+ {id:'siret',l:'Numéro SIRET',k:'text',r:1,c:F2(isPro),h:'14 chiffres, indiqués sur votre Kbis. Il sert à établir le devis et à vérifier votre société.'},
+ {id:'activite',l:'Votre activité',k:'m',r:1,c:F2(isPro),o:['Lotisseur ou promoteur','Constructeur ou maître d\'œuvre','Terrassier ou entreprise de VRD','Paysagiste ou espaces verts','Collectivité ou syndic'],h:'Cochez ce qui correspond le mieux à votre société.'},
+ {id:'adrsoc',l:'Adresse du siège (adresse, code postal, ville)',k:'text',r:1,c:F2(isPro),ac:'street-address',h:'L\'adresse de facturation de la société.'},
  {id:'prenom',l:'Prénom',k:'text',r:1,c:has,ac:'given-name',h:'Pour nous adresser à vous correctement.'},
  {id:'nom',l:'Nom',k:'text',r:1,c:has,ac:'family-name',h:'Tel qu\'il doit apparaître sur le devis.'},
- {id:'fonction',l:'Votre fonction',k:'text',c:isPro,h:'Conducteur de travaux, directeur, gérant, responsable technique…'},
+ {id:'fonction',l:'Votre fonction',k:'text',c:F2(isPro),h:'Conducteur de travaux, directeur, gérant, responsable technique…'},
  {id:'tel',l:'Téléphone',k:'tel',r:1,c:has,ac:'tel',h:'Pour confirmer les détails ou fixer la visite du terrain.'},
  {id:'mail',l:'E-mail',k:'email',r:1,c:has,ac:'email',h:'Le devis vous sera envoyé à cette adresse.'},
- {id:'moyen',l:'Meilleur moyen de vous joindre',k:'m',c:has,o:['Appel téléphonique','SMS','WhatsApp','E-mail'],h:'Les canaux que vous consultez le plus vite.'},
- {id:'creneau',l:'Créneaux où vous êtes joignable',k:'m',c:isPart,o:['Matin','Midi','Après-midi','Soir','Week-end'],h:'Pour tomber au bon moment du premier coup.'},
- {id:'connu',l:'Comment nous avez-vous connus ?',k:'m',c:isPart,o:['Bouche-à-oreille','Recherche internet','Réseaux sociaux','Vidéo de chantier','Un professionnel du BTP'],h:'Cela nous aide à savoir où nous faire connaître.'}
+ {id:'moyen',l:'Meilleur moyen de vous joindre',k:'m',c:F2(has),o:['Appel téléphonique','SMS','WhatsApp','E-mail'],h:'Les canaux que vous consultez le plus vite.'},
+ {id:'creneau',l:'Créneaux où vous êtes joignable',k:'m',c:F2(isPart),o:['Matin','Midi','Après-midi','Soir','Week-end'],h:'Pour tomber au bon moment du premier coup.'},
+ {id:'connu',l:'Comment nous avez-vous connus ?',k:'m',c:F2(isPart),o:['Bouche-à-oreille','Recherche internet','Réseaux sociaux','Vidéo de chantier','Un professionnel du BTP'],h:'Cela nous aide à savoir où nous faire connaître.'}
 ]},
-{id:'chantier',t:'Le chantier',intro:'Où et quoi.',cond:isPart,q:[
+{id:'express',t:'Votre projet',cond:lite,intro:'L\'essentiel en 1 minute. Nous vous rappelons pour le reste. Pour un devis plus précis, cliquez sur « Aller plus loin » sous le formulaire.',q:[
+ {id:'cp',l:'Code postal du terrain',k:'text',r:1,ac:'postal-code',h:'Pour calculer le déplacement.'},
+ {id:'ville',l:'Commune',k:'text',r:1,ac:'address-level2',h:'Là où se trouve le terrain.'},
+ {id:'x_prest',l:'Ce dont vous avez besoin',k:'m',r:1,o:['Hydroensemencement (gazon, talus, prairie)','Arrosage automatique','Terrassement ou préparation du sol',NSP],h:'Plusieurs réponses possibles.'},
+ {id:'surf',l:'Surface approximative',k:'num',u:'m²',h:'Une estimation suffit : longueur × largeur.'},
+ {id:'m_desc',l:'Votre message',k:'area',h:'Facultatif : quelques mots sur votre projet.'},
+ {id:'rgpd',l:'J\'accepte d\'être recontacté au sujet de ma demande de devis',k:'consent',r:1,h:'Vos données ne servent qu\'à répondre à votre demande. Voir la politique de confidentialité.'}
+]},
+{id:'chantier',t:'Le chantier',intro:'Où et quoi.',cond:F2(isPart),q:[
  {id:'adr',l:'Adresse du chantier',k:'text',r:1,ac:'street-address',h:'Là où se déroulent les travaux, pas forcément votre domicile.'},
  {id:'cp',l:'Code postal',k:'text',r:1,ac:'postal-code',h:'Détermine le trajet et le centre de décharge le plus proche.'},
  {id:'ville',l:'Commune',k:'text',r:1,ac:'address-level2',h:'Idem : sert à calculer le déplacement du matériel.'},
@@ -2899,9 +2910,9 @@ var S=[
  {id:'surf',l:'Surface totale à traiter',k:'num',u:'m²',r:1,h:'Approximative. Vous pouvez la déduire de la longueur par la largeur du terrain.'},
  {id:'lots',l:'Nombre de parcelles ou de lots',k:'num',c:function(a){return inc(a,'projet','Lotissement')},h:'Nombre de parcelles à traiter dans l\'opération.'},
  {id:'constr',l:'Les constructions sont-elles terminées ?',k:'radio',o:['Oui','En cours','Non'],h:'Des travaux en cours imposent de protéger les ouvrages et de caler le planning.'},
- {id:'acces',l:'Accès au chantier',k:'m',o:['Portail large','Portillon d\'un seul côté','Portillon des deux côtés','Passage étroit (moins de 1,5 m)','Voie en pente','Escalier ou marches','Accès par un terrain voisin','Passage sous porche ou garage','Chemin non goudronné','Camion impossible à proximité','Aucun souci'],h:'Tout ce qui limite le passage d\'un camion ou d\'une mini-pelle. Cochez plusieurs cases, et « Autre » si votre cas n\'est pas listé.'}
+ {id:'acces',l:'Accès au chantier',k:'m',o:['Portail large','Portillon d\'un seul côté','Portillon des deux côtés','Passage étroit (moins de 1,5 m)','Voie en pente','Escalier ou marches','Accès par un terrain voisin','Passage sous porche ou garage','Chemin non goudronné','Véhicule impossible à proximité','Aucun souci'],h:'Tout ce qui limite le passage d\'un pickup avec remorque ou d\'une mini-pelle. Cochez plusieurs cases, et « Autre » si votre cas n\'est pas listé.'}
 ]},
-{id:'terrain',t:'Le terrain',intro:'L\'état du sol au moment de notre passage. Si la terre en place ne peut pas porter un gazon, un apport de terre végétale de premier choix est chiffré en supplément, sur un devis adapté.',cond:isPart,q:[
+{id:'terrain',t:'Le terrain',intro:'L\'état du sol au moment de notre passage. Si la terre en place ne peut pas porter un gazon, un apport de terre végétale de premier choix est chiffré en supplément, sur un devis adapté.',cond:F2(isPart),q:[
  {id:'etat',l:'État actuel du terrain',k:'m',o:['Terre brute','Remblai récent','Ancien gazon','Friche','Gravats présents'],h:'Ce que nous trouverons en arrivant. Plusieurs réponses possibles si le terrain est varié.'},
  {id:'sol',l:'Nature du sol',k:'m',o:['Argile','Limon','Sable','Cailloux','Mélangé',NSP],h:'Détermine la préparation et le choix des semences. Une poignée de terre mouillée qui se roule en boudin est de l\'argile.'},
  {id:'pente',l:'Pente du terrain',k:'m',o:['Plat','Légère','Moyenne','Forte','Talus raide'],h:'Une pente forte change la technique de projection.'},
@@ -2913,7 +2924,7 @@ var S=[
  {id:'gravats',l:'Gravats ou déchets visibles',k:'radio',o:YN,h:'Ils doivent être triés avant le semis.'},
  {id:'plan',l:'Plan ou relevé topographique disponible',k:'radio',o:YN,h:'Si oui, joignez-le à la dernière étape.'}
 ]},
-{id:'terr',t:'Terrassement',intro:'Si vous n\'en avez pas besoin, répondez Non à la première question.',cond:isPart,q:[
+{id:'terr',t:'Terrassement',intro:'Si vous n\'en avez pas besoin, répondez Non à la première question.',cond:F2(isPart),q:[
  {id:'t_b',l:'Avez-vous besoin de terrassement ?',k:'radio',o:['Oui, complet','Oui, partiel','Non','À étudier'],h:'Terrassement : tout ce qui prépare le sol (décapage, nivellement, remblai).'},
  {id:'t_trav',l:'Travaux souhaités',k:'m',o:['Décapage de terre végétale','Nivellement','Remblai','Tranchées','Plateforme','Évacuation des terres','Finition fine'],c:notNo('t_b'),h:'Cochez tout ce que vous voulez voir chiffré.'},
  {id:'t_ep',l:'Épaisseur à décaper',k:'m',o:['5 cm','10 cm','15 cm','20 cm ou plus',NSP],c:notNo('t_b'),h:'Épaisseur de terre retirée avant semis. Une plus grande épaisseur augmente les volumes à évacuer.'},
@@ -2924,7 +2935,7 @@ var S=[
  {id:'t_res',l:'Réseaux enterrés repérés (DT-DICT)',k:'radio',o:YNN,c:notNo('t_b'),h:'Eau, gaz, électricité, fibre : une déclaration est obligatoire avant de creuser.'},
  {id:'t_veg',l:'Terre végétale à conserver',k:'radio',o:YN,c:notNo('t_b'),h:'La terre de surface, fertile, à réutiliser si elle est de bonne qualité.'}
 ]},
-{id:'arro',t:'Arrosage',intro:'Arrosage automatique connecté, piloté depuis le téléphone.',cond:isPart,q:[
+{id:'arro',t:'Arrosage',intro:'Arrosage automatique connecté, piloté depuis le téléphone.',cond:F2(isPart),q:[
  {id:'a_b',l:'Souhaitez-vous un arrosage automatique ?',k:'radio',o:['Oui','Non','À étudier'],h:'Il garantit la levée du gazon et supprime la corvée d\'arrosage.'},
  {id:'a_type',l:'Type de système',k:'m',o:['Goutte-à-goutte','Turbines','Tuyères','Je veux un conseil'],c:notNo('a_b'),h:'Goutte-à-goutte pour massifs et haies, turbines pour grandes pelouses, tuyères pour petites surfaces.'},
  {id:'a_zones',l:'Zones à arroser',k:'m',o:['Pelouse','Massifs','Haies','Potager','Arbres'],c:notNo('a_b'),h:'Chaque type de zone a ses propres besoins en eau.'},
@@ -2936,7 +2947,7 @@ var S=[
  {id:'a_wifi',l:'Wi-Fi à portée de l\'emplacement',k:'radio',o:YNN,c:notNo('a_b'),h:'Nécessaire pour piloter l\'arrosage depuis le téléphone.'},
  {id:'a_app',l:'Pilotage depuis le téléphone',k:'radio',o:['Oui','Non','Indifférent'],c:notNo('a_b'),h:'Lancer, arrêter ou programmer l\'arrosage à distance.'}
 ]},
-{id:'hydro',t:'Hydroensemencement',intro:'Le gazon, la prairie ou la protection du talus.',cond:isPart,q:[
+{id:'hydro',t:'Hydroensemencement',intro:'Le gazon, la prairie ou la protection du talus.',cond:F2(isPart),q:[
  {id:'h_b',l:'Souhaitez-vous un hydroensemencement ?',k:'radio',o:['Oui','Non','À étudier'],h:'Projection de semences, mulch et fixateur avec de l\'eau. Plus rapide et plus régulier qu\'un semis à la main.'},
  {id:'h_usage',l:'Usage',k:'m',o:['Pelouse d\'agrément','Jeux ou sport','Prairie fleurie','Talus, anti-érosion','Parking enherbé'],c:notNo('h_b'),h:'Le mélange de semences dépend de l\'usage.'},
  {id:'h_expo',l:'Exposition',k:'m',o:['Plein soleil','Mi-ombre','Ombre'],c:notNo('h_b'),h:'Plusieurs réponses si le terrain varie : sous des arbres puis en plein soleil, par exemple.'},
@@ -2945,17 +2956,17 @@ var S=[
  {id:'h_ent',l:'Entretien prévu après semis',k:'m',o:['Tonte régulière','Tonte rare','Aucun'],c:notNo('h_b'),h:'Le niveau d\'entretien oriente le choix des espèces.'},
  {id:'h_per',l:'Période souhaitée',k:'m',o:['Printemps','Été','Automne','Hiver','Peu importe'],c:notNo('h_b'),h:'Le printemps et l\'automne sont les meilleures périodes.'},
  {id:'h_eau',l:'Point d\'eau pour remplir la citerne',k:'m',o:['Sur place','À moins de 100 m','Plus loin','Aucun'],c:notNo('h_b'),h:'La citerne de l\'hydroensemenseur se remplit sur un robinet ou une borne.'},
- {id:'h_pl',l:'Accès pour un camion poids lourd',k:'m',o:['Large','Limité','Impossible',NSP],c:notNo('h_b'),h:'Notre camion pèse plusieurs tonnes et mesure environ 2,5 m de large.'},
+ {id:'h_pl',l:'Accès pour un pickup avec remorque',k:'m',o:['Large','Limité','Impossible',NSP],c:notNo('h_b'),h:'Notre pickup avec remorque mesure environ 2 m de large.'},
  {id:'h_dim',l:'Hauteur ou largeur limitées sur le trajet',k:'text',c:notNo('h_b'),h:'Porche, branches basses, rue étroite, pont à limitation de tonnage.'}
 ]},
-{id:'bord',t:'Bordures et finitions',intro:'Ce qui fait la différence à la livraison.',cond:isPart,q:[
+{id:'bord',t:'Bordures et finitions',intro:'Ce qui fait la différence à la livraison.',cond:F2(isPart),q:[
  {id:'b_b',l:'Souhaitez-vous des bordures ?',k:'radio',o:['Oui','Non','À étudier'],h:'Une bordure sépare nettement pelouse, allée et massif.'},
  {id:'b_type',l:'Type de bordure',k:'m',o:['Acier','Béton','Pavé','Bois','Pierre',NSP],c:notNo('b_b'),h:'L\'acier est discret, le béton et le pavé plus solides.'},
  {id:'b_lin',l:'Linéaire approximatif',k:'num',u:'m',c:notNo('b_b'),h:'Longueur totale à border, en mètres. Laissez vide si inconnu.'},
  {id:'b_aut',l:'Autres travaux à prévoir',k:'m',o:['Allées','Terrasse','Plantations','Pose de plaques de gazon','Clôture','Aucun'],h:'Pour que nous sachions ce que d\'autres feront autour.'},
  {id:'b_pail',l:'Paillage ou plantations de massifs',k:'radio',o:YN,h:'Un massif paillé garde l\'humidité et limite les mauvaises herbes.'}
 ]},
-{id:'delais',t:'Délais et budget',intro:'Pour caler le planning et rester dans votre enveloppe.',cond:isPart,q:[
+{id:'delais',t:'Délais et budget',intro:'Pour caler le planning et rester dans votre enveloppe.',cond:F2(isPart),q:[
  {id:'d_debut',l:'Début de chantier souhaité',k:'date',h:'Une date idéale. Nous vous dirons ce qui est possible.'},
  {id:'d_urg',l:'Degré d\'urgence',k:'radio',o:['Dès que possible','Dans le mois','Dans les 3 mois','Pas pressé'],h:'Pour organiser notre planning.'},
  {id:'d_cont',l:'Contraintes de date',k:'m',o:['Livraison de maison','Permis ou conformité','Vente du bien','Événement','Aucune'],h:'Tout ce qui impose une date de fin.'},
@@ -2963,7 +2974,7 @@ var S=[
  {id:'d_aut',l:'Avez-vous demandé d\'autres devis ?',k:'radio',o:YN,h:'Nous vous aidons à comparer sur la même base.'},
  {id:'d_pay',l:'Mode de règlement prévu',k:'m',o:['Virement','Virement instantané','Carte bancaire','Acompte puis solde à la fin','Paiement en trois fois','À discuter'],h:'Plus d\'informations dans la section « Paiement » du site.'}
 ]},
-{id:'pchant',t:'Votre opération',intro:'L\'essentiel pour chiffrer par lot. Le reste se voit en visite. Apport de terre végétale chiffré à part si le sol en place ne convient pas.',cond:isPro,q:[
+{id:'pchant',t:'Votre opération',intro:'L\'essentiel pour chiffrer par lot. Le reste se voit en visite. Apport de terre végétale chiffré à part si le sol en place ne convient pas.',cond:F2(isPro),q:[
  {id:'p_nom',l:'Nom de l\'opération',k:'text',h:'Nom du programme, du lotissement ou du chantier.'},
  {id:'adr',l:'Adresse du chantier',k:'text',r:1,h:'Là où se déroulent les travaux.'},
  {id:'cp',l:'Code postal',k:'text',r:1,ac:'postal-code',h:'Détermine le trajet et le centre de décharge le plus proche.'},
@@ -2973,19 +2984,19 @@ var S=[
  {id:'surf',l:'Surface totale à traiter',k:'num',u:'m²',r:1,h:'Approximative. Toutes parcelles confondues.'},
  {id:'lots',l:'Nombre de lots ou de parcelles',k:'num',h:'Pour le chiffrage par lot. Laissez vide si un seul ouvrage.'},
  {id:'p_talus',l:'Talus ou fortes pentes à traiter',k:'radio',o:['Oui','Non',NSP],h:'Une pente forte change la technique de projection et le mélange.'},
- {id:'p_acc',l:'Accès pour un camion poids lourd',k:'radio',o:['Large','Limité','Impossible',NSP],h:'Notre camion pèse plusieurs tonnes et mesure environ 2,5 m de large.'},
+ {id:'p_acc',l:'Accès pour un pickup avec remorque',k:'radio',o:['Large','Limité','Impossible',NSP],h:'Notre pickup avec remorque mesure environ 2 m de large.'},
  {id:'d_debut',l:'Début d\'intervention souhaité',k:'date',h:'Une date idéale. Nous calons le planning sur vos livraisons.'},
  {id:'p_plan',l:'Planning général de l\'opération',k:'radio',o:['Joint à la dernière étape','À transmettre plus tard','Pas encore défini'],h:'Pour caler nos passages sur ceux des autres corps d\'état.'},
  {id:'p_ss',l:'Intervention en sous-traitance',k:'radio',o:YN,h:'Dans ce cas, la sous-traitance doit être déclarée avec paiement direct.'},
  {id:'p_freq',l:'Chantier unique ou récurrent',k:'radio',o:['Unique','Plusieurs chantiers'],h:'Pour des chantiers répétés, nous proposons un tarif cadre.'},
  {id:'p_pieces',l:'Pièces administratives demandées',k:'m',o:['Kbis','Attestation d\'assurance','Attestation de vigilance','Plan de prévention'],h:'Nous les joignons au devis pour accélérer votre validation.'}
 ]},
-{id:'visite',t:'Visite technique',cond:has,intro:'Une visite gratuite d\'environ 1 h 30 pour un devis ferme. Vous proposez un créneau, nous le confirmons par téléphone ou SMS.',q:[
+{id:'visite',t:'Visite technique',cond:F2(has),intro:'Une visite gratuite d\'environ 1 h 30 pour un devis ferme. Vous proposez un créneau, nous le confirmons par téléphone ou SMS.',q:[
  {id:'v_b',l:'Souhaitez-vous une visite technique du terrain ?',k:'radio',r:1,o:['Oui, je choisis un créneau','Non, chiffrez sur pièces'],h:'Mesures, nature du sol, accès du camion. Sans visite, le devis reste à confirmer sur place.'},
  {id:'v_slot',l:'Créneau de visite',k:'slot',r:1,c:function(a){return /^Oui/.test(a.v_b||'')},h:'Créneaux libres des trois prochaines semaines. Il reste en attente jusqu\'à notre confirmation.'},
  {id:'v_pres',l:'Présence sur place',k:'radio',o:['Je serai présent','Terrain accessible sans moi'],c:function(a){return /^Oui/.test(a.v_b||'')},h:'Sans vous, le portail doit être ouvert ou l\'accès indiqué.'}
 ]},
-{id:'docs',t:'Photos et documents',cond:has,intro:'Photos du terrain, plans, devis déjà reçus : tout ce qui nous évite de poser des questions.',q:[
+{id:'docs',t:'Photos et documents',cond:F2(has),intro:'Photos du terrain, plans, devis déjà reçus : tout ce qui nous évite de poser des questions.',q:[
  {id:'f_photos',l:'Photos du terrain',k:'file',c:has,h:'Plusieurs angles : vue d\'ensemble, sol, pente, accès. Images uniquement.',acc:'image/*'},
  {id:'f_docs',l:'Plans, relevé de géomètre, cahier des charges',k:'file',c:has,h:'PDF, Word, Excel, DWG, DXF ou images.',acc:'.pdf,.doc,.docx,.xls,.xlsx,.dwg,.dxf,.zip,image/*'},
  {id:'f_dev',l:'Devis d\'un autre prestataire, si vous en avez un',k:'file',c:isPart,h:'Pour comparer sur la même base. Nous ne le partageons à personne.',acc:'.pdf,.doc,.docx,.xls,.xlsx,image/*'},
@@ -3011,7 +3022,7 @@ function opts(q){var o=q.o.slice();if(q.k==='m'&&o.indexOf('Autre')<0)o.push('Au
 function render(){
   var st=steps();if(cur>=st.length)cur=st.length-1;
   var tot=allVisible(),ans=0;st.forEach(function(s){vis(s).forEach(function(q){if(answered(q))ans++})});
-  $('qintro').textContent=!A.type?'Choisissez d\'abord votre profil, particulier ou professionnel : les questions s\'adaptent.':isPro(A)?'Questionnaire professionnel, '+tot+' questions. Seules celles marquées « Obligatoire » doivent être remplies. Comptez 3 minutes avec vos plans à portée de main.':tot+' questions pour un devis précis. L\'essentiel prend 2 minutes : seules celles marquées « Obligatoire » doivent être remplies. Pour les autres, répondez « Je ne sais pas » ou passez. Plusieurs réponses sont possibles quand c\'est utile.';
+  $('qintro').textContent=lite(A)?'Demande express : vos coordonnées et l\'essentiel, en 1 minute. Pour un devis plus précis, cliquez sur « Aller plus loin ».':!A.type?'Choisissez d\'abord votre profil, particulier ou professionnel : les questions s\'adaptent.':isPro(A)?'Questionnaire professionnel, '+tot+' questions. Seules celles marquées « Obligatoire » doivent être remplies. Comptez 3 minutes avec vos plans à portée de main.':tot+' questions pour un devis précis. L\'essentiel prend 2 minutes : seules celles marquées « Obligatoire » doivent être remplies. Pour les autres, répondez « Je ne sais pas » ou passez. Plusieurs réponses sont possibles quand c\'est utile.';
   $('pstep').textContent=done?'Récapitulatif':'Étape '+(cur+1)+' sur '+st.length+' · '+st[cur].t;
   $('pcount').textContent=ans+' / '+tot+' réponses';
   $('pbar').style.width=(done?100:Math.round(ans/tot*100))+'%';
@@ -3022,10 +3033,11 @@ function render(){
   var qs=vis(s),h='<h2>'+esc(s.t)+'</h2><p class="intro">'+esc(s.intro)+'</p>';
   qs.forEach(function(q,j){h+=qHtml(q,before+j+1)});
   h+='<div class="actions">'+(cur>0?'<button class="btn ghost" type="button" id="prev">Précédent</button>':'<span></span>')+
-     '<button class="btn" type="button" id="next">'+(cur===st.length-1?'Envoyer ma demande':'Suivant')+'</button></div>';
+     '<button class="btn" type="button" id="next">'+(cur===st.length-1?'Envoyer ma demande':'Suivant')+'</button></div>'+
+     (s.id==='express'?'<div class="gofull"><p>Vous voulez un devis plus précis, sans attendre notre appel ? Décrivez votre terrain en 3 minutes.</p><button class="btn ghost" type="button" id="gofull">Aller plus loin : questionnaire complet →</button></div>':'');
   $('panel').innerHTML=h;
   bind(qs);
-  $('next').onclick=next; if($('prev'))$('prev').onclick=function(){cur--;lastSig=sig();render();top0()};
+  $('next').onclick=next; if($('gofull'))$('gofull').onclick=function(){A._full=true;var st2=steps();cur=0;for(var i=0;i<st2.length;i++){if(st2[i].id!=='vous'){cur=i;break}}lastSig=sig();render();top0()}; if($('prev'))$('prev').onclick=function(){cur--;lastSig=sig();render();top0()};
 }
 function qHtml(q,n){
   var id='q_'+q.id,v=A[q.id],reqTag=q.r?' <span class="req">Obligatoire</span>':'';
@@ -3126,7 +3138,7 @@ function renderRecap(){
   function showSent(r){$('sendst').innerHTML=sendMsg(r,qSent.slot);watchSlot(r.slotOk?qSent.slot:null,$('slotlive'))}
   if(qSent&&qSent.r)showSent(qSent.r);
   else if(!qSent){qSent={slot:wantSlot};
-    var data={kind:'devis',profil:A.type||'',createdAt:new Date().toISOString(),statut:'nouvelle',prenom:A.prenom||'',nom:A.nom||'',societe:A.societe||'',tel:A.tel||'',mail:A.mail||'',
+    var data={kind:'devis',express:!A._full,profil:A.type||'',createdAt:new Date().toISOString(),statut:'nouvelle',prenom:A.prenom||'',nom:A.nom||'',societe:A.societe||'',tel:A.tel||'',mail:A.mail||'',
       adresse:A.adr||'',cp:A.cp||'',commune:A.ville||'',zone:zo?zo.z:0,km:zo?zo.km:null,alerte:!!z3,slot:wantSlot,slotStatut:wantSlot?'attente':null,surface:A.surf||'',recap:txt};
     var tk=qSent;sendDemande(data,function(r){tk.r=r;if(qSent===tk&&$('sendst'))showSent(r)})}
   $('copy').onclick=function(){
