@@ -2161,8 +2161,8 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
       <article>
         <p class="for">Arrosage automatique connecté</p>
         <ul>
-          <li><b class="wm">Hunter</b><span>Gamme connectée Hydrawise : pilotage à distance et suivi météo depuis le smartphone.</span></li>
-          <li><b class="wm">Rain Bird</b><span>Matériel d'arrosage robuste, répandu sur les chantiers et les espaces verts.</span></li>
+          <li><b class="wm">Gardena</b><span>Programmateur connecté Gardena smart system : arrosage piloté depuis le smartphone, avec la météo locale.</span></li>
+          <li><b class="wm">Gardena</b><span>Tuyères escamotables et goutte-à-goutte à raccords rapides : un réseau simple à entretenir et à faire évoluer.</span></li>
         </ul>
       </article>
       <article>
@@ -2378,13 +2378,13 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
         <div class="kv" id="si_kv"></div>
         <div id="si_warn"></div>
         <a class="btn" href="#devis">Faire chiffrer mon arrosage</a>
-        <p class="note">Pré-dimensionnement indicatif. Programmateurs connectés Hunter ou Rain Bird, pilotés depuis le téléphone. Le plan d'arrosage définitif se fait sur place, après mesure du débit et de la pression.</p>
+        <p class="note">Pré-dimensionnement indicatif. Matériel Gardena, programmateur connecté piloté depuis le téléphone. Le plan d'arrosage définitif se fait sur place, après mesure du débit et de la pression.</p>
       </div>
     </div>
   </section>
   <section class="sec" id="faq-arro" data-pg="tarifs" style="padding-top:0">
     <div class="head"><p class="eyebrow">Questions sur l'arrosage</p><h2>Arrosage connecté : ce qu'on nous demande.</h2></div>
-    <div class="faq"><details><summary>Quel matériel d'arrosage posez-vous ?</summary><p>Du matériel Hunter ou Rain Bird : programmateur connecté Wi-Fi (Hydrawise chez Hunter, module LNK2 chez Rain Bird), électrovannes, tuyères ou turbines selon la forme de la pelouse, goutte-à-goutte pour les massifs et les haies. La référence exacte est sur le devis.</p></details><details><summary>Comment je pilote l'arrosage depuis mon téléphone ?</summary><p>Avec l'application du fabricant : lancer ou arrêter une zone, modifier les durées, suspendre en cas de pluie. Nous réglons les programmes de levée, d'installation et d'entretien avant de partir.</p></details><details><summary>Faut-il du Wi-Fi à l'emplacement du programmateur ?</summary><p>Oui pour le pilotage à distance. Si le signal ne porte pas jusqu'au garage ou au local technique, un répéteur suffit en général. Nous le vérifions à la visite.</p></details><details><summary>Et quand il pleut ?</summary><p>Le programmateur suspend l'arrosage grâce à un capteur de pluie ou aux données météo de votre secteur. Vous ne payez pas l'eau d'un arrosage inutile.</p></details><details><summary>Est-ce que je saurai où passent les tuyaux ?</summary><p>Oui. À la réception, vous recevez le plan de récolement : tracé et profondeur des canalisations, électrovannes, regards et programmateur, avec les photos des tranchées ouvertes.</p></details><details><summary>Un compteur d'eau séparé pour le jardin, c'est utile ?</summary><p>Selon votre distributeur d'eau, un compteur dédié à l'arrosage peut éviter de payer l'assainissement sur cette eau. Renseignez-vous auprès de lui : nous posons le réseau en conséquence.</p></details></div>
+    <div class="faq"><details><summary>Quel matériel d'arrosage posez-vous ?</summary><p>Du matériel Gardena : programmateur connecté Gardena smart system piloté depuis votre téléphone, électrovannes 24 V en regard étanche, tuyères et turbines escamotables selon la forme de la pelouse, goutte-à-goutte pour les massifs et les haies. Réseau principal en PEHD 25/32 enterré à 25-30 cm sur lit de sable. La référence exacte est sur le devis.</p></details><details><summary>Comment je pilote l'arrosage depuis mon téléphone ?</summary><p>Avec l'application du fabricant : lancer ou arrêter une zone, modifier les durées, suspendre en cas de pluie. Nous réglons les programmes de levée, d'installation et d'entretien avant de partir.</p></details><details><summary>Faut-il du Wi-Fi à l'emplacement du programmateur ?</summary><p>Oui pour le pilotage à distance. Si le signal ne porte pas jusqu'au garage ou au local technique, un répéteur suffit en général. Nous le vérifions à la visite.</p></details><details><summary>Et quand il pleut ?</summary><p>Le programmateur suspend l'arrosage grâce à un capteur de pluie ou aux données météo de votre secteur. Vous ne payez pas l'eau d'un arrosage inutile.</p></details><details><summary>Est-ce que je saurai où passent les tuyaux ?</summary><p>Oui. À la réception, vous recevez le plan de récolement : tracé et profondeur des canalisations, électrovannes, regards et programmateur, avec les photos des tranchées ouvertes.</p></details><details><summary>Un compteur d'eau séparé pour le jardin, c'est utile ?</summary><p>Selon votre distributeur d'eau, un compteur dédié à l'arrosage peut éviter de payer l'assainissement sur cette eau. Renseignez-vous auprès de lui : nous posons le réseau en conséquence.</p></details></div>
   </section>
 </main>
 
@@ -3462,9 +3462,7 @@ function simu(){
    ['Pelouse',zP?zP+' zone'+(zP>1?'s':'')+' en '+(tuy?'tuyères':'turbines'):'—'],
    ['Massifs et haies',zG?zG+' zone'+(zG>1?'s':'')+' en goutte-à-goutte':'—'],
    ['Programmateur conseillé',tot?prog+' stations':'—'],
-   ['Hunter',tot?(tot<=6?'Hydrawise HC 6 stations':tot<=12?'Hydrawise HC 12 stations':'Hydrawise Pro-HC 24 stations'):'—'],
-   ['Rain Bird',tot?(tot<=12?'ESP-TM2 '+([4,6,8,12].filter(function(n){return n>=tot})[0])+' stations + Wi-Fi LNK2':'ESP-ME3 modulaire + Wi-Fi LNK2'):'—'],
-   ['Eau en été, par mois',tot?'≈ '+String(Math.round(wk*4.3)).replace('.',',')+' m³':'—'],
+   ['Matériel Gardena',tot?(tot<=6?'Programmateur smart system 6 vannes 24 V':Math.ceil(tot/6)+' programmateurs smart system 6 vannes 24 V'):'—'],    ['Eau en été, par mois',tot?'≈ '+String(Math.round(wk*4.3)).replace('.',',')+' m³':'—'],
    ['Durée d\'un arrosage d\'été',tot?Math.floor(cycle/60)+' h '+p2(cycle%60)+' pour tout le jardin':'—'],
    ['Eau en été, par semaine',wk?('≈ '+String(wk).replace('.',',')+' m³'):'—']].map(function(r){return '<div><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'}).join('');
   var w=[];if(P&&P<2.5)w.push('Pression sous 2,5 bars : les turbines portent mal. Nous partons sur des tuyères, ou sur un surpresseur.');
@@ -4462,7 +4460,7 @@ function pubGrid(){var d=(new Date().getDay()+6)%7;
 /* comptes à suivre : recherche en un clic dans Instagram et Facebook */
 var PUBFOL=[['Pour être vu localement (Gard)',[['Alès Agglomération','Collectivité : chantiers, aménagements, annonces locales'],['Ville d\'Alès','Actualité et événements de la ville'],['Département du Gard','Projets d\'aménagement, routes, collèges'],['Midi Libre Alès','Presse locale : lotissements, permis, vie locale'],['Objectif Gard','Presse locale en ligne'],['Gard Tourisme','Grosse audience locale : partages et commentaires'],['CAUE du Gard','Architecture, paysage, conseils aux particuliers']]],
  ['Réseau pro et partenaires',[['Unep Les Entreprises du Paysage','Syndicat du paysage : réglementation, chiffres, événements'],['CMA Gard','Chambre de métiers : aides, formations, réseau artisans'],['CCI Gard','Réseau d\'entreprises du Gard'],['Initiative Gard','Prêts d\'honneur pour créateurs'],['Défense Mobilité','Reconversion des militaires'],['Paysalia','Salon du paysage (Lyon) : nouveautés matériel']]],
- ['Métier et inspiration',[['Finn Corporation','Fabricant d\'hydroseeders : vidéos de chantiers'],['Profile Products','Mulchs et fixateurs : techniques anti-érosion'],['Rain Bird','Arrosage automatique : conseils, nouveautés'],['Hunter Industries','Arrosage automatique : matériel pro'],['Kiloutou','Location de matériel : offres et nouveautés'],['Météo-France','Alertes pluie, orages, sécheresse']]]];
+ ['Métier et inspiration',[['Finn Corporation','Fabricant d\'hydroseeders : vidéos de chantiers'],['Profile Products','Mulchs et fixateurs : techniques anti-érosion'],['Gardena','Arrosage automatique : gammes, nouveautés, conseils'],['Kiloutou','Location de matériel : offres et nouveautés'],['Météo-France','Alertes pluie, orages, sécheresse']]]];
 function pubFollow(){return '<details class="pubacc"><summary>👥 Comptes à suivre sur Instagram et Facebook</summary><p class="note">Abonnez-vous depuis le compte KREÖN, puis 10 minutes par jour : aimez et commentez 3 publications locales avec un vrai conseil (jamais de pub). Touchez un nom pour le rechercher directement ; vérifiez que c\'est le compte officiel (coche bleue ou nombre d\'abonnés).</p>'+
   PUBFOL.map(function(g){return '<h4 class="chh">'+esc(g[0])+'</h4><ul class="pfol">'+g[1].map(function(a){var q=encodeURIComponent(a[0]);return '<li><b>'+esc(a[0])+'</b><small>'+esc(a[1])+'</small><span><a class="plbtn" href="https://www.instagram.com/explore/search/keyword/?q='+q+'" target="_blank" rel="noopener">Instagram</a><a class="plbtn" href="https://www.facebook.com/search/top?q='+q+'" target="_blank" rel="noopener">Facebook</a></span></li>'}).join('')+'</ul>'}).join('')+'</details>'}
 
@@ -5497,7 +5495,7 @@ var DVTECH={hydro_gazon:'Mélange Rustique Méditerranée (fétuque élevée 70 
  terr:'Décapage jusqu\'à 10 cm, nivellement ±2 cm, pente d\'écoulement 1 à 2 % vers l\'extérieur, réglage fin et ratissage. Pierres de plus de 5 cm retirées. Mini-pelle et outillage de réglage, conducteur d\'engin qualifié.',
  evac:'Chargement, transport en camion poids lourd et dépôt en installation de stockage de déchets inertes (ISDI) agréée. Bordereau de suivi remis au client.',
  tv:'Terre végétale criblée 0/20 de premier choix, fournie, livrée et régalée sur 10 cm d\'épaisseur.',
- arro:'Réseau PE Ø25/32 enterré à 30 cm, électrovannes 24 V en regard, tuyères et turbines Hunter ou Rain Bird, programmateur Wi-Fi pilotable depuis smartphone, sonde de pluie. Mise en service, réglages et prise en main.',
+ arro:'Réseau Gardena : PEHD 25/32 enterré à 25-30 cm sur lit de sable, électrovannes 24 V en regard étanche, tuyères et turbines escamotables Gardena réglées au ras du sol fini, programmateur Gardena smart system pilotable depuis smartphone, filtre et vanne d\'arrêt. Mise en service, réglages et prise en main.',
  goutte:'Tube goutteur Ø16 autorégulant (goutteurs 2 L/h tous les 33 cm), posé sous paillage, raccordé à une électrovanne dédiée avec filtre et réducteur de pression.',
  alim:'Tranchée à la mini-pelle sur 40 cm de profondeur, tube PE Ø32 PN16, grillage avertisseur bleu, remblai compacté et remise en état de surface.',
  bordA:'Bordure acier galvanisé 2 mm, hauteur 15 cm, fixée par piquets.',bordB:'Bordure béton 100 × 20 × 5 cm posée sur lit de béton.'};
@@ -6342,4 +6340,5 @@ route();
 
 </body>
 </html>
+
 
