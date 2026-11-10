@@ -1195,6 +1195,16 @@ input.vh:focus-visible+*,.avadd:focus-within{outline:3px solid var(--sun)}
 
 
 
+
+.gspanel{margin-bottom:16px}
+.gsres{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.gsk{background:var(--bg);border-radius:14px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.gsk span{color:var(--muted);font-size:.85rem}.gsk b{font-family:var(--f-display);font-style:italic;font-weight:900;font-size:1.4rem;line-height:1.1}
+.gsk em{font-style:normal;font-size:.82rem;color:var(--muted)}.gsk.hl{background:var(--lime)}.gsk.hl b{color:var(--green-deep)}
+.gstab{width:100%;border-collapse:collapse;font-size:.93rem}.gstab td{padding:6px 0;border-bottom:1px solid var(--line)}.gstab td:last-child{text-align:right;font-variant-numeric:tabular-nums}.gstab .tot td{font-weight:700;border-bottom:0}
+@media(max-width:760px){.gsres{grid-template-columns:1fr 1fr}}
+.pubvid{display:block;width:100%;max-width:300px;aspect-ratio:9/16;border-radius:14px;background:#000;margin:8px 0}
+body:not(.has-avis) #avis,body:not(.has-avis) #livre{display:none!important}
 /* ===== habillage « bento » de l'espace équipe ===== */
 #admin{--sk-bg:#eef4ee;--sk-card:#fff;--sk-g:#285B42;--sk-l:#87B559;--sk-sh:0 1px 0 rgba(0,0,0,.03),0 8px 22px rgba(40,91,66,.08)}
 #admin{background:linear-gradient(160deg,#eef4ee,#f7f5ef 55%,#eef3f6);border-radius:24px;padding-block:14px 24px;max-width:1280px}
@@ -3596,7 +3606,7 @@ function paintReal(){
 }
 function stars(n){n=+n||0;return '★★★★★'.slice(0,n)+'<span style="color:#d7dccf">'+'★★★★★'.slice(0,5-n)+'</span>'}
 function paintAvis(){
-  var pub=AVIS.slice().sort(function(a,b){return (b.date||'')<(a.date||'')?-1:1});
+  var pub=AVIS.slice();document.body.classList.toggle('has-avis',pub.length>0);pub=pub.sort(function(a,b){return (b.date||'')<(a.date||'')?-1:1});
   $('gold').innerHTML=pub.length?pub.map(function(a){return '<article class="gcard2"><span class="verif">✓ Client vérifié</span><div class="stars" aria-label="'+a.note+' sur 5">'+stars(a.note)+'</div><blockquote>'+esc(a.texte)+'</blockquote>'+((a.photos||[]).length?'<div class="gphotos">'+a.photos.slice(0,3).map(function(p){return '<img src="/_blob/'+p+'" alt="Photo du chantier de '+esc(a.prenom)+'" loading="lazy">'}).join('')+'</div>':'')+'<div class="who3"><b>'+esc(a.prenom)+(a.nom?' '+esc(a.nom)+'.':'')+'</b> · '+esc(a.type||'')+' · '+esc(a.commune||'')+'</div></article>'}).join('')
     :'<div class="aempty" style="grid-column:1/-1"><b>Les premiers avis arrivent après nos premiers chantiers.</b><span>Chaque avis est relié à un chantier réalisé et vérifié avant publication.</span></div>';
   if(pub.length){var one=pub.map(function(a){return '<article class="rc"><div><span class="verif">✓ Client vérifié</span></div><div class="stars" style="color:var(--sun)">'+stars(a.note)+'</div><blockquote>'+esc(a.texte)+'</blockquote><div class="who2"><b>'+esc(a.prenom)+(a.nom?' '+esc(a.nom)+'.':'')+'</b><span>'+esc(a.type||'')+' · '+esc(a.commune||'')+'</span></div></article>'}).join('');
@@ -4484,7 +4494,7 @@ document.getElementById('adm').addEventListener('click',function(e){var b=e.targ
 var PUBC={site:['Site · Conseils','#285B42',''],google:['Fiche Google','#4285f4','https://business.google.com/'],linkedin:['LinkedIn · post','#0a66c2','https://www.linkedin.com/feed/?shareActive=true'],linkedin_article:['LinkedIn · article','#0a66c2','https://www.linkedin.com/article/new/'],instagram:['Instagram','#c13584','https://www.instagram.com/'],tiktok:['TikTok','#23262b','https://www.tiktok.com/upload'],facebook:['Facebook','#1877f2','https://www.facebook.com/'],reels:['Instagram · Reel','#e1306c','https://www.instagram.com/'],shorts:['YouTube · Short','#ff0000','https://studio.youtube.com/']};
 var PUBK={google:'google',linkedin:'linkedin',linkedin_article:'linkedin',instagram:'instagram',reels:'instagram',tiktok:'tiktok',facebook:'facebook',shorts:'youtube'};
 function pubUrl(c){var C=(BAR&&BAR.comptes)||{},k=PUBK[c];return (k&&C[k])||(PUBC[c]||[])[2]||''}
-var PUB={items:[],sub:false,filt:'todo',canal:'',open:null};
+var PUB={items:[],sub:false,filt:'today',canal:'',open:null};
 function pubSub(){if(PUB.sub||!DB)return;PUB.sub=true;DB.doc('bareme/publications').onSnapshot(function(s){PUB.items=((s.exists&&s.data())||{}).items||[];if(!$('admin').hidden&&(ADM.tab==='publier'||ADM.tab==='demandes'))drawAdmin()},function(){})}
 function pubSave(fn,msg){var ref=DB.doc('bareme/publications');return ref.get().then(function(s){var v=(s.exists&&s.data())||{};v.items=v.items||[];fn(v);v.maj=new Date().toISOString();return ref.set(JSON.parse(JSON.stringify(v)))}).then(function(){if(msg)kToast(msg)},function(){kToast('Refusé : réessayez.')})}
 function pubTodo(){pubSub();return PUB.items.filter(function(i){return i.statut!=='publie'}).length}
@@ -4495,30 +4505,39 @@ function mdLite(t){var out=[],list=null,quote=null;String(t||'').split('\n').for
   if(/^#{1,4}\s/.test(l)){out.push('<h3>'+inl(l.replace(/^#+\s/,''))+'</h3>');return}
   if(/^---+$/.test(l)||!l.trim())return;if(/^(💡|⚠️|📊|✅|👉|🌱|💧)/.test(l)){out.push('<p class="callout">'+inl(l)+'</p>');return}out.push('<p>'+inl(l)+'</p>')});
   return out.map(function(x){if(Array.isArray(x)){var s=x.join('');return /^<li>/.test(s)?'<ul>'+s+'</ul>':'<blockquote>'+s.replace(/(<li>.*<\/li>)/,'<ul>$1</ul>')+'</blockquote>'}return x}).join('')}
+function pubVid(i){return i.video||(/^\/_blob\//.test(i.lien||'')?i.lien:'')}
+function pubFile(i){var u=pubVid(i),nm=((i.titre||'video-kreon').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').slice(0,40)||'video-kreon')+'.mp4';
+  return fetch(u).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){return {name:nm,blob:b.type?b:new Blob([b],{type:'video/mp4'})}})}
 function tabPublier(){pubSub();var L=PUB.items.slice().sort(function(a,b){return (a.date||'9')<(b.date||'9')?-1:1}),t=isoD(new Date());
   var todo=L.filter(function(i){return i.statut!=='publie'}),done=L.filter(function(i){return i.statut==='publie'}).reverse();
-  var base=PUB.filt==='done'?done:todo;if(PUB.canal)base=base.filter(function(i){return i.canal===PUB.canal});
+  var today=todo.filter(function(i){return !i.date||i.date<=t});var base=PUB.filt==='done'?done:PUB.filt==='today'?today:todo;if(PUB.canal)base=base.filter(function(i){return i.canal===PUB.canal});
   var cans=Object.keys(PUBC).filter(function(k){return todo.some(function(i){return i.canal===k})});
   var h='<div class="pubintro"><b>Tout ce que vos agents ont préparé, et où le poster.</b><span>Nina (articles, fiche Google), Arthur (LinkedIn), Lucas (Facebook), Inès (Instagram), Théo (TikTok), Léa (Reels et Shorts). Rien n\'est publié sans vous : copiez, ouvrez le réseau, publiez, puis cochez « Publié ».</span></div>';
   h+=pubGrid()+pubFollow()+pubAccounts();
-  h+='<div class="afilt" role="group" aria-label="Filtrer"><button type="button" data-pub="f-todo" aria-pressed="'+(PUB.filt==='todo')+'">À publier ('+todo.length+')</button><button type="button" data-pub="f-done" aria-pressed="'+(PUB.filt==='done')+'">Déjà publié ('+done.length+')</button></div>';
+  h+='<div class="afilt" role="group" aria-label="Filtrer"><button type="button" data-pub="f-today" aria-pressed="'+(PUB.filt==='today')+'">📅 Aujourd\'hui ('+today.length+')</button><button type="button" data-pub="f-todo" aria-pressed="'+(PUB.filt==='todo')+'">Toute la semaine ('+todo.length+')</button><button type="button" data-pub="f-done" aria-pressed="'+(PUB.filt==='done')+'">Déjà publié ('+done.length+')</button></div>';
   if(cans.length>1)h+='<div class="pubcans"><button type="button" class="plbtn'+(PUB.canal?'':' on')+'" data-pub="c-">Tous</button>'+cans.map(function(k){return '<button type="button" class="plbtn'+(PUB.canal===k?' on':'')+'" data-pub="c-'+k+'" style="--tc:'+PUBC[k][1]+'">'+PUBC[k][0]+'</button>'}).join('')+'</div>';
   h+='<div class="publist">'+(base.length?base.map(function(i){var c=PUBC[i.canal]||['Autre','#555',''],late=i.statut!=='publie'&&i.date&&i.date<t,ag=(typeof AGL!=='undefined'?AGL.filter(function(a){return a.id===i.agent})[0]:null),op=PUB.open===i.id;
     return '<article class="pubc'+(i.statut==='publie'?' done':'')+'" style="--tc:'+c[1]+'"><div class="pubh"><span class="pubcan">'+c[0]+'</span>'+(i.date?'<span class="pubdate'+(late?' late':'')+'">'+(i.date===t?'Aujourd\'hui':dLong(i.date))+(i.heure?' · '+esc(i.heure):'')+(late?' · en retard':'')+'</span>':'')+(ag?'<span class="pubag" style="--ac:'+ag.col+'">'+esc(ag.nom)+'</span>':'')+'</div>'+
       '<h3>'+esc(i.titre||'Sans titre')+'</h3>'+(i.meta?'<p class="note">'+esc(i.meta)+'</p>':'')+
       '<div class="pubtxt'+(op?' open':'')+'">'+(i.canal==='site'||i.canal==='linkedin_article'?mdLite(i.texte):'<p>'+esc(i.texte||'').replace(/\n/g,'<br>')+'</p>')+'</div>'+
       ((i.texte||'').length>260?'<button type="button" class="pubmore" data-pub="open" data-id="'+esc(i.id)+'">'+(op?'Réduire':'Lire tout')+'</button>':'')+
-      (i.visuel?'<p class="pubvis">🖼️ Visuel : '+esc(i.visuel)+'</p>':'')+(i.lien?'<p class="pubvis">🔗 <a href="'+esc(i.lien)+'" target="_blank" rel="noopener">Ouvrir le visuel (Canva)</a></p>':'')+
+      (pubVid(i)?'<video class="pubvid" src="'+esc(pubVid(i))+'" controls playsinline preload="metadata"></video><p class="pubvis"><button type="button" class="btn" data-pub="dlvid" data-id="'+esc(i.id)+'">⬇ Enregistrer la vidéo</button></p>':'')+(i.visuel?'<p class="pubvis">🖼️ Visuel : '+esc(i.visuel)+'</p>':'')+(i.lien&&!/^\/_blob\//.test(i.lien)&&i.lien!==i.video?'<p class="pubvis"><a class="btn ghost" href="'+esc(i.lien)+'" target="_blank" rel="noopener">🎨 Ouvrir dans Canva</a> <small class="note">(connecté à votre compte Canva)</small></p>':'')+
       '<div class="placts">'+(i.canal==='site'?(i.statut==='publie'?'<button type="button" class="plbtn" data-pub="unsite" data-id="'+esc(i.id)+'">Retirer du site</button>':'<button type="button" class="btn okgo" data-pub="site" data-id="'+esc(i.id)+'">Publier sur le site</button>'):
         '<button type="button" class="btn" data-pub="copy" data-id="'+esc(i.id)+'">Copier le texte</button>'+(pubUrl(i.canal)?'<a class="btn ghost" href="'+esc(pubUrl(i.canal))+'" target="_blank" rel="noopener" data-pubopen="'+esc(i.id)+'">↗ '+({google:'Ouvrir Fiche Google',linkedin:'Ouvrir LinkedIn',linkedin_article:'Ouvrir LinkedIn (article)',instagram:'Ouvrir Instagram',reels:'Ouvrir Instagram (Reel)',tiktok:'Ouvrir TikTok',facebook:'Ouvrir Facebook',shorts:'Ouvrir YouTube Studio'}[i.canal]||'Ouvrir '+c[0].split(' ·')[0])+' <small>(texte copié)</small></a>':'')+(i.statut==='publie'?'<button type="button" class="plbtn" data-pub="undo" data-id="'+esc(i.id)+'">Remettre à publier</button>':'<button type="button" class="plbtn" data-pub="done" data-id="'+esc(i.id)+'">✓ Publié</button>'))+
-      '<button type="button" class="plbtn" data-pub="del" data-id="'+esc(i.id)+'" aria-label="Supprimer">🗑</button></div></article>'}).join(''):'<p class="plempty">'+(PUB.filt==='done'?'Rien de publié pour l\'instant.':'Rien à publier : les agents déposeront ici leurs prochains contenus.')+'</p>')+'</div>';
+      '<button type="button" class="plbtn" data-pub="del" data-id="'+esc(i.id)+'" aria-label="Supprimer">🗑</button></div></article>'}).join(''):'<p class="plempty">'+(PUB.filt==='today'?'Rien à publier aujourd\'hui. Le reste de la semaine est dans « Toute la semaine ».':PUB.filt==='done'?'Rien de publié pour l\'instant.':'Rien à publier : les agents déposeront ici leurs prochains contenus.')+'</p>')+'</div>';
   return h}
 document.getElementById('adm').addEventListener('click',function(e){var b=e.target.closest('[data-pub]');if(!b)return;var a=b.getAttribute('data-pub'),id=b.getAttribute('data-id'),it=PUB.items.filter(function(x){return x.id===id})[0];
   var rd=function(){var bb=document.getElementById('admbody');if(bb&&ADM.tab==='publier')bb.innerHTML=tabPublier();else{$('adm').innerHTML='';drawAdmin()}};
   if(a==='go'){ADM.tab='publier';DV.cur=null;$('adm').innerHTML='';drawAdmin();return}
-  if(a==='f-todo'||a==='f-done'){PUB.filt=a.slice(2);rd();return}
+  if(a==='f-todo'||a==='f-done'||a==='f-today'){PUB.filt=a.slice(2);rd();return}
   if(a.indexOf('c-')===0){PUB.canal=a.slice(2);rd();return}
   if(a==='open'){PUB.open=PUB.open===id?null:id;rd();return}
+  if(a==='dlvid'&&it){b.disabled=true;var t0=b.textContent;b.textContent='Préparation…';
+    pubFile(it).then(function(f){var file=null;try{file=new File([f.blob],f.name,{type:'video/mp4'})}catch(e){}
+      if(file&&navigator.canShare&&navigator.canShare({files:[file]}))return navigator.share({files:[file],title:it.titre||'Vidéo KREON'}).then(function(){kToast('Vidéo prête : choisissez « Enregistrer la vidéo ».')},function(e){if(e&&e.name==='AbortError')return;throw e});
+      var D=DLS;if(!D)throw 0;return D.save({filename:f.name,data:f.blob}).then(function(){kToast('Vidéo enregistrée.')})})
+    .catch(function(e){kToast(e&&e.code==='declined'?'Téléchargement annulé.':'Impossible de récupérer la vidéo : appui long sur la vidéo puis « Enregistrer ».')})
+    .then(function(){b.disabled=false;b.textContent=t0});return}
   if(!it)return;
   if(a==='copy'){var txt=it.texte||'';(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){kToast('📋 Texte copié. Ouvrez '+(PUBC[it.canal]||['le réseau'])[0]+' et collez.')},function(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');kToast('📋 Texte copié.')}catch(x){kToast('Copie impossible : sélectionnez le texte à la main.')}ta.remove()});return}
   if(a==='done'||a==='undo'){pubSave(function(v){v.items.forEach(function(x){if(x.id===id){x.statut=a==='done'?'publie':'a_publier';x.publieLe=a==='done'?new Date().toISOString():null}})},a==='done'?'✓ Marqué publié':'Remis à publier');return}
@@ -5559,9 +5578,30 @@ function newDevis(r){var t=new Date(),d={num:'',date:isoD(t),statut:'brouillon',
     dvFromDemande(d,r)}
   return dvCalc(d)}
 /* ---------- rendu de l'onglet ---------- */
+
+/* ---------- calcul rapide « grande surface B2B » (hydroensemencement) ---------- */
+var GS={m2:6000,km:55,pente:'non',prix:'',cad:2000,inter:1,arro:0};
+var GS_T=[[10000,1.90],[5000,2.20],[2000,2.50],[500,3.00],[0,3.50]],GS_PLANCHER=1.70,GS_REF_PART=580;
+function gsPrix(m){for(var i=0;i<GS_T.length;i++)if(m>=GS_T[i][0])return GS_T[i][1];return 3.5}
+function gsCalc(){var m=Math.max(0,+GS.m2||0),pu=GS.prix!==''&&+GS.prix>0?+GS.prix:gsPrix(m),j=Math.max(1,Math.ceil(m/Math.max(500,+GS.cad||2000)));
+  var mix=m*(0.55+(GS.pente==='oui'?0.15:0)),prep=m*0.05,dep=(+GS.km||0)*2*0.40*j,eau=m*0.004*4,inter=(+GS.inter||0)*300*j;
+  var ca=m*pu+(+GS.arro||0),cout=mix+prep+dep+eau+inter+(+GS.arro||0)*0.6,mb=ca-cout;
+  return {m:m,pu:pu,j:j,mix:mix,prep:prep,dep:dep,eau:eau,inter:inter,ca:ca,cout:cout,mb:mb,tx:ca?mb/ca*100:0,mj:mb/j}}
+function gsOut(){var r=gsCalc(),cls=r.tx>=BAR.seuil.ok?'ok':r.tx>=BAR.seuil.bas?'pend':'ko',x=r.mj/GS_REF_PART;
+  return '<div class="gsres"><div class="gsk"><span>Prix appliqué</span><b>'+r.pu.toFixed(2).replace('.',',')+' €/m²</b>'+(r.pu<GS_PLANCHER?'<em class="altxt">Sous le plancher de '+String(GS_PLANCHER).replace('.',',')+' €/m²</em>':'')+'</div>'+
+  '<div class="gsk"><span>CA HT</span><b>'+eu(r.ca)+'</b></div><div class="gsk"><span>Marge brute</span><b>'+eu(r.mb)+'</b><span class="slotst '+cls+'">'+r.tx.toFixed(1).replace('.',',')+' %</span></div>'+
+  '<div class="gsk hl"><span>Marge par jour</span><b>'+eu(r.mj)+'</b><em>'+(x>=1?'× '+x.toFixed(1).replace('.',',')+' un chantier particulier (~'+GS_REF_PART+' €/j)':'moins qu\'un chantier particulier')+'</em></div></div>'+
+  '<table class="gstab"><tr><td>Durée estimée</td><td>'+r.j+' jour'+(r.j>1?'s':'')+'</td></tr><tr><td>Mélange (semences, mulch, fixateur, engrais)</td><td>'+eu(r.mix)+'</td></tr><tr><td>Préparation et finitions</td><td>'+eu(r.prep)+'</td></tr><tr><td>Déplacements pick-up + remorque (0,40 €/km A/R)</td><td>'+eu(r.dep)+'</td></tr><tr><td>Eau</td><td>'+eu(r.eau)+'</td></tr><tr><td>Intérim</td><td>'+eu(r.inter)+'</td></tr>'+(+GS.arro?'<tr><td>Arrosage sous-traité (coût estimé 60 %)</td><td>'+eu((+GS.arro)*0.6)+'</td></tr>':'')+'<tr class="tot"><td>Coût de revient</td><td>'+eu(r.cout)+'</td></tr></table>'}
+function gsPanel(){var f=function(k,l,v,ex){return '<div class="q"><label for="gs-'+k+'">'+l+'</label><input id="gs-'+k+'" data-gs="'+k+'" type="number" inputmode="decimal" value="'+esc(String(v))+'"'+(ex||'')+'></div>'};
+  return '<div class="fpanel gspanel"><h3>Grande surface B2B · hydroensemencement</h3><p class="dvhint">Pour chiffrer en 5 minutes un chantier de sous-traitance (gendarmerie, ZAC, talus, bassin). Prix dégressif : '+GS_T.slice(0,4).map(function(t){return '≥ '+t[0].toLocaleString('fr-FR')+' m² : '+String(t[1]).replace('.',',')+' €'}).join(' · ')+'. Plancher : '+String(GS_PLANCHER).replace('.',',')+' €/m². Marge brute hors frais fixes.</p>'+
+   '<div class="vgrid">'+f('m2','Surface à ensemencer (m²)',GS.m2)+f('km','Distance depuis Alès (km)',GS.km)+f('prix','Prix imposé €/m² (vide = barème)',GS.prix,' step="0.05" placeholder="barème"')+f('cad','Cadence (m² par jour)',GS.cad)+f('inter','Intérimaires',GS.inter)+f('arro','Arrosage sous-traité, montant HT (€)',GS.arro)+
+   '<div class="q"><label for="gs-pente">Talus en forte pente</label><select id="gs-pente" data-gs="pente"><option value="non"'+(GS.pente==='non'?' selected':'')+'>Non</option><option value="oui"'+(GS.pente==='oui'?' selected':'')+'>Oui (+0,15 €/m² fibres et fixateur)</option></select></div></div>'+
+   '<div id="gsout">'+gsOut()+'</div></div>'}
+document.addEventListener('input',function(e){var t=e.target.closest&&e.target.closest('[data-gs]');if(!t)return;GS[t.getAttribute('data-gs')]=t.value;var o=document.getElementById('gsout');if(o)o.innerHTML=gsOut()});
+document.addEventListener('change',function(e){var t=e.target.closest&&e.target.closest('select[data-gs]');if(!t)return;GS[t.getAttribute('data-gs')]=t.value;var o=document.getElementById('gsout');if(o)o.innerHTML=gsOut()});
 function tabDevis(){subDevis();if(DV.cur)return dvEditor(DV.cur);DV.msg='';
-  var h='<div class="dvtop"><button type="button" class="btn" data-dv="new">Nouveau devis</button><button type="button" class="btn ghost" data-dv="bareme">Barème et coûts</button></div>';
-  if(DV.bareme)h+=dvBareme();
+  var h='<div class="dvtop"><button type="button" class="btn" data-dv="new">Nouveau devis</button><button type="button" class="btn ghost" data-dv="bareme">Barème et coûts</button><button type="button" class="btn ghost" data-dv="gs">Grande surface B2B</button></div>';
+  if(DV.bareme)h+=dvBareme();if(DV.gs)h+=gsPanel();
   if(!DV.list.length)return h+'<div class="aempty"><b>Aucun devis pour l\'instant.</b><span>Créez un devis, ou cliquez sur « Chiffrer » dans une demande : client, adresse et surface sont repris automatiquement.</span></div>';
   var S={brouillon:'Brouillon',valide:'Validé · chez Denis',envoye:'Envoyé',signe:'Signé',refuse:'Refusé'};
   return h+'<div class="dvlist">'+DV.list.map(function(d){if(d.ht==null||d.tx==null){var _id=d._id;d=dvCalc(JSON.parse(JSON.stringify(d)));d._id=_id}var cls=d.tx>=BAR.seuil.ok?'ok':d.tx>=BAR.seuil.bas?'pend':'ko';
@@ -5603,7 +5643,7 @@ $('adm').addEventListener('click',function(e){var b=e.target.closest('[data-dv],
   var a=b.getAttribute('data-dv');
   if(a==='new'){DV.cur=newDevis(null);drawAdmin();return}
   if(a==='close'){DV.cur=null;drawAdmin();return}
-  if(a==='bareme'){DV.bareme=!DV.bareme;drawAdmin();return}
+  if(a==='bareme'){DV.bareme=!DV.bareme;drawAdmin();return}if(a==='gs'){DV.gs=!DV.gs;drawAdmin();return}
   if(a==='barsave'){var o=JSON.parse(JSON.stringify(BAR));Array.prototype.forEach.call(document.querySelectorAll('[data-bk]'),function(i){var path=i.getAttribute('data-bk').split('.'),t=o;for(var j=0;j<path.length-1;j++)t=t[path[j]];t[path[path.length-1]]=+i.value});o.ent=o.ent||{};Array.prototype.forEach.call(document.querySelectorAll('[data-bt]'),function(i){o.ent[i.getAttribute('data-bt')]=i.value.trim()});
     DB.doc('bareme/config').set(o).then(function(){m('Barème enregistré : les nouveaux devis l\'utilisent.')},function(){m('Enregistrement refusé.')});return}
   if(a==='save'){var d=dvCalc(DV.cur),p0=Promise.resolve();
