@@ -10,7 +10,7 @@
 <meta property="og:description" content="Gazon, talus anti-érosion, prairie fleurie et arrosage connecté, à Alès et 90 km autour.">
 <meta property="og:image" content="https://kreonpaysage.com/img/kreon-hero-1672.webp">
 <meta property="og:url" content="https://kreonpaysage.com/">
-<link rel="icon" href="logo-160.png">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#285B42">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;1,800;1,900&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Page claire et franche. Site : bandeau, hero texte + photo, bande verte "Notre offre" très marquée, bandes claires. Devis : questionnaire en étapes sur sa propre vue (#devis). */
@@ -3745,7 +3745,9 @@ var AGL=[
  {id:'lucas',sal:2000,pole:'mkt',nom:'Lucas',role:'Facebook local',col:'#1877f2',when:'Lundi · 9 h 13',days:[1],hours:[9],min:13,every:24*8,
   desc:'4 publications Facebook par semaine pensées pour les habitants du Gard, et les groupes locaux où les partager. Tout arrive dans « À publier ».'},
  {id:'lea',sal:2300,pole:'mkt',nom:'Léa',role:'Formats courts (Reels et Shorts)',col:'#ff4f6d',when:'Samedi · 9 h 41',days:[6],hours:[9],min:41,every:24*8,
-  desc:'3 scripts de vidéos courtes par semaine pour Instagram Reels et YouTube Shorts : accroche, plans à filmer, texte à l\'écran, son, légende.'},
+  desc:'3 vidéos animées prêtes à poster chaque semaine pour Instagram Reels et YouTube Shorts, avec la musique exacte à mettre. Tout arrive dans « À publier ».'},
+ {id:'zoe',sal:2300,pole:'mkt',nom:'Zoé',role:'Tendances réseaux sociaux',col:'#8e44ad',when:'Samedi · 8 h 17',days:[6],hours:[8],min:17,every:24*8,
+  desc:'Chaque samedi, repère ce qui cartonne sur Instagram, TikTok, YouTube, Facebook et LinkedIn (vues, likes, partages) dans le jardin, le paysage et le BTP, et en tire les règles et les sujets de la semaine pour Léa, Inès, Théo, Lucas et Arthur.'},
  {id:'victor',sal:2900,pole:'ops',nom:'Victor',role:'Visites de chantier → dossier PDF',col:'#0b5d4b',when:'À la demande · bouton « Envoyer à Victor » (onglet Visites)',days:[],hours:[],min:0,every:24*400,
   desc:'Lit les photos de la fiche de visite remplie sur place, puis prépare le devis brouillon, la liste de fournitures exacte (+10 %), le plan technique du réseau d\'arrosage à l\'échelle et le dossier chantier, en PDF dans l\'onglet Visites. N\'envoie rien au client.'},
  {id:'clara',sal:2100,pole:'veille',nom:'Clara',role:'Actu business du matin · 7 h',col:'#c97b2a',when:'Tous les jours · 6 h 35 (alimente le briefing de 7 h)',days:[0,1,2,3,4,5,6],hours:[6],min:35,every:26,
@@ -3760,12 +3762,12 @@ var POLES=[{id:'mkt',nom:'Pôle Marketing, Com\' & Publicité',ico:'📣',desc:'
  {id:'fin',nom:'Pôle Finances & Administratif',ico:'💶',desc:'Notes de frais, point financier du soir, aides et réglementation.',col:'#555b63'}];
 
 /* portraits illustrés des agents : personnages inventés, dessinés en SVG */
-var AGF={aurore:['#f2d0b5','#d9a441','long','headset','f'],denis:['#e0ac85','#5a3a22','short','headset','m'],ines:['#c68863','#1d1a18','bun','none','f'],theo:['#8d5a3b','#151312','curly','cap','m'],
+var AGFACE={zoe:['#f6dccb','#2b2a33','bob','glasses','f'],aurore:['#f2d0b5','#d9a441','long','headset','f'],denis:['#e0ac85','#5a3a22','short','headset','m'],ines:['#c68863','#1d1a18','bun','none','f'],theo:['#8d5a3b','#151312','curly','cap','m'],
  nina:['#f6dccb','#a4482b','bob','glasses','f'],sacha:['#e0ac85','#2b2a33','swept','glasses','n'],paul:['#f2d0b5','#6b4a2f','side','none','m'],jules:['#e8b994','#9a9a9a','bald','glasses','m'],
  lucie:['#c68863','#3a2418','long','glasses','f'],arthur:['#f6dccb','#c9a25a','side','none','m'],alex:['#8d5a3b','#1a1715','spiky','none','m'],max:['#e0ac85','#4a3324','short','helmet','m'],
  lucas:['#f2d0b5','#7a4b2a','curly','none','m'],lea:['#f6dccb','#b8322f','pony','none','f'],victor:['#c68863','#1d1a18','short','helmet','m'],clara:['#e8b994','#5b3a1e','bob','none','f'],
  hugo:['#f2d0b5','#b8b8b8','side','glasses','m']};
-function agFace(a){var t=AGF[a.id]||['#e0ac85','#3a2a20','short','none','m'],sk=t[0],hc=t[1],hs=t[2],ac=t[3],g=t[4],bg=a.col||'#285B42';
+function agFace(a){var t=AGFACE[a.id]||['#e0ac85','#3a2a20','short','none','m'],sk=t[0],hc=t[1],hs=t[2],ac=t[3],g=t[4],bg=a.col||'#285B42';
   var p='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><defs><radialGradient id="g" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>';
   p+='<circle cx="48" cy="48" r="48" fill="'+bg+'"/><circle cx="48" cy="48" r="48" fill="url(#g)"/>';
   if(hs==='long'||hs==='pony')p+='<path d="M24 52c0-20 9-32 24-32s24 12 24 32v24H24z" fill="'+hc+'"/>';
@@ -3807,7 +3809,7 @@ function agCard(a){var r=AG.data[a.id]||null,last=r&&r.date?new Date(r.date):nul
 var AGTRIG={aurore:'trig_01PAAdGAhMiHE69sdEnuCU1x',denis:'trig_01L8h8ivj3po7X2vtGGEE4gT',ines:'trig_0134BwSut6wjP3wGiBjHpuPj',theo:'trig_01U1BPzQXF9Ysojwc6V2x2uW',
  nina:'trig_01BdiwM7NNHJjfjGmqwbRn4Q',sacha:'trig_01TqUV4E4JE94xiW2EQma4V3',paul:'trig_01MkNAMoYcSAizvsfNfDZe6T',margot:'trig_01VER8AGpZLpCKyqugRB6pe5',
  jules:'trig_019fRdusXve1wd83NWeX7V1r',lucie:'trig_01YPtMRpRx6aPVyKHAiosVKa',arthur:'trig_01Lm32dn93U95JivMQ5ix5QQ',alex:'trig_011yoFCGMhdVJqUijHQTsVws',
- max:'trig_01TiAULRbDCnwnhL8gqL22KG',lucas:'trig_0186dDyUB7RPPTyrxZuvdi2B',lea:'trig_015ymD1yf5MssXGcZrusvMNZ',clara:'trig_01VsnxJKpszust43AN6bj83Z',hugo:'trig_01XT8e2kUPZg4h4Sf9AJ4Qsg',victor:'trig_01SWm1ShEHwJgZ9CvYfP4T7g'};
+ max:'trig_01TiAULRbDCnwnhL8gqL22KG',lucas:'trig_0186dDyUB7RPPTyrxZuvdi2B',lea:'trig_015ymD1yf5MssXGcZrusvMNZ',clara:'trig_01VsnxJKpszust43AN6bj83Z',hugo:'trig_01XT8e2kUPZg4h4Sf9AJ4Qsg',victor:'trig_01SWm1ShEHwJgZ9CvYfP4T7g',zoe:'trig_015R15B8beuHckUiU8LbgsuE'};
 var AGF={p:null,last:{}};
 function agMcp(){if(!AGF.p)AGF.p=(window.claude&&window.claude.use?window.claude.use('mcp'):Promise.resolve(null)).catch(function(){return null});return AGF.p}
 /* tache : ce que l'agent doit faire et uniquement ça. Résout {ok:true} ou {ok:false,code} */
