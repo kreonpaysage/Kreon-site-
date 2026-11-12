@@ -2023,7 +2023,7 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
       <a href="#faq" data-p="faq">FAQ</a>
       <a href="#mon-espace" data-p="mon-espace" class="acctlink">Mon espace</a>
     </nav>
-    <a class="carnet" id="carnet" href="#devis"><i></i><span>Planning de printemps ouvert</span></a>
+    <a class="carnet" id="carnet" href="#devis"><i></i><span>Liste d'attente · chantiers dès l'automne 2028</span></a>
     <a class="btn ghost" href="#visite" id="hvis">Visite</a>
     <a class="btn" href="#devis" id="hdev">Devis gratuit</a>
     <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainnav"><i></i><i></i><i></i></button>
@@ -2106,7 +2106,7 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
         <a class="btn ghost" href="#visite">Réserver une visite</a>
       </div>
       <ul class="hchips"><li>Terrassement</li><li>Arrosage connecté</li><li>Hydroensemencement</li></ul>
-      <a class="carnet" href="#devis" id="hcarnet"><i></i><span>Planning de printemps ouvert</span></a>
+      <a class="carnet" href="#devis" id="hcarnet"><i></i><span>Liste d'attente · chantiers dès l'automne 2028</span></a>
     </div>
     
   </div></div>
@@ -2567,7 +2567,7 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
     <div class="winter">
       <div class="wt"><p class="eyebrow">Décembre à mars</p><h3>L'hiver, nous travaillons.</h3><p>Seul le semis attend le retour des beaux jours. Le reste du chantier se prépare maintenant, pour que votre pelouse parte dès les premiers jours doux.</p></div>
       <ul class="wl">
-        <li><b>Préparer</b><span>Visites, devis fermes et planning des chantiers de printemps. Les créneaux se réservent tôt.</span></li>
+        <li><b>Préparer</b><span>Visites, devis fermes et planning des chantiers de printemps. Ouverture des chantiers à l'automne 2028.</span></li>
         <li><b>Terrasser</b><span>Terrassement lourd, plateformes, remblais, tranchées et évacuation des terres, sur les journées hors gel.</span></li>
         <li><b>Équiper</b><span>Pose de l'arrosage automatique : le réseau est prêt, l'hydroensemencement part dès mars.</span></li>
       </ul>
@@ -3660,7 +3660,7 @@ function dfr(d){return d.getDate()+' '+MOIS[d.getMonth()]+' '+d.getFullYear()}
 
 /* ---------- état du site : carnet de commandes et alerte chaleur (réglés dans l'Espace KREÖN) ---------- */
 var ETAT={};
-function carnetAuto(){var m=new Date().getMonth();
+function carnetAuto(){if(new Date()<new Date('2028-08-01'))return {texte:'Liste d\'attente · chantiers dès l\'automne 2028',niveau:'ouvert'};var m=new Date().getMonth();
   if(m>=9||m===0)return {texte:'Planning de printemps ouvert',niveau:'ouvert'};
   if(m<=2)return {texte:'Printemps : réservez vos semis',niveau:'ouvert'};
   if(m<=4)return {texte:'Printemps : derniers créneaux',niveau:'limite'};
