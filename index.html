@@ -1320,6 +1320,17 @@ body[data-page=home] .final.full{display:none}
   .rv{opacity:.001;transform:translateY(22px)}
   .rv-go{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 }
+
+/* en-tête : une ligne, menu centré */
+@media(min-width:1061px){
+ header .bar{display:grid!important;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:6px 6px 6px 18px}
+ header .brand{justify-self:start}
+ nav.mainnav{grid-column:2;margin:0!important;justify-self:center;display:flex!important;flex-wrap:nowrap!important;gap:2px!important;font-size:.9rem!important;border:0!important;padding:0!important}
+ nav.mainnav a{white-space:nowrap;padding:8px 13px!important;line-height:1.2}
+ header #hvis,header .carnet,header .burger{display:none!important}
+ header #hdev{grid-column:3;justify-self:end;white-space:nowrap;min-height:44px;padding:0 22px}
+}
+@media(min-width:1061px) and (max-width:1200px){nav.mainnav a{padding:8px 9px!important;font-size:.86rem}}
 /* ===== habillage « bento » de l'espace équipe ===== */
 #admin{--sk-bg:#eef4ee;--sk-card:#fff;--sk-g:#285B42;--sk-l:#87B559;--sk-sh:0 1px 0 rgba(0,0,0,.03),0 8px 22px rgba(40,91,66,.08)}
 #admin{background:linear-gradient(160deg,#eef4ee,#f7f5ef 55%,#eef3f6);border-radius:24px;padding-block:14px 24px;max-width:1280px}
@@ -1881,11 +1892,11 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
       <a href="#top" data-p="home">Accueil</a>
       <a href="#procede" data-p="procede">Le procédé</a>
       <a href="#realisations" data-p="realisations">Réalisations</a>
-      <a href="#deroule" data-p="deroule">Étapes et calendrier</a>
-      <a href="#clients" data-p="clients">Particuliers et pros</a>
-      <a href="#tarifs" data-p="tarifs">Tarifs et zones</a>
-      <a href="#entretien" data-p="entretien">Entretien et SAV</a>
-      <a href="#espace-pro" data-p="espace-pro">Espace pro</a>
+      <a href="#deroule" data-p="deroule">Étapes</a>
+      <a href="#clients" data-p="clients">Clients</a>
+      <a href="#tarifs" data-p="tarifs">Tarifs</a>
+      <a href="#entretien" data-p="entretien">Entretien</a>
+      <a href="#espace-pro" data-p="espace-pro">Pro</a>
       <a href="#faq" data-p="faq">FAQ</a>
       <a href="#mon-espace" data-p="mon-espace" class="acctlink">Mon espace</a>
     </nav>
