@@ -5780,8 +5780,10 @@ var POSTES=[
 function pdef(k){return POSTES.filter(function(p){return p[0]===k})[0]}
 function pvDef(k){var B=BAR;if(/^hydro_/.test(k))return B.hydro.pv[k.slice(6)];return ({terr:B.terr.pv,evac:B.evac.pv,tv:B.tv.pv,arro:B.arro.pv,goutte:B.goutte.pv,alim:B.alim.pv,coco:(B.coco||BAR0.coco).pv,prep:(B.prep||BAR0.prep).pv,diff:(B.diff||BAR0.diff).pv,sable:(B.sable||BAR0.sable).pv,sursemis:(B.sursemis||BAR0.sursemis).pv,pack_ess:(B.pack||BAR0.pack).ess,pack_ser:(B.pack||BAR0.pack).ser,pack_pre:(B.pack||BAR0.pack).pre,bordA:B.bordA.pv,bordB:B.bordB.pv,libre:0})[k]}
 /* coût de revient et durée (jours d'équipe) d'une ligne */
-function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
-  if(/^hydro_/.test(k)){var t=k.slice(6);j=Math.max(.5,q/B.hydro.rend);c=q*B.hydro.mat[t]+j*B.hydro.jour}
+var __REN=false;
+function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0,RX=__REN?2:1,RJ=__REN?(+B.renfort||300):0;
+  if(/^hydro_/.test(k)){var t=k.slice(6);j=Math.max(.5,q/(B.hydro.rend*RX));c=q*B.hydro.mat[t]+j*(B.hydro.jour+RJ)}
+  else if(k==='prep'||k==='coco'){var b0=B[k]||BAR0[k];j=q/(b0.rend*RX);c=q*b0.mat+j*(8*B.thc+RJ)}
   else if(k==='terr'){j=q/B.terr.rend;c=j*B.terr.jour}
   else if(k==='evac'){var rot=Math.ceil(q/B.evac.cap);c=q*B.evac.dens*B.evac.isdi+rot*(B.evac.kmDech*B.evac.conso/100*B.evac.litre+B.thc);j=rot/8}
   else if(k==='tv'){c=q*(B.tv.achat+B.tv.regl);j=q/40}
@@ -5793,7 +5795,7 @@ function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
   return {c:c,j:j}}
 function arr(v){return Math.round(v*100)/100}
 /* recalcul : déplacement selon la zone, totaux, marge */
-function dvCalc(d){var B=BAR,L=d.lignes.filter(function(l){return l.k!=='depl'&&l.k!=='fmin'}),jours=0;
+function dvCalc(d){__REN=!!d.renfort;var B=BAR,L=d.lignes.filter(function(l){return l.k!=='depl'&&l.k!=='fmin'}),jours=0;
   L.forEach(function(l){var r=coutLigne(l);l.cout=arr(r.c);jours+=r.j});
   jours=Math.max(.5,Math.ceil(jours*2)/2);d.jours=jours;
   var zo=zoneOf(d.cp),z=zo?zo.z:0,km=+d.km||(zo&&zo.km)||0,S=+d.surface||0,jt=Math.ceil(jours),ar=km*2,hRoute=ar/B.depl.vitesse;
@@ -5879,7 +5881,7 @@ function dvEditor(d){
       '<label><span>Qté</span><input type="number" step="0.01" data-lf="q" value="'+l.q+'"'+(l.auto?' readonly':'')+'></label><label><span>Unité</span><input type="text" data-lf="u" value="'+esc(l.u)+'"'+(l.auto?' readonly':'')+'></label>'+
       '<label><span>PU HT</span><input type="number" step="0.01" data-lf="pu" value="'+l.pu+'"'+(l.auto?' readonly':'')+'></label>'+(l.k==='libre'?'<label><span>Coût</span><input type="number" step="0.01" data-lf="cout" value="'+l.cout+'"></label>':'')+
       '<div class="dvlt"><b>'+eu(l.tot)+'</b><small>coût '+eu(l.cout)+' · marge '+tx+' %</small></div>'+(l.auto?'<span class="dvauto">Calcul auto</span>':'<button type="button" class="dvdel" data-ldel="'+i+'" aria-label="Supprimer la ligne">×</button>')+'</div>'}).join('')+'</div>';
-  h+='<label class="chk"><input type="checkbox" data-dvopt="deplAuto"'+(d.deplAuto!==false?' checked':'')+'><span>Ajouter le déplacement selon la zone</span></label><label class="chk"><input type="checkbox" data-dvopt="forfaitMin"'+(d.forfaitMin!==false?' checked':'')+'><span>Appliquer le forfait minimum ('+eu(+BAR.forfaitMin||0)+' HT hors déplacement)</span></label></div>';
+  h+='<label class="chk"><input type="checkbox" data-dvopt="deplAuto"'+(d.deplAuto!==false?' checked':'')+'><span>Ajouter le déplacement selon la zone</span></label><label class="chk"><input type="checkbox" data-dvopt="renfort"'+(d.renfort?' checked':'')+'><span>Renfort intérimaire sur la préparation, l\'hydroensemencement et le filet coco (cadence × 2, + '+eu(+BAR.renfort||300)+' HT de coût par jour)</span></label><label class="chk"><input type="checkbox" data-dvopt="forfaitMin"'+(d.forfaitMin!==false?' checked':'')+'><span>Appliquer le forfait minimum ('+eu(+BAR.forfaitMin||0)+' HT hors déplacement)</span></label></div>';
   h+='<div class="fpanel" style="margin-top:14px"><div class="vgrid"><div class="q"><label class="lab" for="dv_tva">TVA</label><select id="dv_tva" data-df="tvaTaux"><option value="20"'+(d.tvaTaux==20?' selected':'')+'>20 %</option><option value="10"'+(d.tvaTaux==10?' selected':'')+'>10 % (rénovation de logement de plus de 2 ans, sous conditions)</option><option value="0"'+(d.tvaTaux==0?' selected':'')+'>Autoliquidation (sous-traitance BTP)</option></select></div>'+
     '<div class="q"><label class="lab" for="dv_st">Statut</label><select id="dv_st" data-df="statut">'+[['brouillon','Brouillon'],['valide','Validé (mail en préparation)'],['envoye','Envoyé'],['signe','Signé'],['refuse','Refusé']].map(function(s){return '<option value="'+s[0]+'"'+(d.statut===s[0]?' selected':'')+'>'+s[1]+'</option>'}).join('')+'</select></div>'+
     '<div class="q wide"><label class="lab" for="dv_no">Remarques sur le devis</label><textarea id="dv_no" data-df="notes" placeholder="Accès, planning, réserves">'+esc(d.notes||'')+'</textarea></div></div></div>';
