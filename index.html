@@ -1481,6 +1481,10 @@ body[data-page=home] .klaunch{display:none}
 .atmore{display:flex;align-items:center;gap:8px}
 .atmorel{display:contents}
 @media (prefers-color-scheme: dark){html:not(:has(#admin:not([hidden]))) .nh-guar{background:#1f2a22}html:not(:has(#admin:not([hidden]))) .klaunch{background:#1f4a35}}
+.wlbar{position:relative;display:grid;gap:2px;margin:10px 0 14px;padding:12px 14px;border-radius:14px;background:#eef6e8;overflow:hidden}.wlbar span{font-size:.85rem;color:#4b5a4f}.wlbar i{position:absolute;left:0;bottom:0;height:4px;background:#285B42}
+.treso.trtest{outline:2px dashed #e0b44a;outline-offset:-2px}
+.trben{grid-column:1/-1;display:grid;gap:4px;padding:12px 14px;border-radius:14px;background:#f1f3ee}.trben.ok{background:#e4f2df}.trben>b{font-size:1.5rem}.trben small b{font-size:inherit}.trben small{line-height:1.45}
+.pkgift{display:inline-block;margin:4px 0 14px;padding:8px 14px;border-radius:99px;background:#e4f2df;color:#23402f;font-weight:600}.pkm{margin:-6px 0 10px;font-size:.9rem;color:var(--muted)}.cocop{max-width:560px}
 /* ===== accueil bento ===== */
 .acc{--ac-bg:#eef4ee;--ac-card:#ffffff;--ac-ink:#1e2a22;--ac-mu:#68736b;--ac-g:#285B42;--ac-l:#87B559;--ac-sun:#f2b632;--ac-o:#e8834a;display:grid;gap:14px;background:linear-gradient(160deg,#eef4ee,#f7f5ef 60%,#eef3f6);border-radius:22px;padding:14px;margin-bottom:14px}
 .acc-hero{background:radial-gradient(120% 140% at 0% 0%,#2f6a4d 0%,#1f4b36 60%,#173a2a 100%);color:#fff;border-radius:20px;padding:20px 22px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;box-shadow:0 10px 30px rgba(31,75,54,.25)}
@@ -1992,7 +1996,7 @@ html.plcap .plexit{display:block;margin:6px auto 24px;max-width:300px}
 
 
 </style>
-<script>window.KPRIX={gazon:2.5,talus:3.2,prairie:2.8,arro:6.5,terr:6,min:850,gs:[[10000,1.90],[5000,2.20],[2000,2.50],[500,3.00],[0,3.50]],plancher:1.70};</script>
+<script>window.KPRIX={gazon:2.5,talus:3.2,prairie:2.8,arro:6.5,terr:6,min:850,coco:8,pack:{ess:250,ser:350,pre:450},gs:[[10000,1.90],[5000,2.20],[2000,2.50],[500,3.00],[0,3.50]],plancher:1.70};</script>
 <script>
 window.KFORM='https://script.google.com/macros/s/AKfycbzwjiOyv-7-l-OjgkHdhv3IeTfi1eJvkJKQ8SDU--WwC5A6hcLnL6TSrO8PZEfgjmsc3A/exec';
 (function(){if(!(window.claude&&window.claude.use))document.documentElement.classList.add('kpub')})();
@@ -2671,6 +2675,11 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
       </div>
     </div>
   </section>
+  <section class="sec" id="coco" data-pg="tarifs" style="padding-top:0">
+    <div class="head"><p class="eyebrow">Talus très pentus</p><h2>Filet coco anti-érosion, posé avant l'hydroensemencement.</h2><p>Sur une pente forte ou une terre qui ravine, nous agrafons un filet en fibre de coco biodégradable, puis nous projetons le mélange par-dessus. La graine se loge dans les mailles, le filet tient la terre pendant que les racines s'installent, puis il se décompose en 2 à 4 ans.</p></div>
+    <div class="kv cocop"><div><span>Grands talus, à partir de 1 000 m² (professionnels)</span><span>6 € HT/m²</span></div><div><span>Talus standard</span><span>8 € HT/m²</span></div><div><span>Petit talus très raide ou difficile d'accès</span><span>10 € HT/m²</span></div></div>
+    <p class="fine">Filet fourni, agrafé et posé, en plus de l'hydroensemencement talus (dès 3,20 € HT/m²). Prix ferme après visite.</p>
+  </section>
   <section class="sec" id="eau" data-pg="tarifs" style="padding-top:0">
     <div class="head"><p class="eyebrow">Calculateur d'eau</p><h2>Combien d'eau pour votre pelouse cet été ?</h2><p>Repère pour le Gard en plein été : 4 à 5 litres par m² et par jour. Changez les valeurs selon votre terrain et votre facture d'eau.</p></div>
     <form class="tool" id="we_form" novalidate>
@@ -2724,17 +2733,18 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
 </section>
 <section class="band full" id="contrat">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">Contrat d'entretien</p><h2>Votre arrosage, suivi toute l'année.</h2><p>Mise en route au printemps, contrôle en été, hivernage et purge du réseau avant le gel. Nous passons, vous n'y pensez plus.</p></div>
+    <div class="head"><p class="eyebrow">Pack Sérénité Arrosage · dès 2028</p><h2>Votre arrosage, suivi toute l'année.</h2><p>Mise en route au printemps, purge à l'air comprimé avant le gel, réglages selon la météo et les restrictions d'eau. Nous passons, vous n'y pensez plus.</p></div>
+    <p class="pkgift">🎁 <b>1<sup>re</sup> année offerte</b> si KREON pose votre arrosage automatique.</p>
     <div class="plans">
-      <div class="plan"><h3>Essentiel</h3><p class="kpr">179 € <small>HT par an</small></p><ul><li>Mise en route au printemps : contrôle des arroseurs, fuites, filtres</li><li>Hivernage à l'automne : purge du réseau à l'air comprimé</li><li>Réglage du programmateur à chaque passage</li></ul><button type="button" class="btn ghost" data-plan="Essentiel">Choisir Essentiel</button></div>
-      <div class="plan star"><span class="badge">Le plus choisi</span><h3>Sérénité</h3><p class="kpr">319 € <small>HT par an</small></p><ul><li>Tout l'Essentiel, plus un contrôle en plein été</li><li>Réglage à distance selon la météo et les restrictions d'eau</li><li>Intervention SAV sous 72 h ouvrées</li><li>10 % de remise sur les pièces</li></ul><button type="button" class="btn" data-plan="Sérénité">Choisir Sérénité</button></div>
-      <div class="plan"><h3>Pro et copropriété</h3><p class="kpr">Sur devis</p><ul><li>Lotissements, résidences, espaces verts d'entreprise</li><li>Planning de passages par réseau</li><li>Rapport après chaque visite</li></ul><button type="button" class="btn ghost" data-plan="Pro et copropriété">Demander un devis</button></div>
+      <div class="plan"><h3>Essentiel</h3><p class="kpr">250 € <small>HT par an</small></p><p class="pkm">ou 21 € HT par mois</p><ul><li>Mise en route au printemps : arroseurs, fuites, filtres, programmateur</li><li>Purge hivernale du réseau à l'air comprimé</li><li>Réglage du programmateur à chaque passage</li></ul><button type="button" class="btn ghost" data-plan="Essentiel">Choisir Essentiel</button></div>
+      <div class="plan star"><span class="badge">Le plus choisi</span><h3>Sérénité</h3><p class="kpr">350 € <small>HT par an</small></p><p class="pkm">ou 29 € HT par mois</p><ul><li>Tout l'Essentiel</li><li>Visite de contrôle en plein été</li><li>Réglages selon les restrictions d'eau du Gard</li></ul><button type="button" class="btn" data-plan="Sérénité">Choisir Sérénité</button></div>
+      <div class="plan"><h3>Premium</h3><p class="kpr">450 € <small>HT par an</small></p><p class="pkm">ou 38 € HT par mois</p><ul><li>Tout le Sérénité</li><li>Surveillance à distance via l'application Gardena</li><li>Dépannage fuite sous 48 h</li><li>Un regarnissage des zones pelées par an</li></ul><button type="button" class="btn ghost" data-plan="Premium">Choisir Premium</button></div>
     </div>
-    <p class="fine">Pièces remplacées en plus (buses, électrovannes, batterie). Zone 2 : + 30 € HT par passage. Zone 3 : nous consulter. Contrat d'un an, renouvelable, résiliable à chaque échéance avec un mois de préavis. Réseau non posé par KREÖN : diagnostic initial de 69 € HT, déduit si vous souscrivez.</p>
+    <p class="fine">Pièces remplacées en plus (buses, électrovannes, batterie). Zone 2 : + 30 € HT par passage. Zone 3 : nous consulter. Lotissements, résidences et copropriétés : sur devis. Contrat d'un an, renouvelable : nous vous prévenons par écrit avant chaque échéance, et vous pouvez résilier à chaque échéance avec un mois de préavis. Paiement mensuel par prélèvement, sans frais. Réseau non posé par KREON : diagnostic initial de 69 € HT, déduit si vous souscrivez.</p>
     <div class="fpanel" style="margin-top:20px">
       <form id="fm-contrat" novalidate data-col="contrats">
         <h3>Souscrire : formule <span id="ct_planlab">Sérénité</span></h3><p class="note" style="margin-top:6px">Déjà sous contrat ? Renouvellement, résiliation et avantages du cercle se gèrent dans <a href="#mon-espace">votre espace client</a>.</p>
-        <div class="kseg" style="margin-top:10px"><label><input type="radio" name="ct_plan" value="Essentiel"><span>Essentiel</span></label><label><input type="radio" name="ct_plan" value="Sérénité" checked><span>Sérénité</span></label><label><input type="radio" name="ct_plan" value="Pro et copropriété"><span>Pro et copropriété</span></label></div>
+        <div class="kseg" style="margin-top:10px"><label><input type="radio" name="ct_plan" value="Essentiel"><span>Essentiel</span></label><label><input type="radio" name="ct_plan" value="Sérénité" checked><span>Sérénité</span></label><label><input type="radio" name="ct_plan" value="Premium"><span>Premium</span></label><label><input type="radio" name="ct_plan" value="Pro et copropriété"><span>Pro et copropriété</span></label></div><div class="kseg" style="margin-top:8px" role="radiogroup" aria-label="Paiement"><label><input type="radio" name="ct_pay" value="Annuel" checked><span>Paiement annuel</span></label><label><input type="radio" name="ct_pay" value="Mensuel"><span>Paiement mensuel</span></label></div>
         <div class="vgrid">
           <div class="q"><label class="lab" for="ct_prenom">Prénom <span class="req">Obligatoire</span></label><input id="ct_prenom" type="text" autocomplete="given-name" data-r="1"><div class="err" hidden></div></div>
           <div class="q"><label class="lab" for="ct_nom">Nom <span class="req">Obligatoire</span></label><input id="ct_nom" type="text" autocomplete="family-name" data-r="1"><div class="err" hidden></div></div>
@@ -3836,7 +3846,7 @@ function checkForm(f){var ok=true,first=null;
   if(first)first.scrollIntoView({block:'center',behavior:'smooth'});return ok}
 var LABELS={av_prenom:'Prénom',av_nom:'Initiale',av_commune:'Commune',av_ref:'Référence chantier',av_type:'Type',av_note:'Note',av_txt:'Avis',
  pa_prenom:'Parrain prénom',pa_nom:'Parrain nom',pa_tel:'Parrain tél.',pa_ref:'Réf. client parrain',pa_fprenom:'Filleul',pa_ftel:'Filleul tél.',pa_fcp:'Filleul CP',pa_fproj:'Projet du filleul',
- ct_plan:'Formule',ct_prenom:'Prénom',ct_nom:'Nom',ct_tel:'Téléphone',ct_mail:'E-mail',ct_adr:'Adresse',ct_cp:'Code postal',ct_pose:'Réseau posé par KREÖN',ct_zones:'Nombre de zones',ct_prog:'Programmateur',
+ ct_plan:'Formule',ct_pay:'Paiement',ct_prenom:'Prénom',ct_nom:'Nom',ct_tel:'Téléphone',ct_mail:'E-mail',ct_adr:'Adresse',ct_cp:'Code postal',ct_pose:'Réseau posé par KREÖN',ct_zones:'Nombre de zones',ct_prog:'Programmateur',
  sv_nom:'Nom',sv_tel:'Téléphone',sv_cp:'Code postal',sv_ref:'Référence',sv_obj:'Objet',sv_urg:'Urgence',sv_txt:'Description',
  jb_prof:'Profil',jb_nom:'Nom ou société',jb_tel:'Téléphone',jb_mail:'E-mail',jb_ville:'Commune',jb_perm:'Permis et habilitations',jb_stat:'Statut',jb_exp:'Expérience (ans)',jb_txt:'Message'};
 var FORMS={
@@ -3846,7 +3856,7 @@ var FORMS={
    return {nom:o.pa_prenom+' '+o.pa_nom,tel:o.pa_tel,ref:o.pa_ref,filleul:o.pa_fprenom,filleulTel:o.pa_ftel,cp:o.pa_fcp,projet:o.pa_fproj,code:code}},
    done:function(d){return 'Merci ! Nous contactons votre filleul. Votre code parrain, à lui transmettre : <span class="code">'+esc(d.code)+'</span> Votre bon de 80 € est émis à la signature de son devis.'}},
  'fm-contrat':{t:'SOUSCRIPTION CONTRAT D\'ENTRETIEN',done:'Souscription reçue. Nous vous appelons pour fixer la date du premier passage et vous envoyer le contrat à signer.',
-   pack:function(o){var z=zoneOf(o.ct_cp);return {nom:o.ct_prenom+' '+o.ct_nom,tel:o.ct_tel,mail:o.ct_mail,adresse:o.ct_adr,cp:o.ct_cp,zone:z?z.z:0,km:z?z.km:null,formule:o.ct_plan,pose:o.ct_pose||'',zones:o.ct_zones,programmateur:o.ct_prog}}},
+   pack:function(o){var z=zoneOf(o.ct_cp);return {nom:o.ct_prenom+' '+o.ct_nom,tel:o.ct_tel,mail:o.ct_mail,adresse:o.ct_adr,cp:o.ct_cp,zone:z?z.z:0,km:z?z.km:null,formule:o.ct_plan,paiement:o.ct_pay||'Annuel',pose:o.ct_pose||'',zones:o.ct_zones,programmateur:o.ct_prog}}},
  'fm-sav':{t:'DEMANDE SAV',done:'Demande reçue. Nous vous rappelons sous 48 h ouvrées, plus vite si c\'est urgent. Fuite : gardez la vanne générale de l\'arrosage fermée en attendant.',
    pack:function(o){var z=zoneOf(o.sv_cp);return {nom:o.sv_nom,tel:o.sv_tel,cp:o.sv_cp,zone:z?z.z:0,ref:o.sv_ref,objet:o.sv_obj,urgent:o.sv_urg==='Urgent',texte:o.sv_txt}}},
  'fm-job':{t:'CANDIDATURE',done:'Merci. Nous lisons chaque candidature et vous rappelons si votre profil correspond à nos besoins de la saison.',
@@ -4515,12 +4525,16 @@ function fcCalc(f){var ht=0,tvaByRate={};(f.lignes||[]).forEach(function(l){var 
   var tva=0;Object.keys(tvaByRate).forEach(function(k){tva+=tvaByRate[k]*(+k)/100});f.ht=r2(ht);f.tva=r2(tva);f.ttc=r2(ht+tva);f.tvas=Object.keys(tvaByRate).map(function(k){return {taux:+k,base:r2(tvaByRate[k]),montant:r2(tvaByRate[k]*(+k)/100)}});
   f.net=r2(f.ttc-(+f.deduit||0));return f}
 /* ---- trésorerie (encart permanent en haut du tableau de bord) ---- */
-function fcTreso(){fctSub();var L=fcAll().filter(function(x){return !x.test}),t=isoD(new Date()),m=t.slice(0,7),y=t.slice(0,4),j=0,mo=0,an=0,reste=0,ret=0,nRet=0,fm=0,tvm=0,tva=0;
+function fcTreso(){fctSub();var NT=fcAll().filter(function(x){return x.test}).length,INC=(FCT.on||FCT.trTest)&&NT>0,L=fcAll().filter(function(x){return INC||!x.test}),t=isoD(new Date()),m=t.slice(0,7),y=t.slice(0,4),j=0,mo=0,an=0,reste=0,ret=0,nRet=0,fm=0,tvm=0,tva=0;
   L.forEach(function(f){var tx=+f.tvaTaux||20;(f.paiements||[]).forEach(function(p){var a=+p.montant||0,v=a*tx/(100+tx);if(p.date===t)j+=a;if((p.date||'').slice(0,7)===m){mo+=a;tvm+=v}if((p.date||'').slice(0,4)===y){an+=a;tva+=v}});
     if(f.type==='avoir'&&(f.paiements||[]).length===0){}var r=fcReste(f);reste+=r;if(r>0&&f.echeance&&f.echeance<t){ret+=r;nRet++}if(f.type!=='avoir'&&f.statut!=='annulee'&&(f.date||'').slice(0,7)===m)fm+=+f.ht||0});
-  return (FCT.on?'<p class="esban">🧪 <b>Mode essai actif</b> : factures et devis créés maintenant sont des essais (numéros ESSAI, hors trésorerie, supprimables). <button type="button" class="trlink" data-fct="off">Désactiver</button></p>':'')+'<section class="treso" aria-label="Trésorerie"><div class="trh"><b>💶 Trésorerie en temps réel</b><button type="button" class="trlink" data-fc="tab">Factures →</button></div><div class="trg">'+
+  return (FCT.on?'<p class="esban">🧪 <b>Mode essai actif</b> : factures et devis créés maintenant sont des essais (numéros ESSAI, comptés ici dans la trésorerie le temps du test, jamais dans la compta ni chez Lucie, supprimables). <button type="button" class="trlink" data-fct="off">Désactiver</button></p>':'')+'<section class="treso'+(INC?' trtest':'')+'" aria-label="Trésorerie"><div class="trh"><b>💶 Trésorerie en temps réel'+(INC?' <span class="agst wait">🧪 essais inclus</span>':'')+'</b>'+(NT&&!FCT.on?'<button type="button" class="trlink" data-trtest>'+(FCT.trTest?'Masquer les essais':'🧪 Voir avec les essais ('+NT+')')+'</button>':'')+'<button type="button" class="trlink" data-fc="tab">Factures →</button></div><div class="trg">'+
     '<div><span>Encaissé aujourd\'hui</span><b>'+eu(j)+'</b></div><div><span>Encaissé ce mois</span><b>'+eu(mo)+'</b></div><div><span>Encaissé en '+y+'</span><b>'+eu(an)+'</b></div><div class="'+(nRet?'hot':'')+'"><span>Reste à encaisser</span><b>'+eu(reste)+'</b>'+(nRet?'<small>dont '+eu(ret)+' en retard ('+nRet+')</small>':'<small>CA facturé ce mois : '+eu(fm)+' HT</small>')+'</div></div>'+(function(){var fx=((BAR.fixes||{}).lignes||[]).reduce(function(s,l){return s+(+l.v||0)},0);
-    return '<div class="trv"><div class="tvx"><span>🔒 TVA encaissée à isoler · compte TVA</span><b>'+eu(r2(tvm))+'</b><small>ce mois · '+eu(r2(tva))+' en '+y+' · intouchable, réservée à l\'État</small></div><div><span>HT disponible ce mois</span><b>'+eu(r2(mo-tvm))+'</b><small>chantiers, matériel, frais fixes, salaire</small></div><div><span>Réserve de sécurité visée</span><b>'+eu(r2(fx/4))+'</b><small>3 mois de frais fixes, sur le compte société</small></div></div>'})()+'</section>'}
+    return '<div class="trv"><div class="tvx"><span>🔒 TVA encaissée à isoler · compte TVA</span><b>'+eu(r2(tvm))+'</b><small>ce mois · '+eu(r2(tva))+' en '+y+' · intouchable, réservée à l\'État</small></div><div><span>HT disponible ce mois</span><b>'+eu(r2(mo-tvm))+'</b><small>chantiers, matériel, frais fixes, salaire</small></div><div><span>Réserve de sécurité visée</span><b>'+eu(r2(fx/4))+'</b><small>3 mois de frais fixes, sur le compte société</small></div>'+(function(){
+      if(!NF.mois)NF.mois=m;if(NF.mois===m)try{nfSub()}catch(e){}var fr=NF.mois===m?nfTot(NF.data.lignes||[]).ht:0,ben=r2((mo-tvm)-fr-fx/12),pos=Math.max(0,ben);
+      return '<div class="trben'+(ben>0?' ok':'')+'"><span>💰 Bénéfice du mois · pour toi</span><b>'+eu(ben)+'</b><small>HT encaissé '+eu(r2(mo-tvm))+' − frais du mois '+eu(r2(fr))+' − frais fixes '+eu(r2(fx/12))+' (1/12 de l\'année)</small>'+
+        (pos>0?'<small><b>Ce que tu peux te verser, en net :</b> ≈ '+eu(r2(pos/1.8))+' en salaire (charges du président de SASU ≈ 80 % du net) · ou ≈ '+eu(r2(pos*0.58))+' en dividendes, en fin d\'exercice (impôt sur les sociétés 15 % puis prélèvement forfaitaire). Estimation : à valider avec l\'expert-comptable, après la réserve de sécurité.</small>':'<small>Rien à te verser ce mois : les frais ne sont pas encore couverts.</small>')+'</div>'})()+'</div>'})()+'</section>'}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-trtest]');if(!b)return;FCT.trTest=!FCT.trTest;drawAdmin()});
 /* ---- numérotation légale : continue, chronologique, sans trou (F-AAAA-NNNN) ---- */
 function fcNextNum(test){var y=fcYear(),ref=DB.doc('bareme/compteurs');return ref.get().then(function(s){var v=(s.exists&&s.data())||{};if(test){var t=(v.ty===y?(+v.tn||0):0)+1;v.ty=y;v.tn=t;return ref.set(v).then(function(){return 'ESSAI-'+y+'-'+('00'+t).slice(-3)})}var n=(v.fy===y?(+v.fn||0):0)+1;v.fy=y;v.fn=n;return ref.set(v).then(function(){return 'F-'+y+'-'+('000'+n).slice(-4)})})}
 function fcStore(f){var y=(String(f.num||'').match(/\d{4}/)||[fcYear()])[0],ref=DB.doc('bareme/factures-'+y);return ref.get().then(function(s){var v=(s.exists&&s.data())||{};v.list=v.list||[];var i=-1;v.list.forEach(function(x,k){if(x.id===f.id)i=k});if(i>=0)v.list[i]=f;else v.list.unshift(f);v.maj=new Date().toISOString();return ref.set(JSON.parse(JSON.stringify(v)))})}
@@ -4646,12 +4660,12 @@ document.getElementById('adm').addEventListener('click',function(e){var b=e.targ
 document.getElementById('adm').addEventListener('click',function(e){var b=e.target.closest('[data-dvfac]');if(!b||!DV.cur)return;var d=DV.cur;if(!d._id||!d.num){kToast('Enregistrez d\'abord le devis.');return}
   FC.cur=fcFromDevis(d,b.getAttribute('data-dvfac'));FC.open=null;FC.msg='';fcGoTab();kToast('<b>🧾 Facture préparée depuis le devis '+esc(d.num)+'</b><br>Vérifiez puis « Émettre ».')});
 /* ---- PDF de la facture (mentions obligatoires) ---- */
-function fcPdf(f){return logoJpeg().then(function(lg){var P=PDFW(),M=40,W=P.W-2*M,y,G=[29,111,46],MU=[85,91,99],INK=[35,38,43],LN=[223,229,218],E=BAR.ent||{},pro=!!(f.societe&&String(f.societe).trim()),pg=1;
+function fcPdf(f){return logoJpeg().then(function(lg){var P=PDFW(),M=40,W=P.W-2*M,y,G=[29,111,46],MU=[85,91,99],INK=[35,38,43],LN=[223,229,218],E=BAR.ent||{},pro=!!(f.societe&&String(f.societe).trim()),pg=1;if(lg)P.image(lg.d,lg.w,lg.h);
   function nz(x){return x!=null&&String(x).trim()!==''}
   var titre=f.type==='avoir'?'FACTURE D\'AVOIR':f.type==='acompte'?'FACTURE D\'ACOMPTE':'FACTURE';
-  var foottxt=['KREÖN',nz(E.nom)?E.nom+(nz(E.forme)?' '+E.forme:''):'',nz(E.adresse)?E.adresse:'',nz(E.siret)?'SIRET '+E.siret:'',nz(E.tva)?'TVA '+E.tva:''].filter(nz).join(' · ');
-  function head(){P.page();if(lg)P.drawImage(M,30,104,104*lg.h/lg.w);P.text(P.W-M,42,titre,{f:'BI',s:20,c:G,align:'right'});P.text(P.W-M,59,'N° '+f.num,{f:'B',s:10,align:'right'});P.text(P.W-M,72,'Émise le '+dLong(f.date),{s:8.5,c:MU,align:'right'});P.text(P.W-M,84,f.type==='avoir'?'Annule la facture n° '+(f.refNum||''):(f.devisNum?'Devis n° '+f.devisNum:'Prestation de services'),{s:8.5,c:MU,align:'right'});P.rect(M,94,W,3,{fill:[242,182,50]});y=112}
-  function foot(){P.line(M,P.H-44,P.W-M,P.H-44,{c:LN});P.wrap(foottxt,'R',7,W-60).slice(0,2).forEach(function(t,i){P.text(M,P.H-32+i*9,t,{s:7,c:MU})});P.text(P.W-M,P.H-32,'Page '+pg,{s:7,c:MU,align:'right'})}
+  var foottxt=[lg?'':'KREÖN',nz(E.nom)?E.nom+(nz(E.forme)?' '+E.forme:''):'',nz(E.adresse)?E.adresse:'',nz(E.siret)?'SIRET '+E.siret:'',nz(E.tva)?'TVA '+E.tva:''].filter(nz).join(' · ');
+  function head(){P.page();var lh=lg?170*lg.h/lg.w:0;if(lg)P.drawImage(M,22,170,lh);P.text(P.W-M,42,titre,{f:'BI',s:20,c:G,align:'right'});P.text(P.W-M,59,'N° '+f.num,{f:'B',s:10,align:'right'});P.text(P.W-M,72,'Émise le '+dLong(f.date),{s:8.5,c:MU,align:'right'});P.text(P.W-M,84,f.type==='avoir'?'Annule la facture n° '+(f.refNum||''):(f.devisNum?'Devis n° '+f.devisNum:'Prestation de services'),{s:8.5,c:MU,align:'right'});var by=Math.max(94,22+lh+8);P.rect(M,by,W,3,{fill:[242,182,50]});y=by+18}
+  function foot(){P.line(M,P.H-44,P.W-M,P.H-44,{c:LN});var fx=M;if(lg){P.drawImage(M,P.H-39,52,52*lg.h/lg.w);fx=M+60}P.wrap(foottxt,'R',7,W-60-(fx-M)).slice(0,2).forEach(function(t,i){P.text(fx,P.H-32+i*9,t,{s:7,c:MU})});P.text(P.W-M,P.H-32,'Page '+pg,{s:7,c:MU,align:'right'})}
   function need(h){if(y+h>P.H-62){foot();pg++;head()}}
   head();
   var em=[nz(E.raison)?E.raison:'KREÖN',[E.nom,nz(E.forme)?E.forme:''].filter(nz).join(' – '),E.adresse,[E.tel,E.mail].filter(nz).join(' · '),nz(E.siret)?'SIRET '+E.siret:'SIRET : à compléter',nz(E.rcs)?E.rcs:'',nz(E.tva)?'N° TVA intracommunautaire '+E.tva:''].filter(nz);
@@ -5193,7 +5207,7 @@ function tabAccueil(){if(typeof DB!=='undefined'&&DB)pmxSub();try{plSub()}catch(
      '<div class="acc-team"><div class="acc-avs">'+(AGL||[]).slice(0,6).map(function(a){return accAvatar(a,34)}).join('')+'<span class="acc-more">+'+Math.max(0,(AGL||[]).length-6)+'</span></div><button type="button" class="acc-pill" data-tab="agents">'+(AGL||[]).length+' agents à vos côtés</button></div></section>';
   h+='<div class="acc-grid">';
   /* colonne gauche : chiffres */
-  h+='<button type="button" class="acc-c acc-kpi" data-tab="demandes"><span class="acc-l">Demandes</span><b>'+k.demandes+'</b><small>'+k.visites+' visite'+(k.visites>1?'s':'')+' à confirmer'+(k.z3?' · '+k.z3+' alerte'+(k.z3>1?'s':'')+' zone 3':'')+'</small></button>';
+  h+='<button type="button" class="acc-c acc-kpi" data-tab="demandes"><span class="acc-l">Demandes</span><b>'+k.demandes+'</b><small>'+(function(){var n=(ADM.rows||[]).filter(function(x){return x.attente&&!x.test}).length;return '📋 '+n+' / 20 liste d\'attente · '})()+k.visites+' visite'+(k.visites>1?'s':'')+' à confirmer'+(k.z3?' · '+k.z3+' alerte'+(k.z3>1?'s':'')+' zone 3':'')+'</small></button>';
   h+='<button type="button" class="acc-c acc-kpi" data-tab="devis"><span class="acc-l">Devis</span><b>'+brou.length+'</b><small>à relire · '+att.length+' envoyé'+(att.length>1?'s':'')+' · '+sig.length+' signé'+(sig.length>1?'s':'')+'</small></button>';
   h+='<div class="acc-c acc-kpi acc-marge '+cl+'"><span class="acc-l">Marge moyenne</span><b>'+(mx.length?f1a(txm)+' %':'—')+'</b><div class="acc-bar"><i style="width:'+Math.min(100,Math.max(0,txm*2))+'%"></i><em style="left:'+(BAR.seuil.ok*2)+'%"></em></div><small>cible '+BAR.seuil.ok+' % · alerte sous '+BAR.seuil.bas+' %</small></div>';
   var caS=sig.reduce(function(s_,d){return s_+(+d.ht||0)},0);
@@ -5270,13 +5284,15 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   AGOFF.arm=null;b.disabled=true;var off=((AG.data&&AG.data._off)||[]).slice();if(off.indexOf(id)<0)off.push(id);
   DB.doc('bareme/agents').update({_off:off}).then(function(){if(typeof agDrawerClose==='function')agDrawerClose();agApplyOff();kToast('<b>Agent retiré.</b><br>Sa tâche planifiée sera mise en pause par Aurore à 20 h.');drawAdmin()},function(){b.disabled=false;kToast('Retrait refusé : réessayez.')})},true);
 function tabDemandes(){
-  var R=ADM.rows,list=ADM.filt==='todo'?R.filter(function(r){return r.statut!=='traitee'||r.slotStatut==='attente'}):(ADM.filt==='z3'?R.filter(function(r){return r.alerte&&r.statut!=='traitee'}):R);
+  var R=ADM.rows,list=ADM.filt==='todo'?R.filter(function(r){return r.statut!=='traitee'||r.slotStatut==='attente'}):(ADM.filt==='z3'?R.filter(function(r){return r.alerte&&r.statut!=='traitee'}):(ADM.filt==='wl'?R.filter(function(r){return r.attente}):R));
+  var WL=R.filter(function(r){return r.attente&&!r.test}),WLt=R.filter(function(r){return r.attente&&r.test}).length;
   list=list.slice().sort(function(a,b){return (b.alerte?1:0)-(a.alerte?1:0)||(b.slotStatut==='attente'?1:0)-(a.slotStatut==='attente'?1:0)||(a.createdAt<b.createdAt?1:-1)});
-  var h='<div class="afilt" role="group" aria-label="Filtrer">'+[['todo','À traiter'],['z3','Zone 3'],['all','Tout']].map(function(f){return '<button type="button" data-f="'+f[0]+'" aria-pressed="'+(ADM.filt===f[0])+'">'+f[1]+'</button>'}).join('')+'</div>';
+  var h='<div class="afilt" role="group" aria-label="Filtrer">'+[['todo','À traiter'],['wl','📋 Liste d\'attente'],['z3','Zone 3'],['all','Tout']].map(function(f){return '<button type="button" data-f="'+f[0]+'" aria-pressed="'+(ADM.filt===f[0])+'">'+f[1]+'</button>'}).join('')+'</div>'+
+    '<div class="wlbar"><b>📋 Liste d\'attente 2028 : '+WL.length+' inscrit'+(WL.length>1?'s':'')+'</b><span>Offre −10 % : '+Math.min(WL.length,20)+' / 20 places prises'+(WLt?' · '+WLt+' test'+(WLt>1?'s':'')+' non compté'+(WLt>1?'s':''):'')+'</span><i style="width:'+Math.min(100,WL.length*5)+'%"></i></div>';
   if(!list.length)return h+'<div class="aempty"><b>Rien à traiter.</b><span>Les demandes de devis et de visite arrivent ici dès qu\'un client valide le questionnaire ou réserve un créneau.</span></div>';
   return h+list.map(function(r){
     var st={attente:'<span class="slotst pend">En attente</span>',confirme:'<span class="slotst ok">Confirmée</span>',refuse:'<span class="slotst ko">Refusée</span>',pris:'<span class="slotst ko">Créneau pris, à replanifier</span>'}[r.slotStatut]||'';
-    return '<article class="dem'+(r.alerte?' al':'')+(r.statut==='traitee'?' dim':'')+'"><div class="dtop"><span class="ztag z'+(r.zone||0)+'">'+(r.zone?'Zone '+r.zone:'Zone ?')+(r.km!=null?' · '+r.km+' km':'')+'</span><span class="kind">'+(r.kind==='visite'?'Visite':'Devis')+(r.profil?' · '+esc(r.profil):'')+'</span><span class="when">'+when(r)+'</span></div>'+
+    return '<article class="dem'+(r.alerte?' al':'')+(r.statut==='traitee'?' dim':'')+'"><div class="dtop"><span class="ztag z'+(r.zone||0)+'">'+(r.zone?'Zone '+r.zone:'Zone ?')+(r.km!=null?' · '+r.km+' km':'')+'</span><span class="kind">'+(r.kind==='visite'?'Visite':'Devis')+(r.profil?' · '+esc(r.profil):'')+'</span>'+(r.attente?'<span class="slotst pend">📋 Liste d\'attente 2028'+(r.test?' · test':'')+'</span>':'')+'<span class="when">'+when(r)+'</span></div>'+
       (r.alerte?'<p class="altxt">Alerte logistique : chantier hors zone, chiffrer transport, hébergement et repas.</p>':'')+
       '<h3>'+esc((r.prenom||'')+' '+(r.nom||''))+(r.societe?' · '+esc(r.societe):'')+'</h3><p class="dline"><span>'+esc(r.cp||'')+' '+esc(r.commune||'')+'</span><span class="sel">'+esc(r.tel||'')+'</span>'+(r.mail?'<span class="sel">'+esc(r.mail)+'</span>':'')+(r.surface?'<span>'+esc(r.surface)+' m²</span>':'')+'</p>'+
       (r.slot?'<p class="dline"><b>Visite : '+esc(slotLabel(r.slot))+'</b> '+st+'</p>':(r.kind==='visite'?'<p class="dline">Visite à planifier après étude</p>':''))+
@@ -5737,7 +5753,7 @@ var BAR0={
  tv:{pv:60,achat:38,regl:4},
  arro:{pv:6.5,mat:2,rend:200,prog:260},
  bordA:{pv:38,mat:14,rend:20},bordB:{pv:26,mat:8,rend:30},
- goutte:{pv:4.5,mat:1.2,rend:120},alim:{pv:14,mat:3.5,rend:60},
+ goutte:{pv:4.5,mat:1.2,rend:120},coco:{pv:8,mat:2.4,rend:200},pack:{ess:250,ser:350,pre:450,h:{ess:2.5,ser:3.5,pre:4.5},km:20},alim:{pv:14,mat:3.5,rend:60},
  depl:{kmPL:.95,vitesse:70,pers:2,z3km:1.10,z3h:45,nuitPV:110,nuitCout:95},
  seuil:{ok:35,bas:25},num:0,forfaitMin:850,
  fixes:{jours:120,lignes:[{n:'Assurances RC Pro et décennale',v:2500},{n:'Assurance du camion',v:2200},{n:'Expert-comptable',v:1800},{n:'Téléphone et internet',v:600},{n:'Site, logiciels, nom de domaine',v:400},{n:'Contrôles (CT, VGP, chronotachygraphe)',v:600},{n:'Banque et divers',v:500}]},
@@ -5753,9 +5769,9 @@ var POSTES=[
  ['terr','Terrassement de finition : décapage, nivellement, réglage','m²'],['evac','Évacuation des terres en centre agréé (ISDI), bordereau fourni','m³'],
  ['tv','Apport de terre végétale de premier choix, fournie et régalée','m³'],['arro','Arrosage automatique connecté : réseau, électrovannes, programmateur Wi-Fi, réglages','m²'],
  ['goutte','Goutte-à-goutte massifs et haies : tube goutteur, raccords, raccordement sur électrovanne','ml'],['alim','Tranchée d\'alimentation depuis le point d\'eau : tranchée, tube PE Ø32, grillage avertisseur, remblai','ml'],
- ['bordA','Bordures acier posées','ml'],['bordB','Bordures béton posées','ml'],['libre','Ligne libre','u']];
+ ['coco','Filet coco anti-érosion biodégradable 700 g/m², fourni, agrafé et posé','m²'],['pack_ess','Pack Sérénité Arrosage · Essentiel (mise en route + purge hivernale), 1 an','an'],['pack_ser','Pack Sérénité Arrosage · Sérénité (+ visite d\'été, réglages restrictions d\'eau), 1 an','an'],['pack_pre','Pack Sérénité Arrosage · Premium (+ surveillance à distance, dépannage 48 h, regarnissage), 1 an','an'],['bordA','Bordures acier posées','ml'],['bordB','Bordures béton posées','ml'],['libre','Ligne libre','u']];
 function pdef(k){return POSTES.filter(function(p){return p[0]===k})[0]}
-function pvDef(k){var B=BAR;if(/^hydro_/.test(k))return B.hydro.pv[k.slice(6)];return ({terr:B.terr.pv,evac:B.evac.pv,tv:B.tv.pv,arro:B.arro.pv,goutte:B.goutte.pv,alim:B.alim.pv,bordA:B.bordA.pv,bordB:B.bordB.pv,libre:0})[k]}
+function pvDef(k){var B=BAR;if(/^hydro_/.test(k))return B.hydro.pv[k.slice(6)];return ({terr:B.terr.pv,evac:B.evac.pv,tv:B.tv.pv,arro:B.arro.pv,goutte:B.goutte.pv,alim:B.alim.pv,coco:(B.coco||BAR0.coco).pv,pack_ess:(B.pack||BAR0.pack).ess,pack_ser:(B.pack||BAR0.pack).ser,pack_pre:(B.pack||BAR0.pack).pre,bordA:B.bordA.pv,bordB:B.bordB.pv,libre:0})[k]}
 /* coût de revient et durée (jours d'équipe) d'une ligne */
 function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
   if(/^hydro_/.test(k)){var t=k.slice(6);j=Math.max(.5,q/B.hydro.rend);c=q*B.hydro.mat[t]+j*B.hydro.jour}
@@ -5763,7 +5779,8 @@ function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
   else if(k==='evac'){var rot=Math.ceil(q/B.evac.cap);c=q*B.evac.dens*B.evac.isdi+rot*(B.evac.kmDech*B.evac.conso/100*B.evac.litre+B.thc);j=rot/8}
   else if(k==='tv'){c=q*(B.tv.achat+B.tv.regl);j=q/40}
   else if(k==='arro'){j=q/B.arro.rend;c=q*B.arro.mat+j*8*B.thc+(q>0?B.arro.prog:0)}
-  else if(k==='bordA'||k==='bordB'||k==='goutte'||k==='alim'){var b=B[k];j=q/b.rend;c=q*b.mat+j*8*B.thc}
+  else if(k==='bordA'||k==='bordB'||k==='goutte'||k==='alim'||k==='coco'){var b=B[k]||BAR0[k];j=q/b.rend;c=q*b.mat+j*8*B.thc}
+  else if(/^pack_/.test(k)){var pk=(B.pack||BAR0.pack),hh=pk.h[k.slice(5)]||3;j=q*hh/8;c=q*(hh*B.thc+pk.km)}
   else if(k==='libre'){c=+l.cout||0}
   else if(k==='depl'){c=+l.cout||0}
   return {c:c,j:j}}
@@ -5910,6 +5927,10 @@ var DVTECH={hydro_gazon:'Mélange Rustique Méditerranée (fétuque élevée 70 
  evac:'Chargement, transport (remorque ou camion benne selon le volume) et dépôt en installation de stockage de déchets inertes (ISDI) agréée. Bordereau de suivi remis au client.',
  tv:'Terre végétale criblée 0/20 de premier choix, fournie, livrée et régalée sur 10 cm d\'épaisseur.',
  arro:'Réseau Gardena : PEHD 25/32 enterré à 25-30 cm sur lit de sable, électrovannes 24 V en regard étanche, tuyères et turbines escamotables Gardena réglées au ras du sol fini, programmateur Gardena smart system pilotable depuis smartphone, filtre et vanne d\'arrêt. Mise en service, réglages et prise en main.',
+ coco:'Filet tissé en fibre de coco 100 % biodégradable (700 g/m²), déroulé dans le sens de la pente, recouvrements de 10 cm, agrafé (3 agrafes/m², ancrage en tête de talus). Hydroensemencement projeté par-dessus ; dégradation naturelle en 2 à 4 ans.',
+ pack_ess:'Mise en route au printemps (contrôle des arroseurs, fuites, filtres, programmateur) et purge hivernale du réseau à l\'air comprimé. Contrat d\'un an renouvelable, avec rappel écrit avant chaque échéance. Pièces en sus.',
+ pack_ser:'Formule Essentiel, plus une visite de contrôle en plein été et les réglages selon les restrictions d\'eau en vigueur. Contrat d\'un an renouvelable, avec rappel écrit avant chaque échéance. Pièces en sus.',
+ pack_pre:'Formule Sérénité, plus la surveillance à distance via l\'application Gardena, le dépannage de fuite sous 48 h et un regarnissage des zones pelées par an. Contrat d\'un an renouvelable, avec rappel écrit avant chaque échéance. Pièces en sus.',
  goutte:'Tube goutteur Ø16 autorégulant (goutteurs 2 L/h tous les 33 cm), posé sous paillage, raccordé à une électrovanne dédiée avec filtre et réducteur de pression.',
  alim:'Tranchée à la mini-pelle sur 40 cm de profondeur, tube PE Ø32 PN16, grillage avertisseur bleu, remblai compacté et remise en état de surface.',
  bordA:'Bordure acier galvanisé 2 mm, hauteur 15 cm, fixée par piquets.',bordB:'Bordure béton 100 × 20 × 5 cm posée sur lit de béton.'};
@@ -6673,7 +6694,7 @@ function showLegal(k){
 
 /* ---------- routage par le hash ---------- */
 var PAGES={procede:'Le procédé',realisations:'Conseils de pro',deroule:'Étapes et calendrier',clients:'Particuliers et professionnels',tarifs:'Tarifs et zones',entretien:'Entretien','espace-pro':'Espace professionnels',faq:'Questions fréquentes'};
-var OF={conseils:'realisations',eau:'tarifs',lotisseurs:'espace-pro',melanges:'procede','faq-arro':'tarifs',chiffres:'home',fondateur:'home',comparatif:'procede',materiel:'procede',engagements:'deroule',repousse:'deroule',gel:'entretien',techniques:'espace-pro',partenaires:'espace-pro',garanties:'home',galerie:'realisations',journal:'realisations',livre:'realisations',gazons:'procede',mulch:'procede',levee:'deroule',parrainage:'clients',simu:'tarifs',canicule:'entretien',guide:'entretien',contrat:'entretien',secheresse:'entretien',sav:'entretien',faqpro:'espace-pro',docs:'espace-pro',recrutement:'espace-pro',zones:'tarifs',marques:'procede',hydro:'procede',talus:'procede',methode:'deroule',calendrier:'deroule',pourqui:'clients',pro:'clients',paiement:'tarifs',estimer:'tarifs'};
+var OF={coco:'tarifs',conseils:'realisations',eau:'tarifs',lotisseurs:'espace-pro',melanges:'procede','faq-arro':'tarifs',chiffres:'home',fondateur:'home',comparatif:'procede',materiel:'procede',engagements:'deroule',repousse:'deroule',gel:'entretien',techniques:'espace-pro',partenaires:'espace-pro',garanties:'home',galerie:'realisations',journal:'realisations',livre:'realisations',gazons:'procede',mulch:'procede',levee:'deroule',parrainage:'clients',simu:'tarifs',canicule:'entretien',guide:'entretien',contrat:'entretien',secheresse:'entretien',sav:'entretien',faqpro:'espace-pro',docs:'espace-pro',recrutement:'espace-pro',zones:'tarifs',marques:'procede',hydro:'procede',talus:'procede',methode:'deroule',calendrier:'deroule',pourqui:'clients',pro:'clients',paiement:'tarifs',estimer:'tarifs'};
 function showPage(h){
   var p=PAGES[h]?h:(OF[h]||'home');document.body.setAttribute('data-page',p);
   Array.prototype.forEach.call(document.querySelectorAll('[data-pg]'),function(e){e.hidden=e.getAttribute('data-pg')!==p});
@@ -6788,17 +6809,20 @@ function q2(){bot('Quelle surface environ ?',function(){chips([['📐 Mesurer su
   if(v==='map')return measure(function(m2){S.surf=[m2,m2];S.surfL=m2+' m² (mesurés sur la carte)';q3()},q2);
   S.surf=v;S.surfL=l;q3()})})}
 function q3(){if(S.type==='arro'){S.arro=true;return q4()}
+  if(S.type==='talus'&&S.coco===undefined)return bot('La pente est-elle très forte, ou la terre ravine-t-elle déjà ?',function(){chips([['Oui, très pentu ou ça ravine',true],['Non, pente normale',false],['Je ne sais pas','?']],function(v,l){S.coco=v;S.cocoL=l;q3()})});
   bot('Le terrain est-il prêt à semer ?',function(){chips([['Oui, terre propre et nivelée',false],['Non, à préparer (cailloux, herbes, nivellement)',true],['Je ne sais pas','?']],function(v,l){S.prep=v;S.prepL=l;
     bot('Voulez-vous aussi un arrosage automatique connecté ?',function(){chips([['Oui',true],['Non',false],['Peut-être','?']],function(v,l){S.arro=v;S.arroL=l;q4()})})})})}
 function askCp(next){bot('Quel est le code postal du terrain ?',function(){field('Code postal (ex. 30100)','text',function(v){S.cp=v;var zo=window.kZoneOf?kZoneOf(v):null;S.zo=zo;
   next(zo&&window.kZoneTxt?kZoneTxt(zo):'')},{mode:'numeric',ac:'postal-code',check:function(v){return /^\d{5}$/.test(v)},err:'5 chiffres, ex. 30100'})})}
 function q4(){askCp(estimate)}
 function estimate(zt){
-  var pu=S.type==='arro'?0:P[S.type];if(S.arro===true)pu+=P.arro;if(S.prep===true)pu+=P.terr;
+  var pu=S.type==='arro'?0:P[S.type];if(S.arro===true)pu+=P.arro;if(S.prep===true)pu+=P.terr;if(S.coco===true)pu+=K.coco;
   var txt;
   if(S.surf&&pu){var lo=Math.max(MIN,S.surf[0]*pu),hi=Math.max(MIN,S.surf[1]*pu*1.1);S.est=eur(lo)+' à '+eur(hi)+' HT';
-    txt='Pour <b>'+e(S.typeL.toLowerCase())+'</b>'+(S.arro===true&&S.type!=='arro'?' + arrosage':'')+(S.prep===true?' + préparation':'')+' sur '+e(S.surfL)+' :<div class="kc-est">'+S.est+'</div><small>Estimation indicative, hors déplacement'+(S.zo&&S.zo.z>1?' (zone '+S.zo.z+')':'')+'. Forfait minimum '+eur(MIN)+' HT. Le prix ferme se fait après la visite et le métré.</small>'}
+    txt='Pour <b>'+e(S.typeL.toLowerCase())+'</b>'+(S.arro===true&&S.type!=='arro'?' + arrosage':'')+(S.prep===true?' + préparation':'')+(S.coco===true?' + filet coco anti-érosion':'')+' sur '+e(S.surfL)+' :<div class="kc-est">'+S.est+'</div><small>Estimation indicative, hors déplacement'+(S.zo&&S.zo.z>1?' (zone '+S.zo.z+')':'')+'. Forfait minimum '+eur(MIN)+' HT. Le prix ferme se fait après la visite et le métré.</small>'}
   else{S.est='à chiffrer à la visite';txt='Sans la surface, je ne peux pas estimer : c\'est la visite et le métré qui donneront le prix exact. Repères : gazon dès 2,50 € HT/m², talus dès 3,20 €, prairie dès 2,80 €.'}
+  if(S.coco==='?')txt+='<br><small>🥥 Si la pente est forte, un filet coco anti-érosion peut être conseillé à la visite (+ 8 € HT/m²).</small>';
+  if(S.arro===true)txt+='<br><small>🎁 Pack Sérénité Arrosage offert la 1<sup>re</sup> année : mise en route au printemps et purge avant l\'hiver.</small>';
   if(zt)txt+='<br><small>📍 '+e(zt)+'</small>';
   bot(txt,contact)}
 /* parcours professionnel : barème grandes surfaces */
@@ -6821,7 +6845,7 @@ function contact(){bot('Pour vous inscrire sur la liste d\'attente, comment vous
       bot('Et votre e-mail (facultatif) ?',function(){field('vous@exemple.fr','email',function(v){S.mail=v;send()},{ac:'email',optional:true,check:function(v){return !v||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)},err:'E-mail invalide, ou laissez vide'})})},{ac:'tel',mode:'tel',check:function(v){return v.replace(/\D/g,'').length>=10},err:'10 chiffres, ex. 06 12 34 56 78'})})},{ac:'name'})})}
 function send(){
   var parts=S.nom.split(/\s+/),pre=parts.shift()||'',nom=parts.join(' ');
-  var recap='LISTE D\'ATTENTE · lancement automne 2028 (−10 % pour les 20 premiers inscrits)\nDemande via l\'assistant devis du site\n- Projet : '+(S.pro?'Professionnel · '+S.ptypeL:S.typeL)+'\n'+(S.soc?'- Société : '+S.soc+'\n':'')+'- Surface : '+S.surfL+'\n'+(S.prepL?'- Terrain prêt : '+S.prepL+'\n':'')+(S.arroL?'- Arrosage automatique : '+S.arroL+'\n':'')+'- Code postal : '+S.cp+'\n- Estimation affichée au client : '+S.est;
+  var recap='LISTE D\'ATTENTE · lancement automne 2028 (−10 % pour les 20 premiers inscrits)\nDemande via l\'assistant devis du site\n- Projet : '+(S.pro?'Professionnel · '+S.ptypeL:S.typeL)+'\n'+(S.soc?'- Société : '+S.soc+'\n':'')+'- Surface : '+S.surfL+'\n'+(S.prepL?'- Terrain prêt : '+S.prepL+'\n':'')+(S.cocoL?'- Pente forte / ravinement : '+S.cocoL+(S.coco===true?' (filet coco inclus dans l\'estimation)':'')+'\n':'')+(S.arroL?'- Arrosage automatique : '+S.arroL+(S.arro===true?' (Pack Sérénité 1re année offerte)':'')+'\n':'')+'- Code postal : '+S.cp+'\n- Estimation affichée au client : '+S.est;
   var data={kind:'devis',express:true,source:'assistant',attente:true,listeAttente:'2028',profil:S.pro?'Professionnel':'Particulier',createdAt:new Date().toISOString(),statut:'nouvelle',prenom:pre,nom:nom,societe:S.soc||'',tel:S.tel,mail:S.mail||'',adresse:'',cp:S.cp,commune:(S.zo&&S.zo.commune)||'',zone:S.zo?S.zo.z:0,km:S.zo?S.zo.km:null,alerte:!!(S.zo&&S.zo.z===3),slot:null,slotStatut:null,surface:S.surf?String(Math.round((S.surf[0]+S.surf[1])/2)):'',recap:recap};
   bot('J\'enregistre votre inscription…',function(){
     var done=function(r){bot(r&&r.ok?'✅ <b>C\'est noté, merci '+e(pre)+' !</b> Vous êtes sur la liste d\'attente. Valentin vous recontacte avant l\'ouverture des chantiers (automne 2028) pour fixer la visite et le métré.':'⚠️ L\'envoi n\'a pas abouti. Réessayez dans un instant, ou écrivez à <a href="mailto:valentin@kreonpaysage.com">valentin@kreonpaysage.com</a>.',function(){
