@@ -777,7 +777,8 @@ footer{padding-block:26px 40px;font-size:.88rem;color:var(--muted);display:flex;
 .faqgrp h3{font-size:1.2rem;color:var(--green-deep)}
 
 
-.fr-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;margin:0 0 14px;padding:14px 2px 6px}
+.fr-now{margin:0 0 10px;line-height:1.4}.fr-now span{color:var(--muted);font-size:.9rem}.fr-dos .fr-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.fr-dos .fr-act:empty{display:none}.fr-list,.fr-card{min-width:0;max-width:100%}.fr-mt{overflow-wrap:anywhere}
+.fr-wrap{width:100%;max-width:calc(100vw - 32px);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;margin:0 0 14px;padding:14px 2px 6px}
 .fr{display:flex;min-width:max-content}
 .fr-st{position:relative;width:118px;flex:none;border:0;background:none;font:inherit;color:var(--fg);cursor:pointer;padding:0 4px;text-align:center;scroll-snap-align:start}
 .fr-st::before{content:"";position:absolute;top:25px;left:0;right:0;height:4px;background:var(--line)}
@@ -791,7 +792,7 @@ footer{padding-block:26px 40px;font-size:.88rem;color:var(--muted);display:flex;
 .fr-list{display:grid;gap:10px}
 .fr-card{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--green);border-radius:6px}
 .fr-card.wait{border-left-color:var(--sun)}
-.fr-ch{display:grid;grid-template-columns:1fr auto;gap:4px 10px;width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit;padding:12px 14px;cursor:pointer}
+.fr-ch{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit;padding:12px 14px;cursor:pointer}
 .fr-nm{font-weight:800}.fr-mt{grid-column:1/-1;color:var(--muted);font-size:.88rem}
 .fr-pill{font-size:.75rem;font-weight:700;border-radius:99px;padding:2px 9px;background:var(--lime);color:var(--green-deep);align-self:start;white-space:nowrap}.fr-pill.w{background:var(--sun-soft);color:#7a5600}
 .fr-pg{grid-column:1/-1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}.fr-pg i{display:block;height:100%;background:var(--green)}
@@ -5094,17 +5095,15 @@ function tabFresque(){frSub();var L=frBuild(),n=FRS.map(function(){return 0});L.
   var h='<div class="fr-wrap"><div class="fr" role="list">'+FRS.map(function(s,i){return '<button type="button" role="listitem" class="fr-st'+(n[i]?' has':'')+(FR.step===i?' sel':'')+'" data-fr="step" data-i="'+i+'"><span class="fr-dot">'+s.ic+'</span>'+(n[i]?'<span class="fr-num">'+n[i]+'</span>':'')+'<span class="fr-lab"><small>ÉTAPE '+(i+1)+'</small>'+s.t+'</span></button>'}).join('')+'</div></div>';
   var list=FR.step==null?L.filter(function(o){return o.step<9}):L.filter(function(o){return o.step===FR.step});
   list.sort(function(a,b){return b.step-a.step});
-  h+='<div class="fr-head"><b>'+(FR.step==null?'Tous les dossiers en cours':FRS[FR.step].ic+' '+(FR.step+1)+'. '+FRS[FR.step].t)+'</b>'+(FR.step!=null?'<span>👤 '+FRS[FR.step].who+'</span><button type="button" class="btn ghost" data-fr="all">Tous les dossiers</button>':'<span>Touchez une étape pour filtrer, un dossier pour tout voir.</span>')+'</div>';
+  h+='<div class="fr-head"><b>'+(FR.step==null?'Tous les dossiers en cours':FRS[FR.step].ic+' '+(FR.step+1)+'. '+FRS[FR.step].t)+'</b>'+(FR.step!=null?'<span>👤 '+FRS[FR.step].who+'</span><button type="button" class="btn ghost" data-fr="all">Tous les dossiers</button>':'')+'</div>';
   h+=list.length?'<div class="fr-list">'+list.map(function(o){var left=frLeft(o,o.step);var op=FR.open===o.key;
-    return '<article class="fr-card'+(left?' wait':'')+(op?' open':'')+'"><button type="button" class="fr-ch" data-fr="open" data-k="'+esc(o.key)+'"><span class="fr-nm">'+esc(o.nom)+'</span><span class="fr-pill'+(left?' w':'')+'">'+(left?left+' à faire':'prêt à avancer')+'</span><span class="fr-mt">'+esc([o.lieu,o.surf?o.surf+' m²':'',o.ht?eu(o.ht)+' HT':''].filter(Boolean).join(' · '))+' · étape '+(o.step+1)+' : '+FRS[o.step].t+'</span><span class="fr-pg"><i style="width:'+Math.round(100*o.step/9)+'%"></i></span></button>'+(op?frDossier(o)+'<div class="dact" style="padding:0 16px 16px">'+kDelBtn('dossier:'+o.key)+'</div>':'')+'</article>'}).join('')+'</div>':'<div class="aempty"><b>Aucun dossier ici.</b><span>Les dossiers apparaissent dès qu\'une demande, une visite ou un devis existe.</span></div>';
+    return '<article class="fr-card'+(op?' open':'')+'"><button type="button" class="fr-ch" data-fr="open" data-k="'+esc(o.key)+'"><span class="fr-nm">'+esc(o.nom)+'</span><span class="fr-pill">'+(o.step+1)+'/10</span><span class="fr-mt">'+esc([o.lieu,o.surf?o.surf+' m²':'',o.ht?eu(o.ht)+' HT':''].filter(Boolean).join(' · '))+' · étape '+(o.step+1)+' : '+FRS[o.step].t+'</span><span class="fr-pg"><i style="width:'+Math.round(100*o.step/9)+'%"></i></span></button>'+(op?frDossier(o)+'<div class="dact" style="padding:0 16px 16px">'+kDelBtn('dossier:'+o.key)+'</div>':'')+'</article>'}).join('')+'</div>':'<div class="aempty"><b>Aucun dossier ici.</b><span>Les dossiers apparaissent dès qu\'une demande, une visite ou un devis existe.</span></div>';
   return h}
-function frDossier(o){
-  return '<div class="fr-dos">'+FRS.map(function(s,i){var cur=i===o.step,past=i<o.step,left=frLeft(o,i);
-    var tk=s.tasks.map(function(t){var ok=o.isDone(t[0]),au=!!o.auto[t[0]];
-      return '<label class="fr-t'+(ok?' ok':'')+'"><input type="checkbox" data-frk="'+esc(o.key)+'|'+t[0]+'"'+(ok?' checked':'')+(au||!cur&&!past?' disabled':'')+'> <span>'+t[1]+(t[2]?' <small>facultatif</small>':'')+(au?' <small>auto</small>':'')+'</span></label>'}).join('');
-    var ac=cur?'<div class="fr-act">'+s.act.map(function(a){var ok=(a[0]==='dem'&&o.dem)||(a[0]==='vis'&&o.vis)||(/^(dv|sign)$/.test(a[0])&&o.dv)||a[0]==='max';return ok?'<button type="button" class="btn ghost" data-fr="act" data-a="'+a[0]+'" data-k="'+esc(o.key)+'">'+a[1]+'</button>':''}).join('')+(i<9?'<button type="button" class="btn" data-fr="next" data-k="'+esc(o.key)+'"'+(left?' disabled':'')+'>Passer à l\'étape '+(i+2)+' →</button>':'<button type="button" class="btn ghost" data-fr="arch" data-k="'+esc(o.key)+'">Archiver le dossier</button>')+'</div>':'';
-    return '<details class="fr-s'+(past?' done':cur?' cur':'')+'"'+(cur?' open':'')+'><summary><span class="fr-b">'+(past?'✓':i+1)+'</span>'+s.ic+' '+s.t+'<em>'+(past?'validé':cur?(left?left+' à faire':'prêt'):'à venir')+'</em></summary>'+(past||cur?'<div class="fr-ts">'+tk+'</div>'+ac:'')+'</details>'}).join('')+
-    '<p class="note">Les cases « auto » se cochent seules d\'après le tableau de bord (visite, devis, factures, dates). Un devis signé, quel que soit le moyen, fait passer le dossier à l\'étape 5 partout.</p></div>'}
+function frDossier(o){var s=FRS[o.step],i=o.step;
+  var ac=s.act.map(function(a){var ok=(a[0]==='dem'&&o.dem)||(a[0]==='vis'&&o.vis)||(/^(dv|sign)$/.test(a[0])&&o.dv)||a[0]==='max';return ok?'<button type="button" class="btn ghost" data-fr="act" data-a="'+a[0]+'" data-k="'+esc(o.key)+'">'+a[1]+'</button>':''}).join('');
+  return '<div class="fr-dos"><p class="fr-now">'+s.ic+' <b>Étape '+(i+1)+' sur 10 : '+s.t+'</b><br><span>👤 '+s.who+'</span></p>'+
+    '<div class="fr-act">'+ac+'</div><div class="fr-act">'+(i>0?'<button type="button" class="btn ghost" data-fr="prev" data-k="'+esc(o.key)+'">← Étape précédente</button>':'')+
+    (i<9?'<button type="button" class="btn" data-fr="next" data-k="'+esc(o.key)+'">Étape suivante : '+FRS[i+1].t+' →</button>':'<button type="button" class="btn ghost" data-fr="arch" data-k="'+esc(o.key)+'">Archiver le dossier</button>')+'</div></div>'}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fr],[data-frsign]');if(!b||!DB)return;
   if(b.hasAttribute('data-frsign')){window.kSignLien(b.getAttribute('data-frsign'));return}
   var a=b.getAttribute('data-fr'),k=b.getAttribute('data-k');
@@ -5112,6 +5111,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   if(a==='all'){FR.step=null;drawAdmin();return}
   if(a==='open'){FR.open=FR.open===k?null:k;drawAdmin();return}
   var o=frBuild().filter(function(x){return x.key===k})[0];if(!o)return;
+  if(a==='prev'){FR.st[k]=FR.st[k]||{};FR.st[k].step=Math.max(0,o.step-1);frSave().then(function(){kToast('<b>'+esc(o.nom)+'</b> revient à l\'étape '+o.step+' : '+FRS[o.step-1].t)});return}
   if(a==='next'){FR.st[k]=FR.st[k]||{};FR.st[k].step=o.step+1;frSave().then(function(){kToast('<b>'+esc(o.nom)+'</b> passe à l\'étape '+(o.step+2)+' : '+FRS[o.step+1].t)});return}
   if(a==='arch'){FR.st[k]=FR.st[k]||{};FR.st[k].archive=new Date().toISOString();FR.open=null;frSave().then(function(){kToast('Dossier archivé.')});return}
   if(a==='act'){var x=b.getAttribute('data-a');
