@@ -2034,7 +2034,7 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
     <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainnav"><i></i><i></i><i></i></button>
   </div>
 </header>
-<div class="klaunch" role="note"><span class="kl-l">🚀 <b>Ouverture des chantiers à l'automne 2028.</b> Inscrivez-vous sur la liste d'attente : <b>−10 %</b> sur le premier chantier pour les 20 premiers inscrits.</span><span class="kl-s">🚀 <b>Chantiers dès l'automne 2028</b> · −10 % pour les 20 premiers</span><a href="#devis" data-kchat>Je m'inscris →</a></div>
+<div class="klaunch" role="note"><span class="kl-l">🚀 <b>Ouverture des chantiers à l'automne 2028.</b> Inscrivez-vous sur la liste d'attente : <b>−10 %</b> sur le premier chantier (jusqu'à 300 € HT) pour les 20 premiers inscrits.</span><span class="kl-s">🚀 <b>Chantiers dès l'automne 2028</b> · −10 % pour les 20 premiers</span><a href="#devis" data-kchat>Je m'inscris →</a></div>
 <div class="heatbar full" id="heatbar" hidden role="status"><div class="wrap"><span><b id="hbt">Alerte chaleur</b> · <span id="hbm"></span></span><a href="#canicule">Nos conseils →</a></div></div>
 <div id="phead" class="phead full" hidden><div class="wrap"><a class="crumb" href="#top">← Accueil</a><h1 id="ph1"></h1></div></div>
 <div id="subnav" class="subnav full" hidden><div class="wrap"><nav aria-label="Sections de la page"></nav></div></div>
@@ -2191,7 +2191,7 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
       <a class="tile" href="#entretien"><b>Entretien</b><span>Guide, contrat d'entretien, alerte chaleur, restrictions d'eau.</span></a>
       <a class="tile" href="#espace-pro"><b>Espace pro</b><span>Talus routiers, bassins, zones d'activités, partenaires, fiches techniques.</span></a>
       <a class="tile" href="#faq"><b>Questions fréquentes</b><span>Été, talus, délais, arrosage : les réponses claires.</span></a>
-      <a class="tile" href="#devis" data-kchat><b>Liste d'attente 2028</b><span>Estimation en 1 minute, −10 % pour les 20 premiers inscrits.</span></a>
+      <a class="tile" href="#devis" data-kchat><b>Liste d'attente 2028</b><span>Estimation en 1 minute, −10 % (jusqu'à 300 € HT) pour les 20 premiers inscrits.</span></a>
     </div>
   </div>
 </section>
@@ -2432,14 +2432,14 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
   <section class="wrap">
     <div class="head"><p class="eyebrow">Parrainage</p><h2>Le cercle KREÖN</h2><p>Nos meilleurs ambassadeurs sont nos clients. Un voisin, un ami, un collègue veut une pelouse ? Présentez-le-nous : chaque filleul qui signe vous fait monter d'un cran dans le cercle.</p></div>
     <div class="tiers">
-      <div><small>1 filleul signé</small><b>Membre</b><span>80 € de bon pour vous, 5 % de remise pour lui.</span></div>
-      <div><small>3 filleuls signés</small><b>Ambassadeur</b><span>En plus des bons : un an de contrat d'entretien Essentiel offert.</span></div>
-      <div><small>5 filleuls signés</small><b>Pilier du cercle</b><span>5 % de remise permanente sur vos prestations, et priorité de planning au printemps.</span></div>
+      <div><small>1 filleul signé</small><b>Membre</b><span>100 € de bon pour vous en prestations, 100 € HT de remise pour lui.</span></div>
+      <div><small>3 filleuls signés</small><b>Ambassadeur</b><span>En plus des bons : un an de Pack Sérénité Arrosage offert.</span></div>
+      <div><small>5 filleuls signés</small><b>Pilier du cercle</b><span>Priorité de planning au printemps et −10 % sur le sur-semis et les extensions d'arrosage.</span></div>
     </div>
 
     <div class="refer">
-      <div><b>80 € pour vous</b><span>en bon de réduction sur votre prochaine prestation ou votre contrat d'entretien, quand votre filleul signe.</span></div>
-      <div><b>5 % pour lui</b><span>de remise sur son premier chantier, plafonnée à 150 € HT.</span></div>
+      <div><b>100 € pour vous</b><span>en bon sur l'entretien, le sur-semis ou le Pack Sérénité, quand votre filleul signe.</span></div>
+      <div><b>100 € HT pour lui</b><span>de remise sur son premier chantier.</span></div>
       <div><b>Sans limite</b><span>un bon par filleul qui signe un devis d'au moins 1 500 € HT. Bons cumulables.</span></div>
     </div>
     <div class="fpanel">
@@ -6801,7 +6801,7 @@ function field(ph,type,cb,opt){sc();inp.innerHTML='<form class="kc-f"><label cla
 function measure(cb,back){if(!window.kMap){back();return}
   window.kMap(function(m2){if(m2>0){me('📐 '+new Intl.NumberFormat('fr-FR').format(m2)+' m² mesurés sur la carte');cb(m2)}else back()})}
 function start(pro){log.innerHTML='';inp.innerHTML='';S={};
-  bot('Bonjour 👋 Je suis l\'assistant de KREON. En quelques questions, je vous donne une <b>première estimation</b> et je vous inscris sur la <b>liste d\'attente</b> : les chantiers démarrent à l\'<b>automne 2028</b>, et les 20 premiers inscrits ont <b>−10 %</b> sur leur premier chantier.',function(){
+  bot('Bonjour 👋 Je suis l\'assistant de KREON. En quelques questions, je vous donne une <b>première estimation</b> et je vous inscris sur la <b>liste d\'attente</b> : les chantiers démarrent à l\'<b>automne 2028</b>, et les 20 premiers inscrits ont <b>−10 %</b> sur leur premier chantier, jusqu\'à 300 € HT.',function(){
     if(pro===true)return proStart();
     bot('Quel est votre projet ?',function(){
     chips([['Pelouse / gazon','gazon'],['Talus en pente','talus'],['Prairie fleurie','prairie'],['Arrosage automatique seul','arro'],['Je suis un professionnel','pro']],function(v,l){if(v==='pro')return proStart();S.type=v;S.typeL=l;q2()})})})}
@@ -6845,7 +6845,7 @@ function contact(){bot('Pour vous inscrire sur la liste d\'attente, comment vous
       bot('Et votre e-mail (facultatif) ?',function(){field('vous@exemple.fr','email',function(v){S.mail=v;send()},{ac:'email',optional:true,check:function(v){return !v||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)},err:'E-mail invalide, ou laissez vide'})})},{ac:'tel',mode:'tel',check:function(v){return v.replace(/\D/g,'').length>=10},err:'10 chiffres, ex. 06 12 34 56 78'})})},{ac:'name'})})}
 function send(){
   var parts=S.nom.split(/\s+/),pre=parts.shift()||'',nom=parts.join(' ');
-  var recap='LISTE D\'ATTENTE · lancement automne 2028 (−10 % pour les 20 premiers inscrits)\nDemande via l\'assistant devis du site\n- Projet : '+(S.pro?'Professionnel · '+S.ptypeL:S.typeL)+'\n'+(S.soc?'- Société : '+S.soc+'\n':'')+'- Surface : '+S.surfL+'\n'+(S.prepL?'- Terrain prêt : '+S.prepL+'\n':'')+(S.cocoL?'- Pente forte / ravinement : '+S.cocoL+(S.coco===true?' (filet coco inclus dans l\'estimation)':'')+'\n':'')+(S.arroL?'- Arrosage automatique : '+S.arroL+(S.arro===true?' (Pack Sérénité 1re année offerte)':'')+'\n':'')+'- Code postal : '+S.cp+'\n- Estimation affichée au client : '+S.est;
+  var recap='LISTE D\'ATTENTE · lancement automne 2028 (−10 % jusqu\'à 300 € HT pour les 20 premiers inscrits)\nDemande via l\'assistant devis du site\n- Projet : '+(S.pro?'Professionnel · '+S.ptypeL:S.typeL)+'\n'+(S.soc?'- Société : '+S.soc+'\n':'')+'- Surface : '+S.surfL+'\n'+(S.prepL?'- Terrain prêt : '+S.prepL+'\n':'')+(S.cocoL?'- Pente forte / ravinement : '+S.cocoL+(S.coco===true?' (filet coco inclus dans l\'estimation)':'')+'\n':'')+(S.arroL?'- Arrosage automatique : '+S.arroL+(S.arro===true?' (Pack Sérénité 1re année offerte)':'')+'\n':'')+'- Code postal : '+S.cp+'\n- Estimation affichée au client : '+S.est;
   var data={kind:'devis',express:true,source:'assistant',attente:true,listeAttente:'2028',profil:S.pro?'Professionnel':'Particulier',createdAt:new Date().toISOString(),statut:'nouvelle',prenom:pre,nom:nom,societe:S.soc||'',tel:S.tel,mail:S.mail||'',adresse:'',cp:S.cp,commune:(S.zo&&S.zo.commune)||'',zone:S.zo?S.zo.z:0,km:S.zo?S.zo.km:null,alerte:!!(S.zo&&S.zo.z===3),slot:null,slotStatut:null,surface:S.surf?String(Math.round((S.surf[0]+S.surf[1])/2)):'',recap:recap};
   bot('J\'enregistre votre inscription…',function(){
     var done=function(r){bot(r&&r.ok?'✅ <b>C\'est noté, merci '+e(pre)+' !</b> Vous êtes sur la liste d\'attente. Valentin vous recontacte avant l\'ouverture des chantiers (automne 2028) pour fixer la visite et le métré.':'⚠️ L\'envoi n\'a pas abouti. Réessayez dans un instant, ou écrivez à <a href="mailto:valentin@kreonpaysage.com">valentin@kreonpaysage.com</a>.',function(){
