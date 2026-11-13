@@ -1485,6 +1485,7 @@ body[data-page=home] .klaunch{display:none}
 .treso.trtest{outline:2px dashed #e0b44a;outline-offset:-2px}
 .trben{grid-column:1/-1;display:grid;gap:4px;padding:12px 14px;border-radius:14px;background:#f1f3ee}.trben.ok{background:#e4f2df}.trben>b{font-size:1.5rem}.trben small b{font-size:inherit}.trben small{line-height:1.45}
 .pkgift{display:inline-block;margin:4px 0 14px;padding:8px 14px;border-radius:99px;background:#e4f2df;color:#23402f;font-weight:600}.pkm{margin:-6px 0 10px;font-size:.9rem;color:var(--muted)}.cocop{max-width:560px}
+.nh-offer{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-top:16px;padding:16px 18px;border-radius:20px;background:#e4f2df;color:#23402f}.nh-offer>div{display:grid;gap:2px}.nh-offer b{font-size:1.1rem}.nh-offer span,.nh-offer small{font-size:.85rem}
 /* ===== accueil bento ===== */
 .acc{--ac-bg:#eef4ee;--ac-card:#ffffff;--ac-ink:#1e2a22;--ac-mu:#68736b;--ac-g:#285B42;--ac-l:#87B559;--ac-sun:#f2b632;--ac-o:#e8834a;display:grid;gap:14px;background:linear-gradient(160deg,#eef4ee,#f7f5ef 60%,#eef3f6);border-radius:22px;padding:14px;margin-bottom:14px}
 .acc-hero{background:radial-gradient(120% 140% at 0% 0%,#2f6a4d 0%,#1f4b36 60%,#173a2a 100%);color:#fff;border-radius:20px;padding:20px 22px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;box-shadow:0 10px 30px rgba(31,75,54,.25)}
@@ -1996,7 +1997,7 @@ html.plcap .plexit{display:block;margin:6px auto 24px;max-width:300px}
 
 
 </style>
-<script>window.KPRIX={gazon:2.5,talus:3.2,prairie:2.8,arro:6.5,terr:6,min:850,coco:8,pack:{ess:250,ser:350,pre:450},gs:[[10000,1.90],[5000,2.20],[2000,2.50],[500,3.00],[0,3.50]],plancher:1.70};</script>
+<script>window.KPRIX={gazon:2.5,talus:3.2,prairie:2.8,arro:6.5,terr:6,min:850,coco:8,prep:3,pack:{ess:250,ser:350,pre:450},gs:[[10000,1.90],[5000,2.20],[2000,2.50],[500,3.00],[0,3.50]],plancher:1.70};</script>
 <script>
 window.KFORM='https://script.google.com/macros/s/AKfycbzwjiOyv-7-l-OjgkHdhv3IeTfi1eJvkJKQ8SDU--WwC5A6hcLnL6TSrO8PZEfgjmsc3A/exec';
 (function(){if(!(window.claude&&window.claude.use))document.documentElement.classList.add('kpub')})();
@@ -2064,12 +2065,13 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
 </section>
 
 <section class="nh-sec" aria-labelledby="nh-proc">
-  <div class="nh-head"><h2 id="nh-proc">Trois étapes, <b>un seul interlocuteur.</b></h2><p>Du terrain brut à la pelouse levée, c'est le même interlocuteur du début à la fin.</p></div>
-  <ol class="nh-steps">
-    <li><h3>Visite et métré</h3><p>On mesure au Moasure, on regarde le sol, la pente et le point d'eau. Devis précis, sans surprise.</p></li>
-    <li><h3>Préparation et projection</h3><p>Terrain réglé, puis mélange projeté depuis la remorque. Le mulch garde l'humidité et protège la graine.</p></li>
-    <li><h3>Levée et suivi</h3><p>Arrosage Gardena réglé avec vous, consignes écrites et garantie de levée.</p></li>
-  </ol>
+  <div class="nh-head"><h2 id="nh-proc">Votre jardin clé en main, <b>en 3 étapes.</b></h2><p>Après une visite et un métré gratuits, on s'occupe de tout, du terrain brut à la pelouse qui lève.</p></div>
+    <ol class="nh-steps">
+      <li><h3>Préparation du terrain</h3><p>On dégage, on travaille le sol en profondeur et on le nivelle. Les pierres et les herbes passent sous la surface : rien ne part en décharge.</p></li>
+      <li><h3>Pose du réseau d'arrosage</h3><p>Arrosage automatique Gardena enterré dans les règles, piloté depuis votre téléphone.</p></li>
+      <li><h3>Hydroensemencement</h3><p>Semences, fibres et engrais projetés en une passe. Levée en 7 à 15 jours, garantie à J+45.</p></li>
+    </ol>
+    <div class="nh-offer"><div><b>Offre complète dès 12 € HT/m²</b><span>Préparation + arrosage + hydroensemencement · sans arrosage dès 5,50 € HT/m²</span></div><div><small>Exemple</small><b>400 m² ≈ 4 800 € HT</b></div><a class="nh-btn pri" href="#devis" data-kchat>Estimer mon terrain</a></div>
 </section>
 
 <section class="nh-sec" aria-labelledby="nh-why">
@@ -2674,6 +2676,11 @@ function kPost(col,data,cb){if(!window.KFORM){cb({ok:false});return}
         <p class="note">Pré-dimensionnement indicatif. Matériel Gardena, programmateur connecté piloté depuis le téléphone. Le plan d'arrosage définitif se fait sur place, après mesure du débit et de la pression.</p>
       </div>
     </div>
+  </section>
+  <section class="sec" id="cle-en-main" data-pg="tarifs" style="padding-top:0">
+    <div class="head"><p class="eyebrow">Offre complète</p><h2>Votre jardin clé en main, en 3 étapes.</h2><p>Un seul devis, un seul interlocuteur, du terrain brut à la pelouse qui lève. La durée dépend de la surface : elle est fixée au devis, après la visite.</p></div>
+    <div class="kv cocop"><div><span>1 · Préparation du terrain</span><span>3,00 € HT/m²</span></div><div><span>2 · Pose du réseau d'arrosage Gardena</span><span>6,50 € HT/m²</span></div><div><span>3 · Hydroensemencement gazon</span><span>2,50 € HT/m²</span></div><div><span><b>Offre complète</b></span><span><b>12,00 € HT/m²</b></span></div></div>
+    <p class="fine">Sans arrosage : 5,50 € HT/m². Ancien gazon à retirer : + 0,50 € HT/m². Tranchée depuis le compteur au-delà de 10 m : 14 € HT/ml. Déplacement selon la zone. Prix ferme après visite et métré.</p>
   </section>
   <section class="sec" id="coco" data-pg="tarifs" style="padding-top:0">
     <div class="head"><p class="eyebrow">Talus très pentus</p><h2>Filet coco anti-érosion, posé avant l'hydroensemencement.</h2><p>Sur une pente forte ou une terre qui ravine, nous agrafons un filet en fibre de coco biodégradable, puis nous projetons le mélange par-dessus. La graine se loge dans les mailles, le filet tient la terre pendant que les racines s'installent, puis il se décompose en 2 à 4 ans.</p></div>
@@ -5753,7 +5760,7 @@ var BAR0={
  tv:{pv:60,achat:38,regl:4},
  arro:{pv:6.5,mat:2,rend:200,prog:260},
  bordA:{pv:38,mat:14,rend:20},bordB:{pv:26,mat:8,rend:30},
- goutte:{pv:4.5,mat:1.2,rend:120},coco:{pv:8,mat:2.4,rend:200},pack:{ess:250,ser:350,pre:450,h:{ess:2.5,ser:3.5,pre:4.5},km:20},alim:{pv:14,mat:3.5,rend:60},
+ goutte:{pv:4.5,mat:1.2,rend:120},coco:{pv:8,mat:2.4,rend:200},prep:{pv:3,mat:0.8,rend:300},scarif:{pv:0.5,mat:0.25,rend:600},pack:{ess:250,ser:350,pre:450,h:{ess:2.5,ser:3.5,pre:4.5},km:20},alim:{pv:14,mat:3.5,rend:60},
  depl:{kmPL:.95,vitesse:70,pers:2,z3km:1.10,z3h:45,nuitPV:110,nuitCout:95},
  seuil:{ok:35,bas:25},num:0,forfaitMin:850,
  fixes:{jours:120,lignes:[{n:'Assurances RC Pro et décennale',v:2500},{n:'Assurance du camion',v:2200},{n:'Expert-comptable',v:1800},{n:'Téléphone et internet',v:600},{n:'Site, logiciels, nom de domaine',v:400},{n:'Contrôles (CT, VGP, chronotachygraphe)',v:600},{n:'Banque et divers',v:500}]},
@@ -5769,9 +5776,9 @@ var POSTES=[
  ['terr','Terrassement de finition : décapage, nivellement, réglage','m²'],['evac','Évacuation des terres en centre agréé (ISDI), bordereau fourni','m³'],
  ['tv','Apport de terre végétale de premier choix, fournie et régalée','m³'],['arro','Arrosage automatique connecté : réseau, électrovannes, programmateur Wi-Fi, réglages','m²'],
  ['goutte','Goutte-à-goutte massifs et haies : tube goutteur, raccords, raccordement sur électrovanne','ml'],['alim','Tranchée d\'alimentation depuis le point d\'eau : tranchée, tube PE Ø32, grillage avertisseur, remblai','ml'],
- ['coco','Filet coco anti-érosion biodégradable 700 g/m², fourni, agrafé et posé','m²'],['pack_ess','Pack Sérénité Arrosage · Essentiel (mise en route + purge hivernale), 1 an','an'],['pack_ser','Pack Sérénité Arrosage · Sérénité (+ visite d\'été, réglages restrictions d\'eau), 1 an','an'],['pack_pre','Pack Sérénité Arrosage · Premium (+ surveillance à distance, dépannage 48 h, regarnissage), 1 an','an'],['bordA','Bordures acier posées','ml'],['bordB','Bordures béton posées','ml'],['libre','Ligne libre','u']];
+ ['prep','Préparation complète du terrain : dégagement et évacuation des déchets verts, travail du sol en profondeur (pierres et herbes enfouies), nivellement et roulage','m²'],['scarif','Retrait de l\'ancien gazon (scarification) et évacuation','m²'],['coco','Filet coco anti-érosion biodégradable 700 g/m², fourni, agrafé et posé','m²'],['pack_ess','Pack Sérénité Arrosage · Essentiel (mise en route + purge hivernale), 1 an','an'],['pack_ser','Pack Sérénité Arrosage · Sérénité (+ visite d\'été, réglages restrictions d\'eau), 1 an','an'],['pack_pre','Pack Sérénité Arrosage · Premium (+ surveillance à distance, dépannage 48 h, regarnissage), 1 an','an'],['bordA','Bordures acier posées','ml'],['bordB','Bordures béton posées','ml'],['libre','Ligne libre','u']];
 function pdef(k){return POSTES.filter(function(p){return p[0]===k})[0]}
-function pvDef(k){var B=BAR;if(/^hydro_/.test(k))return B.hydro.pv[k.slice(6)];return ({terr:B.terr.pv,evac:B.evac.pv,tv:B.tv.pv,arro:B.arro.pv,goutte:B.goutte.pv,alim:B.alim.pv,coco:(B.coco||BAR0.coco).pv,pack_ess:(B.pack||BAR0.pack).ess,pack_ser:(B.pack||BAR0.pack).ser,pack_pre:(B.pack||BAR0.pack).pre,bordA:B.bordA.pv,bordB:B.bordB.pv,libre:0})[k]}
+function pvDef(k){var B=BAR;if(/^hydro_/.test(k))return B.hydro.pv[k.slice(6)];return ({terr:B.terr.pv,evac:B.evac.pv,tv:B.tv.pv,arro:B.arro.pv,goutte:B.goutte.pv,alim:B.alim.pv,coco:(B.coco||BAR0.coco).pv,prep:(B.prep||BAR0.prep).pv,scarif:(B.scarif||BAR0.scarif).pv,pack_ess:(B.pack||BAR0.pack).ess,pack_ser:(B.pack||BAR0.pack).ser,pack_pre:(B.pack||BAR0.pack).pre,bordA:B.bordA.pv,bordB:B.bordB.pv,libre:0})[k]}
 /* coût de revient et durée (jours d'équipe) d'une ligne */
 function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
   if(/^hydro_/.test(k)){var t=k.slice(6);j=Math.max(.5,q/B.hydro.rend);c=q*B.hydro.mat[t]+j*B.hydro.jour}
@@ -5779,7 +5786,7 @@ function coutLigne(l){var B=BAR,q=+l.q||0,k=l.k,j=0,c=0;
   else if(k==='evac'){var rot=Math.ceil(q/B.evac.cap);c=q*B.evac.dens*B.evac.isdi+rot*(B.evac.kmDech*B.evac.conso/100*B.evac.litre+B.thc);j=rot/8}
   else if(k==='tv'){c=q*(B.tv.achat+B.tv.regl);j=q/40}
   else if(k==='arro'){j=q/B.arro.rend;c=q*B.arro.mat+j*8*B.thc+(q>0?B.arro.prog:0)}
-  else if(k==='bordA'||k==='bordB'||k==='goutte'||k==='alim'||k==='coco'){var b=B[k]||BAR0[k];j=q/b.rend;c=q*b.mat+j*8*B.thc}
+  else if(k==='bordA'||k==='bordB'||k==='goutte'||k==='alim'||k==='coco'||k==='prep'||k==='scarif'){var b=B[k]||BAR0[k];j=q/b.rend;c=q*b.mat+j*8*B.thc}
   else if(/^pack_/.test(k)){var pk=(B.pack||BAR0.pack),hh=pk.h[k.slice(5)]||3;j=q*hh/8;c=q*(hh*B.thc+pk.km)}
   else if(k==='libre'){c=+l.cout||0}
   else if(k==='depl'){c=+l.cout||0}
@@ -5927,6 +5934,8 @@ var DVTECH={hydro_gazon:'Mélange Rustique Méditerranée (fétuque élevée 70 
  evac:'Chargement, transport (remorque ou camion benne selon le volume) et dépôt en installation de stockage de déchets inertes (ISDI) agréée. Bordereau de suivi remis au client.',
  tv:'Terre végétale criblée 0/20 de premier choix, fournie, livrée et régalée sur 10 cm d\'épaisseur.',
  arro:'Réseau Gardena : PEHD 25/32 enterré à 25-30 cm sur lit de sable, électrovannes 24 V en regard étanche, tuyères et turbines escamotables Gardena réglées au ras du sol fini, programmateur Gardena smart system pilotable depuis smartphone, filtre et vanne d\'arrêt. Mise en service, réglages et prise en main.',
+ prep:'Tonte ou débroussaillage, ramassage et évacuation des déchets verts. Travail du sol en profondeur : les pierres et les herbes sont enfouies sous la terre fine, sans évacuation de terre. Nivellement fin et roulage avant semis.',
+ scarif:'Scarification de l\'ancien gazon, ramassage et évacuation en filière de déchets verts.',
  coco:'Filet tissé en fibre de coco 100 % biodégradable (700 g/m²), déroulé dans le sens de la pente, recouvrements de 10 cm, agrafé (3 agrafes/m², ancrage en tête de talus). Hydroensemencement projeté par-dessus ; dégradation naturelle en 2 à 4 ans.',
  pack_ess:'Mise en route au printemps (contrôle des arroseurs, fuites, filtres, programmateur) et purge hivernale du réseau à l\'air comprimé. Contrat d\'un an renouvelable, avec rappel écrit avant chaque échéance. Pièces en sus.',
  pack_ser:'Formule Essentiel, plus une visite de contrôle en plein été et les réglages selon les restrictions d\'eau en vigueur. Contrat d\'un an renouvelable, avec rappel écrit avant chaque échéance. Pièces en sus.',
@@ -6694,7 +6703,7 @@ function showLegal(k){
 
 /* ---------- routage par le hash ---------- */
 var PAGES={procede:'Le procédé',realisations:'Conseils de pro',deroule:'Étapes et calendrier',clients:'Particuliers et professionnels',tarifs:'Tarifs et zones',entretien:'Entretien','espace-pro':'Espace professionnels',faq:'Questions fréquentes'};
-var OF={coco:'tarifs',conseils:'realisations',eau:'tarifs',lotisseurs:'espace-pro',melanges:'procede','faq-arro':'tarifs',chiffres:'home',fondateur:'home',comparatif:'procede',materiel:'procede',engagements:'deroule',repousse:'deroule',gel:'entretien',techniques:'espace-pro',partenaires:'espace-pro',garanties:'home',galerie:'realisations',journal:'realisations',livre:'realisations',gazons:'procede',mulch:'procede',levee:'deroule',parrainage:'clients',simu:'tarifs',canicule:'entretien',guide:'entretien',contrat:'entretien',secheresse:'entretien',sav:'entretien',faqpro:'espace-pro',docs:'espace-pro',recrutement:'espace-pro',zones:'tarifs',marques:'procede',hydro:'procede',talus:'procede',methode:'deroule',calendrier:'deroule',pourqui:'clients',pro:'clients',paiement:'tarifs',estimer:'tarifs'};
+var OF={'cle-en-main':'tarifs',coco:'tarifs',conseils:'realisations',eau:'tarifs',lotisseurs:'espace-pro',melanges:'procede','faq-arro':'tarifs',chiffres:'home',fondateur:'home',comparatif:'procede',materiel:'procede',engagements:'deroule',repousse:'deroule',gel:'entretien',techniques:'espace-pro',partenaires:'espace-pro',garanties:'home',galerie:'realisations',journal:'realisations',livre:'realisations',gazons:'procede',mulch:'procede',levee:'deroule',parrainage:'clients',simu:'tarifs',canicule:'entretien',guide:'entretien',contrat:'entretien',secheresse:'entretien',sav:'entretien',faqpro:'espace-pro',docs:'espace-pro',recrutement:'espace-pro',zones:'tarifs',marques:'procede',hydro:'procede',talus:'procede',methode:'deroule',calendrier:'deroule',pourqui:'clients',pro:'clients',paiement:'tarifs',estimer:'tarifs'};
 function showPage(h){
   var p=PAGES[h]?h:(OF[h]||'home');document.body.setAttribute('data-page',p);
   Array.prototype.forEach.call(document.querySelectorAll('[data-pg]'),function(e){e.hidden=e.getAttribute('data-pg')!==p});
@@ -6816,7 +6825,7 @@ function askCp(next){bot('Quel est le code postal du terrain ?',function(){field
   next(zo&&window.kZoneTxt?kZoneTxt(zo):'')},{mode:'numeric',ac:'postal-code',check:function(v){return /^\d{5}$/.test(v)},err:'5 chiffres, ex. 30100'})})}
 function q4(){askCp(estimate)}
 function estimate(zt){
-  var pu=S.type==='arro'?0:P[S.type];if(S.arro===true)pu+=P.arro;if(S.prep===true)pu+=P.terr;if(S.coco===true)pu+=K.coco;
+  var pu=S.type==='arro'?0:P[S.type];if(S.arro===true)pu+=P.arro;if(S.prep===true)pu+=K.prep;if(S.coco===true)pu+=K.coco;
   var txt;
   if(S.surf&&pu){var lo=Math.max(MIN,S.surf[0]*pu),hi=Math.max(MIN,S.surf[1]*pu*1.1);S.est=eur(lo)+' à '+eur(hi)+' HT';
     txt='Pour <b>'+e(S.typeL.toLowerCase())+'</b>'+(S.arro===true&&S.type!=='arro'?' + arrosage':'')+(S.prep===true?' + préparation':'')+(S.coco===true?' + filet coco anti-érosion':'')+' sur '+e(S.surfL)+' :<div class="kc-est">'+S.est+'</div><small>Estimation indicative, hors déplacement'+(S.zo&&S.zo.z>1?' (zone '+S.zo.z+')':'')+'. Forfait minimum '+eur(MIN)+' HT. Le prix ferme se fait après la visite et le métré.</small>'}
