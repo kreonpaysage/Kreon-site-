@@ -15,7 +15,7 @@ jobs:
             d=$(dirname "$f"); i=1
             while IFS= read -r u; do
               [ -z "$u" ] && continue
-              [ -f "$d/$i.jpg" ] || curl -sSL -o "$d/$i.jpg" "$u"
+              if [ ! -f "$d/$i.jpg" ] || [ $(stat -c%s "$d/$i.jpg") -lt 10000 ]; then curl -sSL -o "$d/$i.jpg" "$u"; fi
               i=$((i+1))
             done < "$f"
           done
