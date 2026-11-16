@@ -1,0 +1,26 @@
+name: social-fetch
+on:
+  push:
+    paths: ['social/**/urls.txt']
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download images
+        run: |
+          for f in social/*/urls.txt; do
+            d=$(dirname "$f"); i=1
+            while IFS= read -r u; do
+              [ -z "$u" ] && continue
+              [ -f "$d/$i.jpg" ] || curl -sSL -o "$d/$i.jpg" "$u"
+              i=$((i+1))
+            done < "$f"
+          done
+      - name: Commit
+        run: |
+          git config user.name "kreon-bot"; git config user.email "bot@kreonpaysage.com"
+          git add social
+          git diff --cached --quiet || (git commit -m "Images réseaux sociaux" && git push)
